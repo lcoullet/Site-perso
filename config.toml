@@ -5,7 +5,7 @@ title = "La Revanche du Site"
 disqusShortname = "lcoullet"
 # Enable Google Analytics by entering your tracking code
 googleAnalytics = "UA-729622-7"
-theme = "hugo-hikari-theme"
+theme = "hikari-theme"
 
 [permalinks]
 	post = "/:title"
