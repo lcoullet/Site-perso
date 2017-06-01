@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://ludovic.coullet.net/tada/</loc>
+    <lastmod>2017-06-02T00:35:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/tutoriel-silverstripe-ep1-installation/</loc>
+    <lastmod>2015-07-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/tutoriel-silverstripe-ep0-introduction/</loc>
+    <lastmod>2015-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/danger-projets-de-sciences/</loc>
+    <lastmod>2015-06-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/de-la-sidstation-a-la-rytm/</loc>
+    <lastmod>2014-06-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/a-la-maniere-de-dot-dot-dot/</loc>
+    <lastmod>2014-06-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/applications-musicales-pour-android/</loc>
+    <lastmod>2014-01-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/le-retour-dot-dot-dot/</loc>
+    <lastmod>2013-09-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/categories/elektron/</loc>
+    <lastmod>2014-06-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/</loc>
+    <lastmod>2017-06-02T00:35:56+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/categories/monomachine/</loc>
+    <lastmod>2014-06-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/categories/musique/</loc>
+    <lastmod>2014-06-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/post/</loc>
+    <lastmod>2017-06-02T00:35:56+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

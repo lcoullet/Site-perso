@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Musique on La Revanche du Site</title>
+    <link>http://ludovic.coullet.net/categories/musique/</link>
+    <description>Recent content in Musique on La Revanche du Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr-fr</language>
+    <copyright>PROPULSÉ PAR [HUGO](//gohugo.io) - THEME: [HIKARI](//github.com/digitalcraftsman/hugo-hikari-theme) - © Ludovic Coullet</copyright>
+    <lastBuildDate>Wed, 04 Jun 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ludovic.coullet.net/categories/musique/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>de la sidstation a la rytm</title>
+      <link>http://ludovic.coullet.net/de-la-sidstation-a-la-rytm/</link>
+      <pubDate>Wed, 04 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/de-la-sidstation-a-la-rytm/</guid>
+      <description>Une retrospective des machines Elektron chez Sonicstate Alors oui, cela peut paraître ridicule de se passionner pour une marque de synthétiseurs quand on &amp;ldquo;fait de la musique&amp;rdquo;. Ce n&amp;rsquo;est pas la guitare qui fait le guitariste, la caméra qui fait le photographe, etc. etc.
+Mais j&amp;rsquo;ai beaucoup d&amp;rsquo;affection et d&amp;rsquo;intérêt pour Elektron, cette marque suédoise pas comme les autres, créée en 1998. Alors quand Sonicstate décide de faire une vidéo rétrospective de tous les produits Elektron, je ne peux que la partager !</description>
+    </item>
+    
+  </channel>
+</rss>

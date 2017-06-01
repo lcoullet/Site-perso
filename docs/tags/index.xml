@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on La Revanche du Site</title>
+    <link>http://ludovic.coullet.net/tags/</link>
+    <description>Recent content in Tags on La Revanche du Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr-fr</language>
+    <copyright>PROPULSÉ PAR [HUGO](//gohugo.io) - THEME: [HIKARI](//github.com/digitalcraftsman/hugo-hikari-theme) - © Ludovic Coullet</copyright>
+    
+	<atom:link href="http://ludovic.coullet.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>

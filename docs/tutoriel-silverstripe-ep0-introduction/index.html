@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+
+
+ <html class="no-js"> 
+<head>
+    <title>tutoriel silverstripe ep0 introduction &middot; La Revanche du Site</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-language" content="fr-fr" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Ludovic Coullet">
+    <meta name="description" content="Le fils de la revanche">
+    <meta name="generator" content="Hugo 0.21" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="http://ludovic.coullet.net/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/tomorrow.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700|Lora:400,700,400italic" rel="stylesheet" type="text/css">
+    
+</head>
+
+<body>
+    
+    <div class="off-canvas">
+    <figure class="avatar">
+        <img src="http://ludovic.coullet.net/img/avatar-ludo.png" title="Ludovic Coullet">
+    </figure>
+    <div class="bio">
+        
+        <h1>Salut c&#39;est Ludo !</h1>
+        
+        
+        <p>Ludovic Coullet</p>
+        
+    </div>
+    <nav>
+
+        
+
+        
+        <h6>Pour les anciens</h6>
+        
+
+        <ul>
+            <li><a target="_blank" href="http://ludovic.coullet.net/index.xml">RSS feed</a></li>
+        </ul>
+
+        
+        <h6>Suivez-moi</h6>
+        
+
+        <ul>
+        
+            <li><a target="_blank" href="//github.com/lcoullet">Github</a></li>
+        
+            <li><a target="_blank" href="//twitter.com/lcoullet">Twitter</a></li>
+        
+            <li><a target="_blank" href="//dancingbanana.party/@blud">Mastodon</a></li>
+        
+        </ul>        
+    </nav>
+</div>
+
+
+    <div class="site-wrapper">
+        <header>
+	<div class="h-wrap">
+		
+		<h1 class="title"><a href="http://ludovic.coullet.net/">La Revanche du Site</a></h1>
+		
+		<a class="menu-icon" title="Menu"><span class="lines"></span></a>
+	</div>
+</header>
+        
+        <section class="single-wrap">
+            <article class="single-content" itemscope itemtype="//schema.org/BlogPosting">
+                <div class="feat">
+                    <h5 class="page-date">
+                    <time datetime="" itemprop="datePublished">
+                    30/06/2015
+                    </time>
+                    </h5>
+                </div>
+                <h1 class="page-title" itemprop="name headline">tutoriel silverstripe ep0 introduction</h1>
+                <div itemprop="articleBody">
+                    
+
+<h2 id="qu-est-ce-que-silverstripe">Qu’est-ce que Silverstripe ?</h2>
+
+<p><a href="http://www.silverstripe.org">Silverstripe</a> (ou SS par la suite, mais je ne ferai pas de mauvais jeux de mots&hellip;) est un CMS PHP open-source sous licence BSD d’origine néo-zélandaise.</p>
+
+<p>Au départ, utilisé en interne par la <a href="http://www.silverstripe.com">société</a> du même nom, il a été libéré aux alentours de 2005 pour la version 2. Nous en sommes aujourd’hui à la version 3.</p>
+
+<p>Silverstripe n’est pas qu’un CMS, il est basé sur le framework PHP orienté objet du même nom. Avec la version 3.X, il est tout à fait possible d’utiliser Silverstripe (framework) pour des projets qui n’ont strictement rien à voir avec les fonctionnalités habituelles de gestion de contenu.</p>
+
+<p>Bien entendu le <em>module CMS</em> a été entièrement réalisé avec ce framework et peut donc être étendu à volonté.</p>
+
+<h2 id="pourquoi-silverstripe-en-guise-d-avertissement">Pourquoi Silverstripe (en guise d’avertissement) ?</h2>
+
+<p>J’ai testé pas mal de CMS tout au long de mon parcours professionnel. Aujourd’hui je gagne ma vie principalement avec l’écosystème Drupal, mais je conserve toujours une <em>affection</em> particulière pour ce petit CMS.</p>
+
+<p>Le but de cette série n’est absolument pas de vous convaincre de la supériorité d’un CMS sur un autre. Ce sont des outils, s’ils conviennent à la tâche et si vous les maîtrisez, alors ce n’est sans doute pas la peine de regarder ailleurs.</p>
+
+<p>Silverstripe ne fait pas partie du trio de tête des CMS mondiaux (Wordpress, Drupal, Joomla). Sa communauté (surtout dans cet hémisphère) n’a rien de comparable avec celle de Wordpress par exemple, le nombre d’extensions (modules) disponibles doit être cent fois moindre et cela se répercute aussi sur les articles et tutoriels disponibles.</p>
+
+<p>Même si le site de l’Elysée tourne actuellement sous Silverstripe (de même que le site de campagne d’Obama en son temps et une bonne partie de l’administration néo-zélandaise), il n’a pas en France le même pouvoir prescripteur que Drupal aujourd’hui : inconnu au bataillon.</p>
+
+<p>Si je commence cette série, c’est avant tout pour lui rendre un peu justice et pour vous exposer ses forces et ses faiblesses.</p>
+
+<p>Cela va mieux en le disant.</p>
+
+<h2 id="les-avantages-de-silverstripe">Les avantages de Silverstripe</h2>
+
+<h3 id="une-interface-utilisateur-simple-à-prendre-en-main">Une interface utilisateur simple à prendre en main</h3>
+
+<p><img src="http://userhelp.silverstripe.org//src/framework_3.1/docs/en/_images/Basic-Overview_2.jpg" alt="" title="Interface d'administration" /></p>
+
+<p>L’administration est centrée sur l’arborescence du contenu, je pense que c’est très bien pour les petits sites et une certaine catégorie de clients qui visualisent les choses par ce biais.</p>
+
+<p>Mais l’on peut heureusement gérer une grande quantité de contenus par d’autres moyens si nécessaire.</p>
+
+<p>On rajoute des pages et des sous-pages et pour chacune on peut choisir un style d’affichage (ou un type de contenu si vous préférez).</p>
+
+<p>Mais on peut aussi créer des sections dans l’administration pour des <em>contenus</em> qui ne seraient pas directement liés à l’arborescence.</p>
+
+<p>Il y a beaucoup de fonctions et de <em>widgets</em> pour faciliter l’insertion, le tri, le changement d’ordre (drag &amp; drop) du contenu. La philosophie du CMS étant de fournir une interface homogène et unifiée pour ne pas perdre l’utilisateur.</p>
+
+<p>Partant de cette base, tout peut être configuré pour fournir une interface d’administration agréable et unique pour chaque projet.</p>
+
+<p>L’interface offre des options de Prévisualisation dans différents formats (tablettes, smartphones, desktop), c’est un petit plus agréable.</p>
+
+<h3 id="des-outils-de-développement-modernes">Des outils de développement modernes</h3>
+
+<p>Silverstripe fait plutôt figure de bon élève dans la catégorie. Voici une liste non exhaustive :</p>
+
+<ul>
+<li><a href="https://getcomposer.org/">Composer</a> pour l’installation des modules et des dépendances.</li>
+<li>Une implémentation assez stricte du modèle MVC, je ne dirais pas complète pour ne pas froisser les puristes.</li>
+<li>La majorité des valeurs de configuration sont stockées dans des fichiers et non en BDD, ce qui facilite grandement le <em>workflow</em> entre plusieurs environnements (test, staging, prod°).</li>
+<li>Un développement vraiment orienté objet.</li>
+<li>Conséquence du MVC, le système de <em>templating</em> est très indépendant du CMS lui-même.</li>
+</ul>
+
+<h3 id="un-framework-robuste">Un <em>framework</em> robuste</h3>
+
+<p>Je n’ai pris le projet en route que depuis la version 2.X (lorsqu’il est devenu open-source). Ce qui est intéressant dans Silverstripe c’est que c’est à la fois un CMS et un Framework de développement PHP.</p>
+
+<p>Depuis la version 3, il est tout à fait possible d’utiliser le second sans le premier. Le CMS étant une application particulière réalisée avec ce Framework.</p>
+
+<p>Vous pouvez jeter un coup d’oeil à l’<a href="http://api.silverstripe.org/3.2/">API</a> ici.</p>
+
+<p>Pour la petite histoire, ce framework s’appelait <em>Sapphire</em> au départ, hommage à peine caché à Ruby (et Ruby on Rails) des développeurs de la compagnie. Si vous connaissez un petit peu Rails, vous ne serez pas dépaysés :</p>
+
+<ul>
+<li>On décrit son modèle de données en PHP et la commande <code>dev/build</code> s’occupe de créer les bonnes tables dans la base, un peu comme on le ferait en Rails avec <code>db:migrate</code>.</li>
+<li>Le système de requêtes est très similaire (syntaxe propre à PHP mise à part) d’Active Record.</li>
+<li>etc.</li>
+</ul>
+
+<h2 id="et-les-inconvénients">Et les inconvénients</h2>
+
+<h3 id="faible-notoriété-et-ressources-disponibles">Faible notoriété et ressources disponibles</h3>
+
+<p>Je ne reviendrais pas sur la notoriété de SS en France. En 2013, il était évoqué dans le livre blanc de <a href="http://www.open-source-guide.com/Solutions/Applications/Cms/Silverstripe">Smile</a> sur les CMS parmi les <em>outsiders</em>, je ne pense pas qu’il y soit encore dans la dernière version. Oui c’est injuste.</p>
+
+<p>La communauté SS est très active en Océanie (Australie et Nouvelle-Zélande), continent d’origine du CMS. En Europe, c’est l’Autriche et le Royaume-uni qui comptent le plus de membres actifs et <a href="http://www.meetup.com/SilverStripe-Europe-Meetup/">d’évènements</a>. Mais cela est sans commune mesure avec l’activité autour de CMS plus connus, notamment Drupal que je connais bien et de sa très active communauté.</p>
+
+<p>Quant aux ressources, je m’en plaignais déjà il y a fort longtemps dans un précédent <a href="http://ludovic.coullet.net/quelques-commentaires-sur-silverstripe/"><em>post</em></a>. Mais les choses se sont bien améliorées, notamment la documentation officielle qui a rattrapé son retard.</p>
+
+<p>Beaucoup d’efforts ont été faits récemment et je vous conseille chaudement la <a href="http://www.silverstripe.org/learn/lessons/">série de tutoriels vidéo / texte</a> en anglais sur le site officiel. D’ailleurs, je ne vous cache pas que ce qui va suivre s’en inspirera forcément un peu.</p>
+
+<h3 id="ce-n-est-pas-un-cms-pour-site-builders-webmasters">Ce n’est pas un CMS pour <em>site builders / webmasters</em></h3>
+
+<p>Si vous connaissez un petit peu Drupal, vous aurez entendu parler des modules CCK et Views (aujourd’hui intégré au <em>Core</em> ou en passe de l’être). Ils permettent d’étendre les fonctionnalités du CMS sans écrire une seule ligne de code pour rajouter des nouveaux types de contenu, faire des <em>pages listes</em>, etc. Les mêmes outils sont aussi disponibles pour Wordpress.</p>
+
+<p>Rien de cela avec Silverstripe. Il faut ouvrir son éditeur / IDE favori pour rajouter un champ date ou image ou afficher les 3 derniers articles de blog en page d’accueil. Nous sommes donc très loin du <em>personna site builder</em> tel qu’on le connait chez <a href="https://www.drupal.org/site-building">Drupal</a> ou d’autres, qui passe son temps à modifier le site via le back-office.</p>
+
+<p>J’exagère à peine car il y a quand même l’équivalent d’un module userform / contact7 qui permet à l’administrateur de créer des formulaires contact personnalisés. Mais ce genre d’exemples se comptent sur les doigts d’une main et ce n’est pas vraiment la philosophie de ce CMS.</p>
+
+<p>Mais attention, je mentirai en vous disant que je suis un <em>véritable développeur</em>, et pourtant j’y arrive très bien. Il faut juste prendre un peu de temps pour apprivoiser le <em>Framework</em> et pour des choses simples, cela va assez vite. D’ailleurs, je mentirai tout autant en vous disant qu’il ne faut pas être développeur pour maîtriser à 100% un module tel que Views sur Drupal. Que ce soit via une interface graphique ou du code, dans les 2 cas il faut quand même savoir de quoi on parle et ce qu’on veut réaliser (savoir ce que c’est qu’une relation…).</p>
+
+<p>Il y a quand même certains avantages (à mon humble avis) à cette approche :</p>
+
+<ul>
+<li>Le back-office n’est pas <em>pollué</em> par ces fonctionnalités et l’utilisateur final ne peut pas faire de bêtises…</li>
+<li>Pas d’interface, moins d’intermédiaires entre le <em>site builder</em> et le code donc plus de performance à l’arrivée.</li>
+</ul>
+
+<p>Néanmoins, si vous cherchez une pléthore de modules à installer, il faudra peut être trouver votre bonheur ailleurs…</p>
+
+<h2 id="a-mi-chemin-entre-framework-et-cms">A mi-chemin entre framework et CMS</h2>
+
+<p>Je ne sais pas où mettre ce dernier point, est-ce un avantage ou bien un inconvénient ?</p>
+
+<ul>
+<li>Vous maîtrisez bien un CMS, mais parfois il faudrait s’éloigner de la gestion de contenu pure et dure pour les besoins métiers d’un client.</li>
+<li>De même tel framework PHP n’a plus de secrets pour vous, mais il ne lui manquerait qu’un bon CMS et vous n’avez pas le temps de re-développer la roue.</li>
+</ul>
+
+<p>C’est là que les ennuis commencent, où comment faire cohabiter votre développement avec le CMS, mutualiser les ressources, assurer la sécurité et la stabilité de l’ensemble etc.</p>
+
+<p>Vous me direz qu’on peut également faire beaucoup de choses avec les CMS les plus avancés disponibles, mais c’est parfois comme vouloir faire aboyer un chat, c’est possible.</p>
+
+<p>Prêts pour la suite, alors rendez-vous next week…</p>
+
+                </div>
+                <div class="feat share">
+                    <a href="//twitter.com/share" class="popup">
+                        <span class="icon-twitter"></span>
+                    </a>
+                </div>
+                
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'lcoullet';
+    var disqus_identifier = 'http:\/\/ludovic.coullet.net\/tutoriel-silverstripe-ep0-introduction\/';
+    var disqus_title = 'tutoriel silverstripe ep0 introduction';
+    var disqus_url = 'http:\/\/ludovic.coullet.net\/tutoriel-silverstripe-ep0-introduction\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                
+                    <a rel="next" href="http://ludovic.coullet.net/tutoriel-silverstripe-ep1-installation/" id="next">
+                        <span class="nav-title nav-title-next">Moins vieux</span> &rarr;
+                    </a>
+                
+                
+                    <a rel="prev" href="http://ludovic.coullet.net/danger-projets-de-sciences/" id="prev">
+                        &larr; <span class="nav-title nav-title-prev">Plus vieux</span>
+                    </a>
+                
+            </article>
+        </section>
+
+        <footer>
+	
+	<small>PROPULSÉ PAR <a href="//gohugo.io">HUGO</a> - THEME: <a href="//github.com/digitalcraftsman/hugo-hikari-theme">HIKARI</a> - © Ludovic Coullet</small>
+	
+</footer>
+    </div>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://ludovic.coullet.net/js/main.js"></script>
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-729622-7', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+<!-- Syntax highlighting -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
