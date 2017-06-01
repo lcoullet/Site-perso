@@ -1,5 +1,5 @@
 +++
-date = "2017-06-02T00:35:56+02:00"
+date = "2017-06-02"
 description = ""
 title = "Tada"
 
