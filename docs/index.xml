@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
     <copyright>PROPULSÉ PAR [HUGO](//gohugo.io) - THEME: [HIKARI](//github.com/digitalcraftsman/hugo-hikari-theme) - © Ludovic Coullet</copyright>
-    <lastBuildDate>Fri, 02 Jun 2017 00:35:56 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ludovic.coullet.net/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Tada</title>
       <link>http://ludovic.coullet.net/tada/</link>
-      <pubDate>Fri, 02 Jun 2017 00:35:56 +0200</pubDate>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ludovic.coullet.net/tada/</guid>
       <description>Tata</description>

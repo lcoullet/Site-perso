@@ -7,7 +7,7 @@ disqusShortname = "lcoullet"
 googleAnalytics = "UA-729622-7"
 theme = "hikari-theme"
 
-publishDir = "docs"
+
 
 [permalinks]
 	post = "/:title"
