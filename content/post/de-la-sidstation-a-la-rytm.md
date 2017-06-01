@@ -21,4 +21,4 @@ Mais assez de blabla, écoutez donc voir et appréciez leurs sonorités et leurs
 
 {{< youtube KYPpoFQCUBU >}}
 
-Quand je regarde cette vidéo, j'ai envie de toutes les avoir, mais si je devais n'en prendre qu'une seule, je crois que ce serait l'Octratrack.
+Quand je regarde cette vidéo, j'ai envie de toutes les avoir, mais si je devais n'en prendre qu'une seule, je crois que ce serait l'Octatrack.
