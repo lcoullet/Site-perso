@@ -7,18 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
     <copyright>PROPULSÉ PAR [HUGO](//gohugo.io) - THEME: [HIKARI](//github.com/digitalcraftsman/hugo-hikari-theme) - © Ludovic Coullet</copyright>
-    <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jun 2016 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ludovic.coullet.net/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Tada</title>
-      <link>http://ludovic.coullet.net/tada/</link>
-      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      <title>Petite refonte</title>
+      <link>http://ludovic.coullet.net/petite-refonte/</link>
+      <pubDate>Thu, 02 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://ludovic.coullet.net/tada/</guid>
-      <description>Tata</description>
+      <guid>http://ludovic.coullet.net/petite-refonte/</guid>
+      <description>Bon je suis passé sous Hugo</description>
     </item>
     
     <item>
