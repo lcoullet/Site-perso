@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Interne on La Revanche du Site</title>
+    <link>http://ludovic.coullet.net/categories/interne/</link>
+    <description>Recent content in Interne on La Revanche du Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr-fr</language>
+    <copyright>PROPULSÉ PAR [HUGO](//gohugo.io) - THEME: [HIKARI](//github.com/digitalcraftsman/hugo-hikari-theme) - © Ludovic Coullet</copyright>
+    <lastBuildDate>Thu, 02 Jun 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ludovic.coullet.net/categories/interne/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Petite refonte</title>
+      <link>http://ludovic.coullet.net/petite-refonte/</link>
+      <pubDate>Thu, 02 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/petite-refonte/</guid>
+      <description>Voilà nouveau thème et c&amp;rsquo;est généré avec Hugo à la place de Jekyll (Octopress). On ne peut pas dire que ce soit le nombre de posts qui m&amp;rsquo;y ait poussé, mais tant qu&amp;rsquo;à faire autant s&amp;rsquo;essayer à une nouvelle technologie.
+Exit une grande partie des billets de la grande époque Posterous, qui de toute façon n&amp;rsquo;étaient plus très pertinents (CSS2, Sass &amp;amp; Compass&amp;hellip;).
+Place aux jeunes !</description>
+    </item>
+    
+  </channel>
+</rss>

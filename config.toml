@@ -22,8 +22,8 @@ publishDir = "docs"
 	custom_js  = []
 
 	# Links to newer/older blog posts
-	newer = "Moins vieux"
-	older = "Plus vieux"
+	newer = "Précédent"
+	older = "Suivant"
 
 	pageNotFoundTitle = "Petit problème de nos amis de la technique, qui nous disent..."
 	pageNotFoundSubtitle = "Sorry, but the requested page wasn’t <br> found on the server."
