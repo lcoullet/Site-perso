@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elm Lang on La Revanche du Site</title>
+    <link>http://ludovic.coullet.net/categories/elm-lang/</link>
+    <description>Recent content in Elm Lang on La Revanche du Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr-fr</language>
+    <copyright>PROPULSÉ PAR [HUGO](//gohugo.io) - THEME: [HIKARI](//github.com/digitalcraftsman/hugo-hikari-theme) - © Ludovic Coullet</copyright>
+    <lastBuildDate>Tue, 06 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ludovic.coullet.net/categories/elm-lang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Elm / Ep0 : introduction</title>
+      <link>http://ludovic.coullet.net/elm-/-ep0--introduction/</link>
+      <pubDate>Tue, 06 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/elm-/-ep0--introduction/</guid>
+      <description>Le but de cette série est de réaliser un petit programme en utilisant Elm pour gérer l’affichage (frontend).
+Qu’est-ce que Elm ?  Elm est un langage de programmation fonctionnel qui permet de créer des interfaces graphiques pour le web ainsi que des jeux. Il compile le code en JavaScript.
+ &amp;ndash; Source : Wikipedia
+Elm est un langage fonctionnel comme OCaml, F#, Haskell, Elixir, Scala, Clojure, etc. Sa syntaxe et ses concepts sont donc très différents des langages impératifs comme le JavaScript et des dérivés comme TypeScript ou PureScript.</description>
+    </item>
+    
+  </channel>
+</rss>

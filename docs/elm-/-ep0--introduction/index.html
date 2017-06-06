@@ -4,7 +4,7 @@
 
  <html class="no-js"> 
 <head>
-    <title>Petite refonte &middot; La Revanche du Site</title>
+    <title>Elm / Ep0 : introduction &middot; La Revanche du Site</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="content-language" content="fr-fr" />
@@ -78,18 +78,53 @@
                 <div class="feat">
                     <h5 class="page-date">
                     <time datetime="" itemprop="datePublished">
-                    02/06/2016
+                    06/06/2017
                     </time>
                     </h5>
                 </div>
-                <h1 class="page-title" itemprop="name headline">Petite refonte</h1>
+                <h1 class="page-title" itemprop="name headline">Elm / Ep0 : introduction</h1>
                 <div itemprop="articleBody">
-                    <p>Voilà nouveau thème et c&rsquo;est généré avec <a href="https://gohugo.io/">Hugo</a> à la place de Jekyll (Octopress).
-On ne peut pas dire que ce soit le nombre de posts qui m&rsquo;y ait poussé, mais tant qu&rsquo;à faire autant s&rsquo;essayer à une nouvelle technologie.</p>
+                    
 
-<p>Exit une grande partie des billets de la grande époque <a href="http://www.posterous.com/">Posterous</a>, qui de toute façon n&rsquo;étaient plus très pertinents (CSS2, Sass &amp; Compass&hellip;).</p>
+<p>Le but de cette série est de réaliser un petit programme en utilisant Elm pour gérer l’affichage (<em>frontend</em>).</p>
 
-<p>Place aux jeunes !</p>
+<h2 id="qu-est-ce-que-elm">Qu’est-ce que Elm ?</h2>
+
+<blockquote>
+<p><a href="http://elm-lang.org/">Elm</a> est un langage de programmation <strong>fonctionnel</strong> qui permet de créer des interfaces graphiques pour le web ainsi que des jeux. Il <strong>compile le code en JavaScript</strong>.</p>
+</blockquote>
+
+<p>&ndash; Source : <a href="https://fr.wikipedia.org/wiki/Elm_(langage)">Wikipedia</a></p>
+
+<p>Elm est un <a href="https://fr.wikipedia.org/wiki/Programmation_fonctionnelle">langage fonctionnel</a> comme <a href="https://fr.wikipedia.org/wiki/OCaml">OCaml</a>, <a href="https://fr.wikipedia.org/wiki/F_sharp">F#</a>, <a href="https://fr.wikipedia.org/wiki/Haskell">Haskell</a>, <a href="https://fr.wikipedia.org/wiki/Elixir_(langage)">Elixir</a>, <a href="https://fr.wikipedia.org/wiki/Scala_(langage)">Scala</a>, <a href="https://fr.wikipedia.org/wiki/Clojure">Clojure</a>, etc. Sa syntaxe et ses concepts sont donc très différents des <a href="https://fr.wikipedia.org/wiki/Programmation_imp%C3%A9rative">langages impératifs</a> comme le JavaScript et des dérivés comme TypeScript ou PureScript.</p>
+
+<p>Cependant et c’est la deuxième partie de la description, tout programme Elm peut-être compilé en Js et donc être utilisé partout où ce dernier peut l’être.</p>
+
+<p>Il dispose également de fonctionnalités qui lui permettent de communiquer avec du code javascript pré-existant.</p>
+
+<h2 id="pourquoi-elm">Pourquoi Elm ?</h2>
+
+<p>Pour faire son malin bien sûr ! Plus sérieusement, voici quelques (bonne et mauvaises) raisons :</p>
+
+<ul>
+<li>Apprendre un nouveau langage, qui plus est fonctionnel et s’enrichir d’autres manières de faire</li>
+<li>Profiter d’un compilateur souvent décrit comme un modèle du genre avec des messages d’erreurs, clairs, précis et qui la plupart du temps vous guident vers une solution</li>
+<li><a href="http://elm-lang.org/blog/blazing-fast-html-round-two">Elm est rapide</a>, plus rapide que React, Angular et Vue à cet instant.</li>
+<li>Pour éviter au maximum les <em>runtime errors</em>, les <em>undefined is not a function</em>, les <em>null</em>, et le <em>callback hell</em>. Si vous faites un peu de Js, cela devrait vous parler. Tout ceci n’existe pas, ne peut pas exister avec Elm.</li>
+</ul>
+
+<h2 id="le-programme">Le programme</h2>
+
+<p>Les langages fonctionnels sont une nouveauté pour moi. Ils sont souvent considérés comme la <em>chasse gardée</em> des universitaires ou des théoriciens de l’informatique avec des concepts barbares comme l’immutabilité, la pureté, les monades, le <em>curry-ing</em> et j’en passe.</p>
+
+<p>Je ne vais pas m’improviser spécialiste du domaine (la supercherie se verrait bien vite). J’essaierai donc au maximum d’introduire ces concepts au fur et à mesure, lorsque nécessaire et sur des cas concrets en vous disant ce que j’en ai compris. N’hésitez pas à me corriger et ne vous laissez pas impressionner. Ici, la plus grande qualité sera de savoir <em>dés-apprendre</em> ce que nous savons déjà.</p>
+
+<p>Nous partons du principe :</p>
+
+<ul>
+<li>Que vous connaissez un peu d’HTML et de CSS et assez de JS pour installer une librairie</li>
+<li>Que vous êtes un peu fous</li>
+</ul>
 
                 </div>
                 <div class="feat share">
@@ -101,9 +136,9 @@ On ne peut pas dire que ce soit le nombre de posts qui m&rsquo;y ait poussé, ma
                 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'lcoullet';
-    var disqus_identifier = 'http:\/\/ludovic.coullet.net\/petite-refonte\/';
-    var disqus_title = 'Petite refonte';
-    var disqus_url = 'http:\/\/ludovic.coullet.net\/petite-refonte\/';
+    var disqus_identifier = 'http:\/\/ludovic.coullet.net\/elm-\/-ep0--introduction\/';
+    var disqus_title = 'Elm \/ Ep0 : introduction';
+    var disqus_url = 'http:\/\/ludovic.coullet.net\/elm-\/-ep0--introduction\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -115,12 +150,8 @@ On ne peut pas dire que ce soit le nombre de posts qui m&rsquo;y ait poussé, ma
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
                 
-                    <a rel="next" href="http://ludovic.coullet.net/elm-/-ep0--introduction/" id="next">
-                        <span class="nav-title nav-title-next">Précédent</span> &rarr;
-                    </a>
                 
-                
-                    <a rel="prev" href="http://ludovic.coullet.net/tutoriel-silverstripe-ep1-installation/" id="prev">
+                    <a rel="prev" href="http://ludovic.coullet.net/petite-refonte/" id="prev">
                         &larr; <span class="nav-title nav-title-prev">Suivant</span>
                     </a>
                 
