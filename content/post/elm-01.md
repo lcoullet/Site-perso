@@ -13,22 +13,22 @@ Pour ce premier programme, inutile d’installer Elm sur sa machine. Vous pouvez
 Ellie c’est un peu le [codepen.io](http://codepen.io/) du Elm. C’est un bac à sable dans lequel vous pouvez écrire et tester du Elm sans avoir besoin d’installer quoi que ce soit.
 
 L’application est divisée en 3 parties :
+
 - Le code Elm
 - Le code HTML
 - et une fenêtre de rendu pour apprécier le résultat
 
 Copiez-coller le code suivant dans la fenêtre « Elm » et cliquez sur compile !
 
-```elm
-module Main exposing (..)
-import Html exposing (text, h1, div)
+
+    module Main exposing (..)
+    import Html exposing (text, h1, div)
 	
-main =
-  div []
-    [ h1 [] [ text "Elm" ]
-		, text "mon premier programme."
-		]
-```
+    main =
+      div []
+        [ h1 [] [ text "Elm" ]
+        , text "mon premier programme."
+        ]
 
 Voilà vous pouvez rajouter Elm à votre CV !
 
@@ -36,13 +36,13 @@ Voilà vous pouvez rajouter Elm à votre CV !
 
 Tout fichier .elm doit commencer par une déclaration de module
 
-	module Main exposing (..)
+    module Main exposing (..)
 
 Ici notre module s’appelle `Main` et c’est par ce nom qu’il est appelé dans le fichier Html plus bas : `var app = Elm.Main.fullscreen()`.
 
 `exposing (..)` indique que ce module _expose_ toutes ces fonctions à l’extérieur `(..)`. Cela peut-être un moyen de recréer ce qui dans d’autres langages s’appellent des fonctions privées.
 
-	import Html exposing (text, h1, div)
+    import Html exposing (text, h1, div)
 
 Nous avons besoin d’afficher du HTML, donc il nous faut importer le module correspondant.
 
@@ -58,17 +58,15 @@ Elm est un langage fonctionnel, nous ne vous avons pas pris en traitres.
 
 Par convention la première fonction qui est appelée à l’exécution du programme est `main`.
 
-	main =
+    main =
 
 ## Première déception : où est passé mon Html ???
 
-```elm
-main =
-  div []
-    [ h1 [] [ text "Elm" ]
-		, text "mon premier programme."
-		]
-```
+    main =
+      div []
+        [ h1 [] [ text "Elm" ]
+        , text "mon premier programme."
+        ]
 
 La fonction `main` appelle tout de suite une autre fonction `div`.
 
@@ -85,10 +83,8 @@ Vous avez envie de partir ? Un peu de courage, ce n’est pas la première fois 
 
 Rajouter un peu plus bas (ou un peu plus haut, ça n’a pas d’importance).
 
-```elm
-add x y =
-  x + y
-```
+    add x y =
+      x + y
 
 Nous venons de définir une première fonction `add` qui prend 2 arguments. Pas besoins de parenthèses ici, mais on peut les utiliser si besoin pour imbriquer une fonction dans une autre comme `add (add 3 2) 2`...
 
@@ -100,17 +96,16 @@ Si vous écrivez des tests fonctionnels pour votre programme Elm, ce n’est pas
 
 Utilisons cette fonction. Modifiez la fonction `main` comme suit :
 
-```elm
-main =
-  div []
-    [ h1 [] [ text "Elm" ]
-	  , text "mon premier programme."
-	  , text (add 3 4)
-	  ]
 
-add x y =
-  x + y
-```
+    main =
+      div []
+        [ h1 [] [ text "Elm" ]
+        , text "mon premier programme."
+        , text (add 3 4)
+        ]
+
+    add x y =
+      x + y
 
 et cliquez sur _compile_.
 
@@ -118,24 +113,22 @@ et cliquez sur _compile_.
 
 Oh oh nous avons une erreur, mais pas n’importe quelle erreur.
 
-```sh
-TYPE MISMATCH
-LINE 10 COLUMN 11
-The argument to function text is causing a mismatch.
-Function text is expecting the argument to be:
-	
-String
-	
-But it is:
-	
-number
-```
+    TYPE MISMATCH
+    LINE 10 COLUMN 11
+    The argument to function text is causing a mismatch.
+    Function text is expecting the argument to be:
+      
+    String
+      
+    But it is:
+      
+    number
 
 Et oui ! La fonction `text` attend une chaine de caractères mais nous lui avons fourni un nombre. Ca ne peut pas marcher.
 
 [Cherchons](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Basics#toString) une fonction qui permette d’effectuer cette transformation. `toString` devrait faire l’affaire !
 
-	text (toString(add 3 4))
+    text (toString(add 3 4))
 
 Compilons et cela marche nous affichons bien 7.
 
@@ -145,13 +138,13 @@ Mais `text (toString(add 3 4))` ça commence à faire beaucoup de parenthèses e
 
 Elm offre une autre manière d’écrire la même chose pour préserver vos yeux et votre santé mentale :
 
-	(add 3 4) |> toString |> text
+    (add 3 4) |> toString |> text
 
 Un peu comme le « | » de votre terminal unix, « |\> » permet de fournir le résultat d’une fonction comme paramètre de la suivante.
 
 D’ailleurs nous aurions pu pousser le vice un peu plus loin et écrire :
 
-	4 |> add 3 |> toString |> text
+    4 |> add 3 |> toString |> text
 
 4 étant ainsi retourné comme paramètre de la fonction `add 3` car c’est bien d’une fonction dont il s’agit. Une fonction _appliquée partiellement_ qui attend son paramètre manquant. Cette technique aussi appelée [_currying_](https://fr.wikipedia.org/wiki/Curryfication) est fréquemment utilisée en Elm et dans tous les autres langages fonctionnels.
 
@@ -164,7 +157,7 @@ Ici c’est tout de suite plus lisible !
 
 Le _pipe operator_ marche aussi dans l’autre sens :
 
-	text <| toString <| add 3 <| 4
+    text <| toString <| add 3 <| 4
 
 Cela peut avoir son intérêt dans certains cas, mais n’en abusez pas.
 
@@ -179,22 +172,20 @@ Admettons que nous devions afficher une liste à puces de ce genre :
 
 Nous pourrions écrire le programme suivant :
 
-```elm
-module Main exposing (..)
-	
-import Html exposing (text, h2, ul, li, div)
-	
-main =
-  div []
-    [ h2 [] [ text "Fruits :" ]
-    , ul []
-      [ li [] [ text "Pommes" ]
-      , li [] [ text "Bananes"]
-      , li [] [ text "Cerises"]
-      , li [] [ text "Poires"]
-      ]
-    ]
-```
+    module Main exposing (..)
+    
+    import Html exposing (text, h2, ul, li, div)
+    
+    main =
+      div []
+        [ h2 [] [ text "Fruits :" ]
+        , ul []
+          [ li [] [ text "Pommes" ]
+          , li [] [ text "Bananes"]
+          , li [] [ text "Cerises"]
+          , li [] [ text "Poires"]
+          ]
+        ]
 
 PS : Vous n’êtes pas obligés de présenter les choses aussi bien, mais une petit clic sur « format » et vous aurez la même chose.
 
@@ -209,20 +200,20 @@ Comment faire ?
 ## Higher order functions
 
 Reprenons au début, nous souhaitons partir d’une liste de fruits  comme `["pommes","bananes","poires"]` et obtenir pour chacune une sortie de ce type : `li [ ] [ text "fruit"]`. Il nous faut donc une fonction qui prenne comme arguments :
+
 - une fonction qui transforme a en b
 - une liste de a
+
 pour avoir au final une liste de b.
 
 C’est exactement ce que propose `List.map` : [http://package.elm-lang.org/packages/elm-lang/core/5.1.1/List#map](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/List#map)
 
-```elm
-map : (a -> b) -> List a -> List b
-Apply a function to every element of a list.
-	
-map sqrt [1,4,9] == [1,2,3]
-	
-map not [True,False,True] == [False,True,False]
-```
+    map : (a -> b) -> List a -> List b
+    Apply a function to every element of a list.
+      
+    map sqrt [1,4,9] == [1,2,3]
+      
+    map not [True,False,True] == [False,True,False]
 
 Ce genre de fonctions qui prennent une fonction comme argument et qui transforment une liste en une autre sont appelées _higher order functions_ ou [fonctions d’ordre supérieur](https://fr.wikipedia.org/wiki/Fonction_d%27ordre_sup%C3%A9rieur).
 
@@ -230,16 +221,14 @@ Dans l’exemple de la documentation `sqrt` renvoie la racine carrée. Sa signat
 
 Ecrivons une fonction qui prenne un fruit (une chaine de caractère) et renvoie un li !
 
-```elm
-fruitDisplayer fruit =
-  li [ ] [ text fruit ]
-```
+    fruitDisplayer fruit =
+      li [ ] [ text fruit ]
 
 PS : les fonctions commencent par une minuscule.
 
 Définissions une liste de fruits
 
-	fruits = ["pommes","bananes","poires"]
+    fruits = ["pommes","bananes","poires"]
 
 Il s’agit d’une liste et pas d’un _array_. Les listes sont les collections de base en Elm contrairement au Js. On peut facilement et rapidement sur une liste, mais on ne peut y accéder simplement en donnant l’ordre d’un élément dans une liste `fruit[0]` par exemple. Rassurez-vous, les arrays existent aussi en Elm, mais on ne les utilise pas aussi couramment.
 
@@ -247,34 +236,33 @@ Notez aussi qu’une liste ne peut contenir qu’un seul type d’éléments, de
 
 Il ne nous reste plus qu’à appeler notre fonction map.
 
-	List.map fruitDisplayer fruits
+    List.map fruitDisplayer fruits
 
 La librairie List est incluse dans le _core_ de Elm mais il convient de l’appeler par son petit nom car il existe d’autres fonctions map dans d’autres librairies.
 
 Ce qui nous donne
 
-```elm
-module Main exposing (..)
-	
-import Html exposing (text, h2, ul, li, div)
-	
-fruits = ["pommes","poires","scoubidou","ha"]
-	
-fruitDisplayer fruit =
-  li [ ] [ text fruit ]
-	
-main =
-  div []
-    [ h2 [] [ text "Fruits :" ]
-    , ul [] (List.map fruitDisplayer fruits)
-    ]
-```
+
+    module Main exposing (..)
+    import Html exposing (text, h2, ul, li, div)
+    
+    fruits = ["pommes","poires","scoubidou","ha"]
+    
+    fruitDisplayer fruit =
+      li [ ] [ text fruit ]
+    
+    main =
+      div []
+        [ h2 [] [ text "Fruits :" ]
+        , ul [] (List.map fruitDisplayer fruits)
+        ]
 
 Et voilà !
 
 Notez que :
-- `List.map` renvoyant une liste et `ul` prenant une liste en deuxième paramètre, pas la peine de remettre des crochets.
-- Nous avons mis des parenthèses pour regrouper tout cela en un seul paramètre, sinon nous aurions eu une erreur nous disant qu’`ul` ne prenait pas 4 paramètres.
+
+* `List.map` renvoyant une liste et `ul` prenant une liste en deuxième paramètre, pas la peine de remettre des crochets.
+* Nous avons mis des parenthèses pour regrouper tout cela en un seul paramètre, sinon nous aurions eu une erreur nous disant qu’`ul` ne prenait pas 4 paramètres.
 
 ## Signatures et types
 
@@ -282,21 +270,21 @@ Je ne sais pas si vous l’aviez remarqués, mais certains éléments de notre c
 
 Au survol de `fruits` par exemple, Elm (enfin le compilateur) nous indique gentiment qu’il a déduit qu’il s’agissait d’une liste de chaines de caractères : `List String`.
 
-	fruits : List String
+    fruits : List String
 
 De même pour `fruitDisplayer` :
 
-	fruitDisplayer: String -> Html.Html msg
+    fruitDisplayer: String -> Html.Html msg
 
 Cette fonction prend une chaine de caractère et retourne du code Html (et éventuellement un message mais ne brulons pas les étapes).
 
 D’ailleurs nous devrions aussi exposer le type Html dans notre programme.
 
-	import Html exposing (Html, text, h2, ul, li, div)
+    import Html exposing (Html, text, h2, ul, li, div)
 
 Ce qui nous donnera
 
-	fruitDisplayer: String -> Html msg
+    fruitDisplayer: String -> Html msg
 
 Il s’agit de _warnings_ qui n’empêcheront pas votre code de compiler en JS. Elm est assez malin pour déduire pas mal de choses et en retour vous fournir des messages d’erreurs explicites.
 
@@ -304,28 +292,26 @@ Mais il vaut mieux être explicite avec vos signatures, c’est un peu de gymnas
 
 Reprenons :
 
-```elm
-module Main exposing (..)
+    module Main exposing (..)
 
-import Html exposing (Html, text, h2, ul, li, div)
-	
-fruits : List String
-fruits =
-  [ "pommes", "poires", "scoubidou", "ha" ]
-	
-fruitDisplayer : String -> Html msg
-  fruitDisplayer fruit =
-    li [] [ text fruit ]
-	
-main : Html msg
-main =
-  div []
-    [ h2 [] [ text "Fruits :" ]
-    , ul [] (List.map fruitDisplayer fruits)
-    ]
-```
+    import Html exposing (Html, text, h2, ul, li, div)
+      
+    fruits : List String
+    fruits =
+      [ "pommes", "poires", "scoubidou", "ha" ]
+      
+    fruitDisplayer : String -> Html msg
+      fruitDisplayer fruit =
+        li [] [ text fruit ]
+      
+    main : Html msg
+    main =
+      div []
+        [ h2 [] [ text "Fruits :" ]
+        , ul [] (List.map fruitDisplayer fruits)
+        ]
 
-Les signatures s’écrivent avec un « : » à la place d’un « = »  et précèdent la fonction correspondante.
+Les signatures s’écrivent avec un `:` à la place d’un `=`  et précèdent la fonction correspondante.
 
 Déjà, votre collègue qui reprendra votre code saura tout de suite de quoi il s’agit. C’est mieux qu’un commentaire.
 
@@ -335,11 +321,11 @@ Si nous reprenons notre « afficheur de fruits »
 
 Nous pourrions l’écrire aussi :
 
-```elm
-	viewFruits fruits : List String -> List (Html msg)
-	viewFruits fruits =
-	  fruits |> List.map fruitDisplayer
-```
+
+    viewFruits fruits : List String -> List (Html msg)
+    viewFruits fruits =
+      fruits |> List.map fruitDisplayer
+
 
 Décomposons notre fonction : `List.map fruitDisplayer fruits`
 
@@ -359,13 +345,13 @@ Sur ce [site](http://klaftertief.github.io/elm-search/?q=(+a+-%3E+b)+-%3E+List+a
 
 Nous pouvons également définir nos propres types avec la commande `type alias`.
 
-```elm
-type alias Fruit = String
 
-fruits : List Fruit
-fruits =
-  [ "pommes", "poires", "scoubidou", "ha" ]
-```
+    type alias Fruit = String
+
+    fruits : List Fruit
+    fruits =
+      [ "pommes", "poires", "scoubidou", "ha" ]
+
 
 Ici nous définissons un fruit comme une chaine de caractères et la liste fruits comme une liste de fruits.
 
@@ -375,35 +361,4 @@ Le compilateur est votre ami. Ne luttez pas contre lui.
 
 **Programme final** :
 
-```elm
-module Main exposing (..)
-	
-import Html exposing (Html, text, h2, ul, li, div)
-	
-type alias Fruit =
-  String
-	
-	
-fruits : List Fruit
-fruits =
-  [ "pommes", "poires", "scoubidou", "ha" ]
-	
-	
-	fruitDisplayer : String -> Html msg
-	fruitDisplayer fruit =
-	    li [] [ text fruit ]
-	
-	
-	viewfruits : List Fruit -> Html msg
-	viewfruits fruits =
-	    ul [] (fruits |> List.map fruitDisplayer)
-	
-	
-	main : Html msg
-	main =
-	    div []
-	        [ h2 [] [ text "Fruits :" ]
-	        , viewfruits fruits
-	        ]
-```
-
+{{< ellie 3qfLQSc6KyBa1 >}}
