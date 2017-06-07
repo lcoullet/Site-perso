@@ -207,7 +207,7 @@ Reprenons au début, nous souhaitons partir d’une liste de fruits  comme `["po
 
 pour avoir au final une liste de b.
 
-C’est exactement ce que propose `List.map` : [http://package.elm-lang.org/packages/elm-lang/core/5.1.1/List#map](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/List#map)
+C’est exactement ce que propose [`List.map`](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/List#map) : 
 
     map : (a -> b) -> List a -> List b
     Apply a function to every element of a list.
@@ -227,7 +227,7 @@ Ecrivons une fonction qui prenne un fruit (une chaine de caractère) et renvoie 
 
 PS : les fonctions commencent par une minuscule.
 
-Définissions une liste de fruits
+Définissons une liste de fruits
 
     fruits = ["pommes","bananes","poires"]
 
