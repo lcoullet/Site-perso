@@ -1,6 +1,5 @@
 +++
-date = "2017-06-08"
-draft = true
+date = "2017-06-07"
 description = "Le but de cette série est de réaliser un petit programme utilisant Elm"
 title = "Elm / Ep1 : Un premier programme avec Elm"
 categories = ["Elm", "Elm-lang"]
@@ -31,6 +30,8 @@ Copiez-coller le code suivant dans la fenêtre « Elm » et cliquez sur compil
         ]
 
 Voilà vous pouvez rajouter Elm à votre CV !
+
+{{< ellie 3qhvF3rLqPTa1 >}}
 
 **Quelques explications**
 

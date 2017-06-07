@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+
+
+ <html class="no-js"> 
+<head>
+    <title>Elm / Ep1 : Un premier programme avec Elm &middot; La Revanche du Site</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-language" content="fr-fr" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Ludovic Coullet">
+    <meta name="description" content="Le fils de la revanche">
+    <meta name="generator" content="Hugo 0.21" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="http://ludovic.coullet.net/css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700|Lora:400,700,400italic" rel="stylesheet" type="text/css">
+    
+</head>
+
+<body>
+    
+    <div class="off-canvas">
+    <figure class="avatar">
+        <img src="http://ludovic.coullet.net/img/avatar-ludo.png" title="Ludovic Coullet">
+    </figure>
+    <div class="bio">
+        
+        <h1>Salut c&#39;est Ludo !</h1>
+        
+        
+        <p>Ludovic Coullet</p>
+        
+    </div>
+    <nav>
+
+        
+
+        
+        <h6>Pour les anciens</h6>
+        
+
+        <ul>
+            <li><a target="_blank" href="http://ludovic.coullet.net/index.xml">RSS feed</a></li>
+        </ul>
+
+        
+        <h6>Suivez-moi</h6>
+        
+
+        <ul>
+        
+            <li><a target="_blank" href="//github.com/lcoullet">Github</a></li>
+        
+            <li><a target="_blank" href="//twitter.com/lcoullet">Twitter</a></li>
+        
+            <li><a target="_blank" href="//dancingbanana.party/@blud">Mastodon</a></li>
+        
+        </ul>        
+    </nav>
+</div>
+
+
+    <div class="site-wrapper">
+        <header>
+	<div class="h-wrap">
+		
+		<h1 class="title"><a href="http://ludovic.coullet.net/">La Revanche du Site</a></h1>
+		
+		<a class="menu-icon" title="Menu"><span class="lines"></span></a>
+	</div>
+</header>
+        
+        <section class="single-wrap">
+            <article class="single-content" itemscope itemtype="//schema.org/BlogPosting">
+                <div class="feat">
+                    <h5 class="page-date">
+                    <time datetime="" itemprop="datePublished">
+                    07/06/2017
+                    </time>
+                    </h5>
+                </div>
+                <h1 class="page-title" itemprop="name headline">Elm / Ep1 : Un premier programme avec Elm</h1>
+                <div itemprop="articleBody">
+                    
+
+<p>Et c’est parti !</p>
+
+<p>Pour ce premier programme, inutile d’installer Elm sur sa machine. Vous pouvez vous rendre sur <a href="https://ellie-app.com/new">Ellie</a> et commencer directement à tester.</p>
+
+<p>Ellie c’est un peu le <a href="http://codepen.io/">codepen.io</a> du Elm. C’est un bac à sable dans lequel vous pouvez écrire et tester du Elm sans avoir besoin d’installer quoi que ce soit.</p>
+
+<p>L’application est divisée en 3 parties :</p>
+
+<ul>
+<li>Le code Elm</li>
+<li>Le code HTML</li>
+<li>et une fenêtre de rendu pour apprécier le résultat</li>
+</ul>
+
+<p>Copiez-coller le code suivant dans la fenêtre « Elm » et cliquez sur compile !</p>
+
+<pre><code>module Main exposing (..)
+import Html exposing (text, h1, div)
+
+main =
+  div [ ]
+    [ h1 [ ] [ text &quot;Elm&quot; ]
+    , text &quot;mon premier programme.&quot;
+    ]
+</code></pre>
+
+<p>Voilà vous pouvez rajouter Elm à votre CV !</p>
+
+<iframe src="https://embed.ellie-app.com/3qhvF3rLqPTa1/0" style="width:100%; height:400px; border:0; border-radius: 3px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+<p><strong>Quelques explications</strong></p>
+
+<p>Tout fichier .elm doit commencer par une déclaration de module</p>
+
+<pre><code>module Main exposing (..)
+</code></pre>
+
+<p>Ici notre module s’appelle <code>Main</code> et c’est par ce nom qu’il est appelé dans le fichier Html plus bas : <code>var app = Elm.Main.fullscreen()</code>.</p>
+
+<p><code>exposing (..)</code> indique que ce module <em>expose</em> toutes ces fonctions à l’extérieur <code>(..)</code>. Cela peut-être un moyen de recréer ce qui dans d’autres langages s’appellent des fonctions privées.</p>
+
+<pre><code>import Html exposing (text, h1, div)
+</code></pre>
+
+<p>Nous avons besoin d’afficher du HTML, donc il nous faut importer le module correspondant.</p>
+
+<p>A la différence de la déclaration de notre module, nous avons choisi explicitement de n’importer que certaines fonctions comme celles permettant d’afficher du texte, un titre et une div.</p>
+
+<p>Nous aurions pu simplement écrire <code>import Html</code> mais cela nous aurait obligé à les appeler de manière plus longue. Par exemple <code>Html.text</code> au lieu de <code>text</code>.</p>
+
+<p>Import permet également de renommer à notre convenance ces appels de fonctions pour éviter les problèmes de <em>namespace</em>. Par exemple <code>import Html as Foo</code>, et dans ce cas, nous aurions pu écrire <code>Foo.text</code>.</p>
+
+<h2 id="tout-est-fonction">Tout est fonction !</h2>
+
+<p>Elm est un langage fonctionnel, nous ne vous avons pas pris en traitres.</p>
+
+<p>Par convention la première fonction qui est appelée à l’exécution du programme est <code>main</code>.</p>
+
+<pre><code>main =
+</code></pre>
+
+<h2 id="première-déception-où-est-passé-mon-html">Première déception : où est passé mon Html ???</h2>
+
+<pre><code>main =
+  div []
+    [ h1 [] [ text &quot;Elm&quot; ]
+    , text &quot;mon premier programme.&quot;
+    ]
+</code></pre>
+
+<p>La fonction <code>main</code> appelle tout de suite une autre fonction <code>div</code>.</p>
+
+<p><code>div</code> prend 2 arguments qui sont 2 listes (pour le moment comme elles s’écrivent [ ], on peut les rapprocher des <em>arrays</em> en js mais c’est faux). Dans la première on pourra mettre tous les attributs Html nécessaires comme un id, class. La seconde c’est tout simplement le contenu de cette div.</p>
+
+<p>Et ce contenu contient lui même d’autres fonctions comme h1 qui prend elle aussi 2 arguments et text qui n’en prend qu’un (une chaine de caractères). Les 2 fonctions text et h1 étant les éléments d’une même liste, elles sont séparées par une « , ».</p>
+
+<p>Vous avez envie de partir ? Un peu de courage, ce n’est pas la première fois qu’on vous propose une manière différente d’écrire du HTML et vous verrez cela offre pas mal d’avantages.</p>
+
+<ul>
+<li>Ce sont des fonctions, elles sont exécutées comme telles, manipulées dans tout le sens et au final, on a un nouveau <a href="https://fr.wikipedia.org/wiki/Document_Object_Model">DOM</a> que Elm se charge lui même de modifier sur le navigateur en ne touchant que ce qui a changé. ReactJs fait la même chose.</li>
+<li>Tout cela n’étant que des fonctions, vous pouvez faire les votre à l’envie.</li>
+</ul>
+
+<h3 id="une-première-fonction">Une première fonction</h3>
+
+<p>Rajouter un peu plus bas (ou un peu plus haut, ça n’a pas d’importance).</p>
+
+<pre><code>add x y =
+  x + y
+</code></pre>
+
+<p>Nous venons de définir une première fonction <code>add</code> qui prend 2 arguments. Pas besoins de parenthèses ici, mais on peut les utiliser si besoin pour imbriquer une fonction dans une autre comme <code>add (add 3 2) 2</code>&hellip;</p>
+
+<p>Notez qu’en Elm, toute fonction retourne forcément une valeur. Les fonctions ici sont dites <strong>pures</strong> car elles ne peuvent manipuler que les paramètres que vous leurs avez fournies.</p>
+
+<p>Elles ne peuvent pas communiquer avec l’extérieur ou être influencées par ce dernier. Si vous lancez 10 000 fois la fonction add avec les mêmes paramètres, vous obtiendrez le même résultat, quelles que soient d’autres variables du programme, l’heure, le serveur sur lequel elles sont lancées, etc.</p>
+
+<p>Si vous écrivez des tests fonctionnels pour votre programme Elm, ce n’est pas la peine de s’embêter à charger au préalable un contexte, un environnement, un état, il n’y en a pas ! C’est l’avantage de la <em>pureté</em> (purity). Cela a aussi des inconvénients que nous verrons plus loin.</p>
+
+<p>Utilisons cette fonction. Modifiez la fonction <code>main</code> comme suit :</p>
+
+<pre><code>main =
+  div []
+    [ h1 [] [ text &quot;Elm&quot; ]
+    , text &quot;mon premier programme.&quot;
+    , text (add 3 4)
+    ]
+
+add x y =
+  x + y
+</code></pre>
+
+<p>et cliquez sur <em>compile</em>.</p>
+
+<h2 id="not-your-average-compiler">Not your average compiler</h2>
+
+<p>Oh oh nous avons une erreur, mais pas n’importe quelle erreur.</p>
+
+<pre><code>TYPE MISMATCH
+LINE 10 COLUMN 11
+The argument to function text is causing a mismatch.
+Function text is expecting the argument to be:
+
+String
+
+But it is:
+
+number
+</code></pre>
+
+<p>Et oui ! La fonction <code>text</code> attend une chaine de caractères mais nous lui avons fourni un nombre. Ca ne peut pas marcher.</p>
+
+<p><a href="http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Basics#toString">Cherchons</a> une fonction qui permette d’effectuer cette transformation. <code>toString</code> devrait faire l’affaire !</p>
+
+<pre><code>text (toString(add 3 4))
+</code></pre>
+
+<p>Compilons et cela marche nous affichons bien 7.</p>
+
+<h2 id="le-pipe-operator">Le <em>pipe operator</em></h2>
+
+<p>Mais <code>text (toString(add 3 4))</code> ça commence à faire beaucoup de parenthèses et c’est peu lisible.</p>
+
+<p>Elm offre une autre manière d’écrire la même chose pour préserver vos yeux et votre santé mentale :</p>
+
+<pre><code>(add 3 4) |&gt; toString |&gt; text
+</code></pre>
+
+<p>Un peu comme le « | » de votre terminal unix, « |&gt; » permet de fournir le résultat d’une fonction comme paramètre de la suivante.</p>
+
+<p>D’ailleurs nous aurions pu pousser le vice un peu plus loin et écrire :</p>
+
+<pre><code>4 |&gt; add 3 |&gt; toString |&gt; text
+</code></pre>
+
+<p>4 étant ainsi retourné comme paramètre de la fonction <code>add 3</code> car c’est bien d’une fonction dont il s’agit. Une fonction <em>appliquée partiellement</em> qui attend son paramètre manquant. Cette technique aussi appelée <a href="https://fr.wikipedia.org/wiki/Curryfication"><em>currying</em></a> est fréquemment utilisée en Elm et dans tous les autres langages fonctionnels.</p>
+
+<p>Ici c’est tout de suite plus lisible !</p>
+
+<ul>
+<li>On prend 4</li>
+<li>On lui ajoute 3</li>
+<li>On le transforme en texte</li>
+<li>On l’affiche en HTML</li>
+</ul>
+
+<p>Le <em>pipe operator</em> marche aussi dans l’autre sens :</p>
+
+<pre><code>text &lt;| toString &lt;| add 3 &lt;| 4
+</code></pre>
+
+<p>Cela peut avoir son intérêt dans certains cas, mais n’en abusez pas.</p>
+
+<h2 id="mais-où-est-passé-mon-for-in">Mais où est passé mon for in ?</h2>
+
+<p>Admettons que nous devions afficher une liste à puces de ce genre :</p>
+
+<ul>
+<li>Pommes</li>
+<li>Bananes</li>
+<li>Cerises</li>
+<li>Poires</li>
+</ul>
+
+<p>Nous pourrions écrire le programme suivant :</p>
+
+<pre><code>module Main exposing (..)
+
+import Html exposing (text, h2, ul, li, div)
+
+main =
+  div []
+    [ h2 [] [ text &quot;Fruits :&quot; ]
+    , ul []
+      [ li [] [ text &quot;Pommes&quot; ]
+      , li [] [ text &quot;Bananes&quot;]
+      , li [] [ text &quot;Cerises&quot;]
+      , li [] [ text &quot;Poires&quot;]
+      ]
+    ]
+</code></pre>
+
+<p>PS : Vous n’êtes pas obligés de présenter les choses aussi bien, mais une petit clic sur « format » et vous aurez la même chose.</p>
+
+<p>Cela marche mais c’est un peu long à écrire, répétitif et surtout cela promet d’être fastidieux si la liste s’allonge.</p>
+
+<p>On pourrait écrire un petit programme qui prenne une liste de fruits en paramètre et écrive à notre place cette suite de <code>li</code>&hellip;</p>
+
+<p>Un petit <em>for each</em> devrait faire l’affaire, mais ce serait trop simple car il n’y en pas.</p>
+
+<p>Comment faire ?</p>
+
+<h2 id="higher-order-functions">Higher order functions</h2>
+
+<p>Reprenons au début, nous souhaitons partir d’une liste de fruits  comme <code>[&quot;pommes&quot;,&quot;bananes&quot;,&quot;poires&quot;]</code> et obtenir pour chacune une sortie de ce type : <code>li [ ] [ text &quot;fruit&quot;]</code>. Il nous faut donc une fonction qui prenne comme arguments :</p>
+
+<ul>
+<li>une fonction qui transforme a en b</li>
+<li>une liste de a</li>
+</ul>
+
+<p>pour avoir au final une liste de b.</p>
+
+<p>C’est exactement ce que propose <code>List.map</code> : <a href="http://package.elm-lang.org/packages/elm-lang/core/5.1.1/List#map">http://package.elm-lang.org/packages/elm-lang/core/5.1.1/List#map</a></p>
+
+<pre><code>map : (a -&gt; b) -&gt; List a -&gt; List b
+Apply a function to every element of a list.
+
+map sqrt [1,4,9] == [1,2,3]
+
+map not [True,False,True] == [False,True,False]
+</code></pre>
+
+<p>Ce genre de fonctions qui prennent une fonction comme argument et qui transforment une liste en une autre sont appelées <em>higher order functions</em> ou <a href="https://fr.wikipedia.org/wiki/Fonction_d%27ordre_sup%C3%A9rieur">fonctions d’ordre supérieur</a>.</p>
+
+<p>Dans l’exemple de la documentation <code>sqrt</code> renvoie la racine carrée. Sa signature est <code>sqrt : Float -&gt; Float</code>, c’est à dire qu’elle prend un float (nombre à virgule) comme paramètre et retourne un float. Nous y reviendrons.</p>
+
+<p>Ecrivons une fonction qui prenne un fruit (une chaine de caractère) et renvoie un li !</p>
+
+<pre><code>fruitDisplayer fruit =
+  li [] [ text fruit ]
+</code></pre>
+
+<p>PS : les fonctions commencent par une minuscule.</p>
+
+<p>Définissions une liste de fruits</p>
+
+<pre><code>fruits = [&quot;pommes&quot;,&quot;bananes&quot;,&quot;poires&quot;]
+</code></pre>
+
+<p>Il s’agit d’une liste et pas d’un <em>array</em>. Les listes sont les collections de base en Elm contrairement au Js. On peut facilement et rapidement sur une liste, mais on ne peut y accéder simplement en donnant l’ordre d’un élément dans une liste <code>fruit[0]</code> par exemple. Rassurez-vous, les arrays existent aussi en Elm, mais on ne les utilise pas aussi couramment.</p>
+
+<p>Notez aussi qu’une liste ne peut contenir qu’un seul type d’éléments, des entiers, des nombres, des chaines de caractères, d’autres listes, etc. Mais pas de mélanges.</p>
+
+<p>Il ne nous reste plus qu’à appeler notre fonction map.</p>
+
+<pre><code>List.map fruitDisplayer fruits
+</code></pre>
+
+<p>La librairie List est incluse dans le <em>core</em> de Elm mais il convient de l’appeler par son petit nom car il existe d’autres fonctions map dans d’autres librairies.</p>
+
+<p>Ce qui nous donne</p>
+
+<pre><code>module Main exposing (..)
+
+import Html exposing (text, h2, ul, li, div)
+
+fruits = [&quot;pommes&quot;,&quot;poires&quot;,&quot;scoubidou&quot;,&quot;ha&quot;]
+
+fruitDisplayer fruit =
+  li [] [ text fruit ]
+
+main =
+  div []
+    [ h2 [] [ text &quot;Fruits :&quot; ]
+    , ul [] (List.map fruitDisplayer fruits)
+    ]
+</code></pre>
+
+<p>Et voilà !</p>
+
+<p>Notez que :</p>
+
+<ul>
+<li><code>List.map</code> renvoyant une liste et <code>ul</code> prenant une liste en deuxième paramètre, pas la peine de remettre des crochets.</li>
+<li>Nous avons mis des parenthèses pour regrouper tout cela en un seul paramètre, sinon nous aurions eu une erreur nous disant qu’<code>ul</code> ne prenait pas 4 paramètres.</li>
+</ul>
+
+<h2 id="signatures-et-types">Signatures et types</h2>
+
+<p>Je ne sais pas si vous l’aviez remarqués, mais certains éléments de notre code sont soulignés en pointillés jaune.</p>
+
+<p>Au survol de <code>fruits</code> par exemple, Elm (enfin le compilateur) nous indique gentiment qu’il a déduit qu’il s’agissait d’une liste de chaines de caractères : <code>List String</code>.</p>
+
+<pre><code>fruits : List String
+</code></pre>
+
+<p>De même pour <code>fruitDisplayer</code> :</p>
+
+<pre><code>fruitDisplayer: String -&gt; Html.Html msg
+</code></pre>
+
+<p>Cette fonction prend une chaine de caractère et retourne du code Html (et éventuellement un message mais ne brulons pas les étapes).</p>
+
+<p>D’ailleurs nous devrions aussi exposer le type Html dans notre programme.</p>
+
+<pre><code>import Html exposing (Html, text, h2, ul, li, div)
+</code></pre>
+
+<p>Ce qui nous donnera</p>
+
+<pre><code>fruitDisplayer: String -&gt; Html msg
+</code></pre>
+
+<p>Il s’agit de <em>warnings</em> qui n’empêcheront pas votre code de compiler en JS. Elm est assez malin pour déduire pas mal de choses et en retour vous fournir des messages d’erreurs explicites.</p>
+
+<p>Mais il vaut mieux être explicite avec vos signatures, c’est un peu de gymnastique au début, cela vient vite et les bénéfices sont inestimables.</p>
+
+<p>Reprenons :</p>
+
+<pre><code>module Main exposing (..)
+
+import Html exposing (Html, text, h2, ul, li, div)
+
+fruits : List String
+fruits =
+  [ &quot;pommes&quot;, &quot;poires&quot;, &quot;scoubidou&quot;, &quot;ha&quot; ]
+
+fruitDisplayer : String -&gt; Html msg
+  fruitDisplayer fruit =
+    li [] [ text fruit ]
+
+main : Html msg
+main =
+  div []
+    [ h2 [] [ text &quot;Fruits :&quot; ]
+    , ul [] (List.map fruitDisplayer fruits)
+    ]
+</code></pre>
+
+<p>Les signatures s’écrivent avec un <code>:</code> à la place d’un <code>=</code>  et précèdent la fonction correspondante.</p>
+
+<p>Déjà, votre collègue qui reprendra votre code saura tout de suite de quoi il s’agit. C’est mieux qu’un commentaire.</p>
+
+<p>Cela vous indique clairement qui fait quoi.</p>
+
+<p>Si nous reprenons notre « afficheur de fruits »</p>
+
+<p>Nous pourrions l’écrire aussi :</p>
+
+<pre><code>viewFruits fruits : List String -&gt; List (Html msg)
+viewFruits fruits =
+  fruits |&gt; List.map fruitDisplayer
+</code></pre>
+
+<p>Décomposons notre fonction : <code>List.map fruitDisplayer fruits</code></p>
+
+<pre><code>(String -&gt; Html) -&gt; List String -&gt; List (Html msg)
+</code></pre>
+
+<ol>
+<li>Elle prend un premier argument qui est une fonction qui transforme une String en Html.</li>
+<li>Un second argument qui est une liste de String.</li>
+<li>Et retourne une liste d’Html.</li>
+</ol>
+
+<p>C’est exactement la signature de <code>List.map</code> :</p>
+
+<pre><code>map : (a -&gt; b) -&gt; List a -&gt; List b
+</code></pre>
+
+<p>a et b étant des types indéfinis, mais du moment que nous respectons cette structure cela marchera.</p>
+
+<p>Sur ce <a href="http://klaftertief.github.io/elm-search/?q=(+a+-%3E+b)+-%3E+List+a+-%3E+List+b">site</a> vous pouvez même chercher la documentation en utilisant les signatures !</p>
+
+<p>Nous pouvons également définir nos propres types avec la commande <code>type alias</code>.</p>
+
+<pre><code>type alias Fruit = String
+
+fruits : List Fruit
+fruits =
+  [ &quot;pommes&quot;, &quot;poires&quot;, &quot;scoubidou&quot;, &quot;ha&quot; ]
+</code></pre>
+
+<p>Ici nous définissons un fruit comme une chaine de caractères et la liste fruits comme une liste de fruits.</p>
+
+<p>Cela peut paraître un peu restrictif, mais si quelque part vous avez une fonction qui retourne une liste de légumes, quand bien même il s’agirait au final de <em>Strings</em>, et que vous l’utilisez comme argument d’une fonction qui prenne une liste de fruits en paramètre, le compilateur vous avertira. Un excellent moyen de ne pas mélanger les torchons et les serviettes.</p>
+
+<p>Le compilateur est votre ami. Ne luttez pas contre lui.</p>
+
+<p><strong>Programme final</strong> :</p>
+
+<iframe src="https://embed.ellie-app.com/3qfLQSc6KyBa1/0" style="width:100%; height:400px; border:0; border-radius: 3px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+                </div>
+                <div class="feat share">
+                    <a href="//twitter.com/share" class="popup">
+                        <span class="icon-twitter"></span>
+                    </a>
+                </div>
+                
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'lcoullet';
+    var disqus_identifier = 'http:\/\/ludovic.coullet.net\/elm-\/-ep1--un-premier-programme-avec-elm\/';
+    var disqus_title = 'Elm \/ Ep1 : Un premier programme avec Elm';
+    var disqus_url = 'http:\/\/ludovic.coullet.net\/elm-\/-ep1--un-premier-programme-avec-elm\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                
+                
+                    <a rel="prev" href="http://ludovic.coullet.net/elm-/-ep0--introduction/" id="prev">
+                        &larr; <span class="nav-title nav-title-prev">Suivant</span>
+                    </a>
+                
+            </article>
+        </section>
+
+        <footer>
+	
+	<small>PROPULSÉ PAR <a href="//gohugo.io">HUGO</a> - THEME: <a href="//github.com/digitalcraftsman/hugo-hikari-theme">HIKARI</a> - © Ludovic Coullet</small>
+	
+</footer>
+    </div>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://ludovic.coullet.net/js/main.js"></script>
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-729622-7', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+<!-- Syntax highlighting -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

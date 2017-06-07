@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ludovic.coullet.net/elm-/-ep1--un-premier-programme-avec-elm/</loc>
+    <lastmod>2017-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ludovic.coullet.net/elm-/-ep0--introduction/</loc>
     <lastmod>2017-06-06T00:00:00+00:00</lastmod>
   </url>
@@ -60,13 +65,13 @@
   
   <url>
     <loc>http://ludovic.coullet.net/categories/elm/</loc>
-    <lastmod>2017-06-06T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://ludovic.coullet.net/categories/elm-lang/</loc>
-    <lastmod>2017-06-06T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -78,7 +83,7 @@
   
   <url>
     <loc>http://ludovic.coullet.net/</loc>
-    <lastmod>2017-06-06T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -96,7 +101,7 @@
   
   <url>
     <loc>http://ludovic.coullet.net/post/</loc>
-    <lastmod>2017-06-06T00:00:00+00:00</lastmod>
+    <lastmod>2017-06-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
