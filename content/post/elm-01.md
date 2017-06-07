@@ -25,8 +25,8 @@ Copiez-coller le code suivant dans la fenêtre « Elm » et cliquez sur compil
     import Html exposing (text, h1, div)
 	
     main =
-      div []
-        [ h1 [] [ text "Elm" ]
+      div [ ]
+        [ h1 [ ] [ text "Elm" ]
         , text "mon premier programme."
         ]
 
@@ -222,7 +222,7 @@ Dans l’exemple de la documentation `sqrt` renvoie la racine carrée. Sa signat
 Ecrivons une fonction qui prenne un fruit (une chaine de caractère) et renvoie un li !
 
     fruitDisplayer fruit =
-      li [ ] [ text fruit ]
+      li [] [ text fruit ]
 
 PS : les fonctions commencent par une minuscule.
 
@@ -242,20 +242,21 @@ La librairie List est incluse dans le _core_ de Elm mais il convient de l’appe
 
 Ce qui nous donne
 
-
     module Main exposing (..)
+
     import Html exposing (text, h2, ul, li, div)
-    
+
     fruits = ["pommes","poires","scoubidou","ha"]
-    
+
     fruitDisplayer fruit =
-      li [ ] [ text fruit ]
-    
+      li [] [ text fruit ]
+
     main =
       div []
         [ h2 [] [ text "Fruits :" ]
         , ul [] (List.map fruitDisplayer fruits)
         ]
+
 
 Et voilà !
 
