@@ -38,3 +38,5 @@ Nous partons du principe :
 
 * Que vous connaissez un peu d’HTML et de CSS et assez de JS pour installer une librairie
 * Que vous êtes un peu fous
+
+La suite est [ici](/elm-/-ep1--un-premier-programme-avec-elm/).

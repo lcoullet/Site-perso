@@ -5,7 +5,7 @@ title = "Elm / Ep1 : Un premier programme avec Elm"
 categories = ["Elm", "Elm-lang"]
 +++
 
-Et c’est parti !
+Et c’est parti ! (si vous avez raté le [début](/elm-/-ep0--introduction/))
 
 Pour ce premier programme, inutile d’installer Elm sur sa machine. Vous pouvez vous rendre sur [Ellie](https://ellie-app.com/new) et commencer directement à tester.
 
