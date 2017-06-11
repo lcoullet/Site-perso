@@ -40,8 +40,8 @@ publishDir = "docs"
 	search = "Search"
 
 	[[params.offcanvas.socialnetworks]]
-		name = "Github"
-		url = "//github.com/lcoullet"
+		name = "Linkedin"
+		url = "//www.linkedin.com/in/lcoullet/"
 
 	[[params.offcanvas.socialnetworks]]
 		name = "Twitter"
@@ -50,3 +50,7 @@ publishDir = "docs"
 	[[params.offcanvas.socialnetworks]]
 		name = "Mastodon"
 		url = "//dancingbanana.party/@blud"
+
+	[[params.offcanvas.socialnetworks]]
+	name = "Github"
+	url = "//github.com/lcoullet"
