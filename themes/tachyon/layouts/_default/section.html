@@ -1,12 +1,11 @@
 {{ partial "header.html" . }}
-<body lang="en">
 
-<main class="pal">
+<main class="pa4">
   <div>
-   <h1 class="ttu fw4 f6 lt-silver">{{ .Title }}</h1>
+   <h1 class="ttu f1">{{ .Title }}</h1>
             {{ range .Data.Pages.GroupByDate "2006" }}
             <h1 class="ttu f4 blue">{{ .Key }}</h1>
-                <ul class="list pnl">
+                <ul class="list">
                     {{ range .Pages }}
                         {{ .Render "li"}}
                     {{ end }}

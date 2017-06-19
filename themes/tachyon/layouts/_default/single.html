@@ -1,11 +1,13 @@
 {{ partial "header.html" . }}
 
-  <main class="pal">
-
-    <h1>{{ .Title }}</h1>
-    <h2>{{ .Date.Format "Jan 2, 2006" }}</h2>
-      {{ .Content }}
-
-  </main>
+<article class="cf ph3 ph5-ns pv5">
+  <header class="fn fl-ns w-50-ns pr4-ns">
+    <h1 class="mb3 mt0 lh-title">{{ .Title }}</h1>
+    <time class="f6 ttu tracked gray">{{ .Date.Format "Jan 2, 2006" }}</time>
+  </header>
+  <div class="fn fl-ns w-50-ns">
+    {{ .Content }}
+  </div>
+</article>
 
 {{ partial "footer.html" . }}
