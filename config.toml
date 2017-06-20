@@ -15,7 +15,6 @@ publishDir = "docs"
 [params]
 	name = "Ludovic Coullet"
 	description = "Le fils de la revanche"
-	copyright = "PROPULSÉ PAR [HUGO](//gohugo.io) - THEME: [HIKARI](//github.com/digitalcraftsman/hugo-hikari-theme) - © Ludovic Coullet"
 
 	# Custom assets can be linked with their paths relative to static/
 	custom_css = []
