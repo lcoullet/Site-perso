@@ -1,0 +1,13 @@
+	<article class="pa4 measure-wide">
+		<h1 class="ttc"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+		<time>{{ .Date.Format "02-01-2006" }}</time>
+		{{ range .Params.tags }}
+		<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="br- bg-washed-blue link di">{{ . }}</a>
+		{{ end }}
+		<div>
+			{{ .Summary }}
+			{{ if .Truncated }}
+				<a href="{{ .Permalink }}">Lire la suite...</a>
+			{{ end }}
+		</div>
+	</article>

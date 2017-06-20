@@ -1,0 +1,9 @@
+<div class="pa4 tc">
+{{ if .Paginator.HasPrev }}
+	<a href="{{ .Paginator.Prev.URL }}">Page précédente</a>
+{{ end }}
+{{ .Paginator.PageNumber }} de {{ .Paginator.TotalPages }}
+{{ if .Paginator.HasNext }}
+	<a href="{{ .Paginator.Next.URL }}">Page suivante</a>
+{{ end }}
+</div>
