@@ -1,10 +1,12 @@
-	<article class="pa4 measure-wide">
+	<article class="fl pa4 w-100 w-50-m w-third-l">
 		<h1 class="ttc"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+		<p>
 		<time>{{ .Date.Format "02-01-2006" }}</time>
 		{{ range .Params.tags }}
 		<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="br- bg-washed-blue link di">{{ . }}</a>
 		{{ end }}
-		<div>
+		</p>
+		<div class="lh-copy">
 			{{ .Summary }}
 			{{ if .Truncated }}
 				<a href="{{ .Permalink }}">Lire la suite...</a>

@@ -1,5 +1,5 @@
 {{ partial "header.html" . }}
-	<main class="pa4 measure">
+	<main class="pa3">
 		{{ $paginator := .Paginate (where .Site.Pages "Type" "post") }}
 		{{ range $paginator.Pages }}
 			{{ partial "summary.html" . }}
