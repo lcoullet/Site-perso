@@ -22,7 +22,7 @@ Copiez-coller le code suivant dans la fenêtre « Elm » et cliquez sur compil
 
     module Main exposing (..)
     import Html exposing (text, h1, div)
-	
+
     main =
       div [ ]
         [ h1 [ ] [ text "Elm" ]
@@ -118,14 +118,14 @@ Oh oh nous avons une erreur, mais pas n’importe quelle erreur.
     LINE 10 COLUMN 11
     The argument to function text is causing a mismatch.
     Function text is expecting the argument to be:
-      
+
     String
-      
+
     But it is:
-      
+
     number
 
-Et oui ! La fonction `text` attend une chaine de caractères mais nous lui avons fourni un nombre. Ca ne peut pas marcher.
+Et oui ! La fonction `text` attend une chaine de caractères mais nous lui avons fourni un nombre. Cela ne peut pas marcher.
 
 [Cherchons](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Basics#toString) une fonction qui permette d’effectuer cette transformation. `toString` devrait faire l’affaire !
 
@@ -174,9 +174,9 @@ Admettons que nous devions afficher une liste à puces de ce genre :
 Nous pourrions écrire le programme suivant :
 
     module Main exposing (..)
-    
+
     import Html exposing (text, h2, ul, li, div)
-    
+
     main =
       div []
         [ h2 [] [ text "Fruits :" ]
@@ -207,13 +207,13 @@ Reprenons au début, nous souhaitons partir d’une liste de fruits  comme `["po
 
 pour avoir au final une liste de b.
 
-C’est exactement ce que propose [`List.map`](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/List#map) : 
+C’est exactement ce que propose [`List.map`](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/List#map) :
 
     map : (a -> b) -> List a -> List b
     Apply a function to every element of a list.
-      
+
     map sqrt [1,4,9] == [1,2,3]
-      
+
     map not [True,False,True] == [False,True,False]
 
 Ce genre de fonctions qui prennent une fonction comme argument et qui transforment une liste en une autre sont appelées _higher order functions_ ou [fonctions d’ordre supérieur](https://fr.wikipedia.org/wiki/Fonction_d%27ordre_sup%C3%A9rieur).
@@ -231,7 +231,7 @@ Définissons une liste de fruits
 
     fruits = ["pommes","bananes","poires"]
 
-Il s’agit d’une liste et pas d’un _array_. Les listes sont les collections de base en Elm contrairement au Js. On peut facilement et rapidement sur une liste, mais on ne peut y accéder simplement en donnant l’ordre d’un élément dans une liste `fruit[0]` par exemple. Rassurez-vous, les arrays existent aussi en Elm, mais on ne les utilise pas aussi couramment.
+Il s’agit d’une liste et pas d’un _array_. Les listes sont les collections de base en Elm contrairement au Js. On peut _itérer_ facilement et rapidement sur une liste, mais on ne peut y accéder simplement en donnant l’ordre d’un élément dans une liste `fruit[0]` par exemple. Rassurez-vous, les arrays existent aussi en Elm, mais on ne les utilise pas aussi couramment.
 
 Notez aussi qu’une liste ne peut contenir qu’un seul type d’éléments, des entiers, des nombres, des chaines de caractères, d’autres listes, etc. Mais pas de mélanges.
 
@@ -297,15 +297,15 @@ Reprenons :
     module Main exposing (..)
 
     import Html exposing (Html, text, h2, ul, li, div)
-      
+
     fruits : List String
     fruits =
       [ "pommes", "poires", "scoubidou", "ha" ]
-      
+
     fruitDisplayer : String -> Html msg
       fruitDisplayer fruit =
         li [] [ text fruit ]
-      
+
     main : Html msg
     main =
       div []
@@ -317,7 +317,7 @@ Les signatures s’écrivent avec un `:` à la place d’un `=`  et précèdent
 
 Déjà, votre collègue qui reprendra votre code saura tout de suite de quoi il s’agit. C’est mieux qu’un commentaire.
 
-Cela vous indique clairement qui fait quoi. 
+Cela vous indique clairement qui fait quoi.
 
 Si nous reprenons notre « afficheur de fruits »
 
@@ -337,7 +337,7 @@ Décomposons notre fonction : `List.map fruitDisplayer fruits`
 2. Un second argument qui est une liste de String.
 3. Et retourne une liste d’Html.
 
-C’est exactement la signature de `List.map` : 
+C’est exactement la signature de `List.map` :
 
 	map : (a -> b) -> List a -> List b
 

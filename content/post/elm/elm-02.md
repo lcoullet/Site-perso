@@ -16,11 +16,11 @@ C'était bien sympa d'écrire un peu d'HTML mais pour une langage qui se veut un
 
 ### Avant-propos
 
-Sur cette partie, je n'invente pas la roue et il y a déjà énormént de ressources sur le sujet :
+Sur cette partie, je n'invente pas la roue et il y a déjà énormément de ressources sur le sujet :
 
 - [The Elm Architecture (doc officielle)](https://guide.elm-lang.org/architecture/)
 - [Le fameux compteur](https://guide.elm-lang.org/architecture/user_input/buttons.html)
-- Et pour les anglophobes 
+- Et pour les anglophobes
 
 Reprenons notre fameux _fruitDisplayer_.
 
@@ -30,7 +30,7 @@ Reprenons notre fameux _fruitDisplayer_.
         , ul [] (List.map fruitDisplayer fruits)
         ]
 
-Jusque là nous intégrons la liste de fruits directement dans l'affichage. Mais nous pourrions tout aussi bien l'intégrer comme une variable dans une fonction. 
+Jusque là nous intégrons la liste de fruits directement dans l'affichage. Mais nous pourrions tout aussi bien l'intégrer comme une variable dans une fonction.
 
     view: List fruit -> Html Msg
     view fruits =

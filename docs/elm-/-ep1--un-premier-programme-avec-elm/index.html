@@ -173,7 +173,7 @@ But it is:
 number
 </code></pre>
 
-<p>Et oui ! La fonction <code>text</code> attend une chaine de caractères mais nous lui avons fourni un nombre. Ca ne peut pas marcher.</p>
+<p>Et oui ! La fonction <code>text</code> attend une chaine de caractères mais nous lui avons fourni un nombre. Cela ne peut pas marcher.</p>
 
 <p><a href="http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Basics#toString">Cherchons</a> une fonction qui permette d’effectuer cette transformation. <code>toString</code> devrait faire l’affaire !</p>
 
@@ -293,7 +293,7 @@ map not [True,False,True] == [False,True,False]
 <pre><code>fruits = [&quot;pommes&quot;,&quot;bananes&quot;,&quot;poires&quot;]
 </code></pre>
 
-<p>Il s’agit d’une liste et pas d’un <em>array</em>. Les listes sont les collections de base en Elm contrairement au Js. On peut facilement et rapidement sur une liste, mais on ne peut y accéder simplement en donnant l’ordre d’un élément dans une liste <code>fruit[0]</code> par exemple. Rassurez-vous, les arrays existent aussi en Elm, mais on ne les utilise pas aussi couramment.</p>
+<p>Il s’agit d’une liste et pas d’un <em>array</em>. Les listes sont les collections de base en Elm contrairement au Js. On peut <em>itérer</em> facilement et rapidement sur une liste, mais on ne peut y accéder simplement en donnant l’ordre d’un élément dans une liste <code>fruit[0]</code> par exemple. Rassurez-vous, les arrays existent aussi en Elm, mais on ne les utilise pas aussi couramment.</p>
 
 <p>Notez aussi qu’une liste ne peut contenir qu’un seul type d’éléments, des entiers, des nombres, des chaines de caractères, d’autres listes, etc. Mais pas de mélanges.</p>
 
