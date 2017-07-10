@@ -6,10 +6,21 @@
     <description>Recent content in Posts on La Revanche du Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
-    <lastBuildDate>Wed, 07 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ludovic.coullet.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>La Coupe Ouitube</title>
+      <link>http://ludovic.coullet.net/la-coupe-ouitube/</link>
+      <pubDate>Mon, 10 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/la-coupe-ouitube/</guid>
+      <description>Cette année j&amp;rsquo;ai encore eu l&amp;rsquo;honneur de pouvoir aider un ami enseignant et ses élèves à participer au Festival Sourd Métrage.
+   Court-métrage réalisé par les élèves de l&amp;rsquo;IES Clément ADER à NICE entre septembre 2016 et avril 2017. Les élèves ont réalisé l&amp;rsquo;ensemble des tâches nécessaire à la création de ce film et ont remporté le &amp;ldquo;prix du scénario&amp;rdquo; du festival Sourd-métrage 2017 à Nancy.
+ Vous pouvez retrouver l&amp;rsquo;ensemble des sources sonores utilisées pour le film (et quelques bonus non présents à l&amp;rsquo;écran) ici :</description>
+    </item>
     
     <item>
       <title>Elm / Ep1 : Un premier programme avec Elm</title>
