@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Musique on La Revanche du Site</title>
+    <link>http://ludovic.coullet.net/tags/musique/</link>
+    <description>Recent content in Musique on La Revanche du Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr-fr</language>
+    <lastBuildDate>Tue, 16 Jun 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ludovic.coullet.net/tags/musique/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>danger projets de sciences</title>
+      <link>http://ludovic.coullet.net/danger-projets-de-sciences/</link>
+      <pubDate>Tue, 16 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/danger-projets-de-sciences/</guid>
+      <description>Auto promo Ces derniers temps, j’ai réalisé la bande son du court métrage Danger ! Projets de sciences.
+  Chaque année un de mes amis participe au Festival Sourd Métrage avec sa classe d’élèves déficients auditifs.
+Il n’en est pas à son coup d’essai puisque c’est la deuxième fois que lui et sa classe remportent le grand prix du jury.
+Jérôme a plusieurs cordes à son arc et il accompagne habituellement ses élèves dans la réalisation d’une bande son.</description>
+    </item>
+    
+  </channel>
+</rss>
