@@ -68,7 +68,7 @@
   </url>
   
   <url>
-    <loc>http://ludovic.coullet.net/categories/elektron/</loc>
+    <loc>http://ludovic.coullet.net/tags/elektron/</loc>
     <lastmod>2014-06-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -86,7 +86,7 @@
   </url>
   
   <url>
-    <loc>http://ludovic.coullet.net/categories/interne/</loc>
+    <loc>http://ludovic.coullet.net/tags/interne/</loc>
     <lastmod>2016-06-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -98,7 +98,7 @@
   </url>
   
   <url>
-    <loc>http://ludovic.coullet.net/categories/monomachine/</loc>
+    <loc>http://ludovic.coullet.net/tags/monomachine/</loc>
     <lastmod>2014-06-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -110,12 +110,6 @@
   </url>
   
   <url>
-    <loc>http://ludovic.coullet.net/categories/musique/</loc>
-    <lastmod>2014-06-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://ludovic.coullet.net/post/</loc>
     <lastmod>2017-07-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -123,7 +117,7 @@
   
   <url>
     <loc>http://ludovic.coullet.net/tags/</loc>
-    <lastmod>2017-07-11T00:00:00+00:00</lastmod>
+    <lastmod>2014-06-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

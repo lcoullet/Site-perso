@@ -2,7 +2,7 @@
 title = "le retour dot dot dot"
 date = "2013-09-10"
 slug = "2013/09/10/le-retour-dot-dot-dot"
-Categories = []
+tags = []
 +++
 
 * quelques modifications sur le thème Octopress de base,

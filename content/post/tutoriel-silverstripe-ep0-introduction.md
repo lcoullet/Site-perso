@@ -2,7 +2,7 @@
 title = "tutoriel silverstripe ep0 introduction"
 date = "2015-06-30"
 slug = "2015/06/30/tutoriel-silverstripe-ep0-introduction"
-Categories = []
+tags = []
 +++
 ## Qu’est-ce que Silverstripe ?
 
@@ -24,7 +24,7 @@ Silverstripe ne fait pas partie du trio de tête des CMS mondiaux (Wordpress, Dr
 
 Même si le site de l’Elysée tourne actuellement sous Silverstripe (de même que le site de campagne d’Obama en son temps et une bonne partie de l’administration néo-zélandaise), il n’a pas en France le même pouvoir prescripteur que Drupal aujourd’hui : inconnu au bataillon.
 
-Si je commence cette série, c’est avant tout pour lui rendre un peu justice et pour vous exposer ses forces et ses faiblesses. 
+Si je commence cette série, c’est avant tout pour lui rendre un peu justice et pour vous exposer ses forces et ses faiblesses.
 
 Cela va mieux en le disant.
 
@@ -52,7 +52,7 @@ L’interface offre des options de Prévisualisation dans différents formats (t
 
 Silverstripe fait plutôt figure de bon élève dans la catégorie. Voici une liste non exhaustive :
 
-- [Composer](https://getcomposer.org/) pour l’installation des modules et des dépendances. 
+- [Composer](https://getcomposer.org/) pour l’installation des modules et des dépendances.
 - Une implémentation assez stricte du modèle MVC, je ne dirais pas complète pour ne pas froisser les puristes.
 - La majorité des valeurs de configuration sont stockées dans des fichiers et non en BDD, ce qui facilite grandement le _workflow_ entre plusieurs environnements (test, staging, prod°).
 - Un développement vraiment orienté objet.
@@ -113,5 +113,3 @@ C’est là que les ennuis commencent, où comment faire cohabiter votre dévelo
 Vous me direz qu’on peut également faire beaucoup de choses avec les CMS les plus avancés disponibles, mais c’est parfois comme vouloir faire aboyer un chat, c’est possible.
 
 Prêts pour la suite, alors rendez-vous next week…
-
-

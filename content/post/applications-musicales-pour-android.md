@@ -2,7 +2,7 @@
 title = "applications musicales pour android"
 date = "2014-01-29"
 slug = "2014/01/29/applications-musicales-pour-android"
-Categories = []
+tags = []
 +++
 
 <blockquote class="twitter-tweet" lang="fr"><p>Un soft de musique sympa sur android ? Synthé/Arpeggiator cc <a href="https://twitter.com/lcoullet">@lcoullet</a></p>&mdash; Math (@underscoredB) <a href="https://twitter.com/underscoredB/statuses/427402720979726336">26 Janvier 2014</a></blockquote>
@@ -48,7 +48,7 @@ Là encore, je ne pense que cela soit jouable en live. Mais il y a de quoi faire
 
 ### SPC Music Sketchpad 2
 
-C'est celui que j'utilise le moins, mais paradoxalement c'est sans doute celui qui se rapproche le plus d'une solution tout-en-un (c'est pas GarageBand non plus) avec séquenceur, synthés, boites à rythmes. 
+C'est celui que j'utilise le moins, mais paradoxalement c'est sans doute celui qui se rapproche le plus d'une solution tout-en-un (c'est pas GarageBand non plus) avec séquenceur, synthés, boites à rythmes.
 
 https://play.google.com/store/apps/details?id=com.mikrosonic.SPC
 

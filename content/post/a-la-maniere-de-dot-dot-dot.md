@@ -2,7 +2,7 @@
 title = "a la maniere de dot dot dot"
 date = "2014-06-02"
 slug = "2014/06/02/a-la-maniere-de-dot-dot-dot"
-Categories = []
+tags = []
 +++
 
 J'ai participé à l'appel à projet 2014 du [Café photo Marseille](http://www.cafephotomarseille.org/).
