@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Développement on La Revanche du Site</title>
+    <link>http://ludovic.coullet.net/categories/d%C3%A9veloppement/</link>
+    <description>Recent content in Développement on La Revanche du Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr-fr</language>
+    <lastBuildDate>Tue, 11 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ludovic.coullet.net/categories/d%C3%A9veloppement/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Elm / Interlude</title>
+      <link>http://ludovic.coullet.net/elm-/-interlude/</link>
+      <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/elm-/-interlude/</guid>
+      <description>Autant vous dire que je n&amp;rsquo;ai pas tenu le rythme. Je m&amp;rsquo;en excuse platement, beaucoup de choses à gérer par ailleurs dans la vraie vie. Mais pour vous faire patienter voilà une petite sélection trés personnelle de liens utiles sur le sujet.
+ Vous verrez dans cette liste qu&amp;rsquo;il y a déjà pas mal de bons articles qui sont déjà sortis et je n&amp;rsquo;ai pas envie de les copier ou de simplement les traduire.</description>
+    </item>
+    
+    <item>
+      <title>Elm / Ep1 : Un premier programme avec Elm</title>
+      <link>http://ludovic.coullet.net/elm-/-ep1--un-premier-programme-avec-elm/</link>
+      <pubDate>Wed, 07 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/elm-/-ep1--un-premier-programme-avec-elm/</guid>
+      <description>Et c’est parti ! (si vous avez raté le début)
+Pour ce premier programme, inutile d’installer Elm sur sa machine. Vous pouvez vous rendre sur Ellie et commencer directement à tester.
+Ellie c’est un peu le codepen.io du Elm. C’est un bac à sable dans lequel vous pouvez écrire et tester du Elm sans avoir besoin d’installer quoi que ce soit.
+L’application est divisée en 3 parties :
+ Le code Elm Le code HTML et une fenêtre de rendu pour apprécier le résultat  Copiez-coller le code suivant dans la fenêtre « Elm » et cliquez sur compile !</description>
+    </item>
+    
+    <item>
+      <title>Elm / Ep0 : introduction</title>
+      <link>http://ludovic.coullet.net/elm-/-ep0--introduction/</link>
+      <pubDate>Tue, 06 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/elm-/-ep0--introduction/</guid>
+      <description>Le but de cette série est de réaliser un petit programme en utilisant Elm pour gérer l’affichage (frontend).
+Qu’est-ce que Elm ?  Elm est un langage de programmation fonctionnel qui permet de créer des interfaces graphiques pour le web ainsi que des jeux. Il compile le code en JavaScript.
+ &amp;ndash; Source : Wikipedia
+Elm est un langage fonctionnel comme OCaml, F#, Haskell, Elixir, Scala, Clojure, etc. Sa syntaxe et ses concepts sont donc très différents des langages impératifs comme le JavaScript et des dérivés comme TypeScript ou PureScript.</description>
+    </item>
+    
+    <item>
+      <title>Tutoriel silverstripe ep1 installation</title>
+      <link>http://ludovic.coullet.net/tutoriel-silverstripe-ep1-installation/</link>
+      <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/tutoriel-silverstripe-ep1-installation/</guid>
+      <description>Note de service Cette série de tutoriels (qui je l’espère va être longue et constituer un tout autonome (priez pour moi)) abordera beaucoup d’aspects du développement de sites webs :
+ Développement back : PHP… Développement front : HTML, CSS, JS… Un soupçon de design et d’ergonomie Un nuage de gestion de projet Une larme d’administration système  Je ne prétends pas être un crack dans chacun des domaines ci-dessus.</description>
+    </item>
+    
+    <item>
+      <title>Tutoriel silverstripe ep0 introduction</title>
+      <link>http://ludovic.coullet.net/tutoriel-silverstripe-ep0-introduction/</link>
+      <pubDate>Tue, 30 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/tutoriel-silverstripe-ep0-introduction/</guid>
+      <description>Qu’est-ce que Silverstripe ? Silverstripe (ou SS par la suite, mais je ne ferai pas de mauvais jeux de mots&amp;hellip;) est un CMS PHP open-source sous licence BSD d’origine néo-zélandaise.
+Au départ, utilisé en interne par la société du même nom, il a été libéré aux alentours de 2005 pour la version 2. Nous en sommes aujourd’hui à la version 3.
+Silverstripe n’est pas qu’un CMS, il est basé sur le framework PHP orienté objet du même nom.</description>
+    </item>
+    
+  </channel>
+</rss>

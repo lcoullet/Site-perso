@@ -1,7 +1,7 @@
 +++
 title = "Petite refonte"
 date = "2016-06-02"
-tags = ["interne"]
+categories = ["Divers"]
 +++
 
 Voilà nouveau thème et c'est généré avec [Hugo](https://gohugo.io/) à la place de Jekyll (Octopress).

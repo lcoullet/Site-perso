@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ludovic.coullet.net/about/</loc>
+    <lastmod>2017-07-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ludovic.coullet.net/elm-/-interlude/</loc>
     <lastmod>2017-07-11T00:00:00+00:00</lastmod>
   </url>
@@ -48,7 +53,7 @@
   </url>
   
   <url>
-    <loc>http://ludovic.coullet.net/a-la-maniere-de-dot-dot-dot/</loc>
+    <loc>http://ludovic.coullet.net/%C3%A0-la-mani%C3%A8re-de.../</loc>
     <lastmod>2014-06-02T00:00:00+00:00</lastmod>
   </url>
   
@@ -58,12 +63,36 @@
   </url>
   
   <url>
-    <loc>http://ludovic.coullet.net/le-retour-dot-dot-dot/</loc>
+    <loc>http://ludovic.coullet.net/le-retour.../</loc>
     <lastmod>2013-09-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>http://ludovic.coullet.net/tags/android/</loc>
+    <lastmod>2014-01-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/tags/caf%C3%A9-photo-marseille/</loc>
+    <lastmod>2014-06-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://ludovic.coullet.net/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/categories/divers/</loc>
+    <lastmod>2016-06-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/categories/d%C3%A9veloppement/</loc>
+    <lastmod>2017-07-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -74,26 +103,14 @@
   </url>
   
   <url>
-    <loc>http://ludovic.coullet.net/tags/elm/</loc>
-    <lastmod>2017-07-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://ludovic.coullet.net/tags/elm-lang/</loc>
     <lastmod>2017-07-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://ludovic.coullet.net/tags/interne/</loc>
-    <lastmod>2016-06-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://ludovic.coullet.net/</loc>
-    <lastmod>2017-07-11T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -104,8 +121,14 @@
   </url>
   
   <url>
-    <loc>http://ludovic.coullet.net/tags/musique/</loc>
+    <loc>http://ludovic.coullet.net/categories/musique/</loc>
     <lastmod>2017-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ludovic.coullet.net/categories/photographie/</loc>
+    <lastmod>2014-06-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -116,8 +139,14 @@
   </url>
   
   <url>
+    <loc>http://ludovic.coullet.net/tags/silverstripe/</loc>
+    <lastmod>2015-07-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://ludovic.coullet.net/tags/</loc>
-    <lastmod>2014-06-04T00:00:00+00:00</lastmod>
+    <lastmod>2014-01-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -3,7 +3,8 @@ date = "2017-06-07"
 draft = true
 description = "Le but de cette série est de réaliser un petit programme utilisant Elm"
 title = "Elm / Ep2 : The Elm Architecture"
-tags = ["Elm", "Elm-lang"]
+tags = ["elm-lang"]
+categories = ["Développement"]
 +++
 
 Et me voilà en retard sur l'horaire. Désolé.

@@ -1,8 +1,8 @@
 +++
-title = "de la sidstation a la rytm"
+title = "De la sidstation a la rytm"
 date = "2014-06-04"
-slug = "2014/06/04/de-la-sidstation-a-la-rytm"
-tags = ["elektron", "monomachine", "musique"]
+categories = ["Musique"]
+tags = ["elektron", "monomachine"]
 +++
 ### Une retrospective des machines Elektron chez Sonicstate
 

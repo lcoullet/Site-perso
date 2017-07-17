@@ -2,7 +2,7 @@
 title = "La Coupe Ouitube"
 date = "2017-07-10"
 draft = false
-tags = ["Musique"]
+categories = ["Musique"]
 +++
 
 Cette année j'ai encore eu l'honneur de pouvoir aider un ami enseignant et ses élèves à participer au [Festival Sourd Métrage](http://associationsourdmetrage.weebly.com/).

@@ -6,10 +6,28 @@
     <description>Recent content in Tags on La Revanche du Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
-    <lastBuildDate>Wed, 04 Jun 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jan 2014 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ludovic.coullet.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android</title>
+      <link>http://ludovic.coullet.net/tags/android/</link>
+      <pubDate>Wed, 29 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Café Photo Marseille</title>
+      <link>http://ludovic.coullet.net/tags/caf%C3%A9-photo-marseille/</link>
+      <pubDate>Mon, 02 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/tags/caf%C3%A9-photo-marseille/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Elektron</title>
@@ -17,15 +35,6 @@
       <pubDate>Wed, 04 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://ludovic.coullet.net/tags/elektron/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Elm</title>
-      <link>http://ludovic.coullet.net/tags/elm/</link>
-      <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://ludovic.coullet.net/tags/elm/</guid>
       <description></description>
     </item>
     
@@ -39,15 +48,6 @@
     </item>
     
     <item>
-      <title>Interne</title>
-      <link>http://ludovic.coullet.net/tags/interne/</link>
-      <pubDate>Thu, 02 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://ludovic.coullet.net/tags/interne/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Monomachine</title>
       <link>http://ludovic.coullet.net/tags/monomachine/</link>
       <pubDate>Wed, 04 Jun 2014 00:00:00 +0000</pubDate>
@@ -57,11 +57,11 @@
     </item>
     
     <item>
-      <title>Musique</title>
-      <link>http://ludovic.coullet.net/tags/musique/</link>
-      <pubDate>Mon, 10 Jul 2017 00:00:00 +0000</pubDate>
+      <title>Silverstripe</title>
+      <link>http://ludovic.coullet.net/tags/silverstripe/</link>
+      <pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://ludovic.coullet.net/tags/musique/</guid>
+      <guid>http://ludovic.coullet.net/tags/silverstripe/</guid>
       <description></description>
     </item>
     

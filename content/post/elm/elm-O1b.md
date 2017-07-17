@@ -4,7 +4,8 @@ date = "2017-07-11"
 draft = false
 description = "Interlude et partage de liens sur Elm"
 title = "Elm / Interlude"
-tags = ["Elm", "Elm-lang"]
+tags = ["elm-lang"]
+categories = ["Développement"]
 +++
 
 Autant vous dire que je n'ai pas tenu le rythme. Je m'en excuse platement, beaucoup de choses à gérer par ailleurs dans la vraie vie. Mais pour vous faire patienter voilà une petite sélection _trés personnelle_ de liens utiles sur le sujet.

@@ -1,7 +1,7 @@
 +++
-title = "danger projets de sciences"
+title = "Danger projets de sciences"
 date = "2015-06-16"
-tags = ["Musique"]
+categories = ["Musique"]
 +++
 
 ## Auto promo

@@ -1,8 +1,8 @@
 +++
-title = "applications musicales pour android"
+title = "Applications musicales pour android"
 date = "2014-01-29"
-slug = "2014/01/29/applications-musicales-pour-android"
-tags = []
+tags = ["Android"]
+categories = ["Musique"]
 +++
 
 <blockquote class="twitter-tweet" lang="fr"><p>Un soft de musique sympa sur android ? Synthé/Arpeggiator cc <a href="https://twitter.com/lcoullet">@lcoullet</a></p>&mdash; Math (@underscoredB) <a href="https://twitter.com/underscoredB/statuses/427402720979726336">26 Janvier 2014</a></blockquote>

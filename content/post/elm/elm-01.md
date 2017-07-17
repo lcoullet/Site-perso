@@ -2,7 +2,8 @@
 date = "2017-06-07"
 description = "Le but de cette série est de réaliser un petit programme utilisant Elm"
 title = "Elm / Ep1 : Un premier programme avec Elm"
-tags = ["Elm", "Elm-lang"]
+tags = ["elm-lang"]
+categories = ["Développement"]
 +++
 
 Et c’est parti ! (si vous avez raté le [début](/elm-/-ep0--introduction/))

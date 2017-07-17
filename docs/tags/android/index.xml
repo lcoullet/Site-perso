@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Android on La Revanche du Site</title>
+    <link>http://ludovic.coullet.net/tags/android/</link>
+    <description>Recent content in Android on La Revanche du Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr-fr</language>
+    <lastBuildDate>Wed, 29 Jan 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ludovic.coullet.net/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Applications musicales pour android</title>
+      <link>http://ludovic.coullet.net/applications-musicales-pour-android/</link>
+      <pubDate>Wed, 29 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://ludovic.coullet.net/applications-musicales-pour-android/</guid>
+      <description>Un soft de musique sympa sur android ? Synthé/Arpeggiator cc @lcoullet
+&amp;mdash; Math (@underscoredB) 26 Janvier 2014 
+En voilà une bonne question&amp;hellip; Il y en a pas peut-être des biens mais je n&amp;rsquo;en connais pas. Il faut dire que l&amp;rsquo;offre d&amp;rsquo;applications musicales sur Android est bien pauvre comparée à celle disponible sur iOS.
+On dirait que nous sommes dans une situation comparable à celle des années 90 où il y avait d&amp;rsquo;un côté les musiciens sous Mac et les autres sous Windows qui galéraient avec des problèmes de configuration, de drivers instables et de latence, etc.</description>
+    </item>
+    
+  </channel>
+</rss>

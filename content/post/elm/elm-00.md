@@ -2,7 +2,8 @@
 date = "2017-06-06"
 description = "Le but de cette série est de réaliser un petit programme utilisant Elm"
 title = "Elm / Ep0 : introduction"
-tags = ["Elm", "Elm-lang"]
+tags = ["elm-lang"]
+categories = ["Développement"]
 +++
 
 Le but de cette série est de réaliser un petit programme en utilisant Elm pour gérer l’affichage (_frontend_).

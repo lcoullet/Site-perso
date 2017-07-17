@@ -1,8 +1,8 @@
 +++
-title = "a la maniere de dot dot dot"
+title = "À la manière de..."
 date = "2014-06-02"
-slug = "2014/06/02/a-la-maniere-de-dot-dot-dot"
-tags = []
+tags = ["Café Photo Marseille"]
+categories = ["Photographie"]
 +++
 
 J'ai participé à l'appel à projet 2014 du [Café photo Marseille](http://www.cafephotomarseille.org/).

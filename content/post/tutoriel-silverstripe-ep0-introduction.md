@@ -1,8 +1,8 @@
 +++
-title = "tutoriel silverstripe ep0 introduction"
+title = "Tutoriel silverstripe ep0 introduction"
 date = "2015-06-30"
-slug = "2015/06/30/tutoriel-silverstripe-ep0-introduction"
-tags = []
+categories = ["Développement"]
+tags = ["silverstripe"]
 +++
 ## Qu’est-ce que Silverstripe ?
 

@@ -1,8 +1,8 @@
 +++
-title = "tutoriel silverstripe ep1 installation"
+title = "Tutoriel silverstripe ep1 installation"
 date = "2015-07-07"
-slug = "2015/07/07/tutoriel-silverstripe-ep1-installation"
-Categories = []
+categories = ["Développement"]
+tags = ["silverstripe"]
 +++
 
 ## Note de service
@@ -39,7 +39,7 @@ Etant sous Mac OSX, j’utilise MAMP avec [Atom](https://atom.io/) comme éditeu
 
 La plupart des éditeurs ci-dessus disposent d’extensions (coloration syntaxique, auto-complétion) spécifiques pour SilverStripe afin de vous faciliter un peu la vie.
 
-Quelques liens : 
+Quelques liens :
 
 - [https://atom.io/packages/silverstripe-bundle](https://atom.io/packages/silverstripe-bundle)
 - [https://github.com/benjamin-smith/sublime-text-silverstripe](https://github.com/benjamin-smith/sublime-text-silverstripe)
@@ -105,17 +105,17 @@ Pour installer Composer, merci de vous référer à sa [documentation](https://g
 Si vous êtes sous OSX et utilisez MAMP, voici comment faire en sorte que Composer s’exécute bien sous MAMP et pas dans la version de PHP fournie avec le système :
 
 	nano ~/.bash_profile
-	
+
 insérer
-	
+
 	alias phpmamp='/Applications/MAMP/bin/php/php5.4.10/bin/php'
-	
+
 relancer le terminal
-	
+
 	curl -sS https://getcomposer.org/installer | phpmamp
-	
+
 	sudo mv composer.phar /usr/local/bin/composer
-	
+
 	composer
 
 ### Installation

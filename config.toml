@@ -5,7 +5,7 @@ title = "La Revanche du Site"
 disqusShortname = "lcoullet"
 # Enable Google Analytics by entering your tracking code
 googleAnalytics = "UA-729622-7"
-theme = "blank"
+theme = "nofancy-master"
 
 publishDir = "docs"
 
@@ -15,41 +15,11 @@ publishDir = "docs"
 [params]
 	name = "Ludovic Coullet"
 	description = "Le fils de la revanche"
+	topmenu="categories"
 
-	# Custom assets can be linked with their paths relative to static/
-	custom_css = []
-	custom_js  = []
-
-	# Links to newer/older blog posts
-	newer = "Précédent"
-	older = "Suivant"
-
-	pageNotFoundTitle = "Petit problème de nos amis de la technique, qui nous disent..."
-	pageNotFoundSubtitle = "Sorry, but the requested page wasn’t <br> found on the server."
-
-[params.offcanvas]
-	# Menu items
-	title = "Salut c'est Ludo !"
-	bio = "Ludovic Coullet"
-	subscribe = "Pour les anciens"
-	followme = "Suivez-moi"
-
-	# Enable Google search
-	search_enabled = false
-	search = "Search"
-
-	[[params.offcanvas.socialnetworks]]
-		name = "Linkedin"
-		url = "//www.linkedin.com/in/lcoullet/"
-
-	[[params.offcanvas.socialnetworks]]
-		name = "Twitter"
-		url = "//twitter.com/lcoullet"
-
-	[[params.offcanvas.socialnetworks]]
-		name = "Mastodon"
-		url = "//dancingbanana.party/@blud"
-
-	[[params.offcanvas.socialnetworks]]
-	name = "Github"
-	url = "//github.com/lcoullet"
+[author]
+	name = "Ludovic Coullet"
+	github = "lcoullet"
+	linkedin = "lcoullet"
+	gaID = "UA-729622-7"
+	twitter = "lcoullet"
