@@ -1,13 +1,28 @@
 ---
+import { Img } from "astro-imagetools/components";
+import { SEO } from "astro-seo";
 ---
 
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<SEO
+			title="Ludovic Coullet"
+			description="Directeur de projet - expert drupal - musique et photographie"
+			openGraph={{
+				basic: {
+					title: "Directeur de projet - expert drupal - musique et photographie",
+					type: "Page",
+					image: "https://ludovic.coullet.net/ludo.jpg",
+				},
+			}}
+			twitter={{
+				creator: "@lcoullet",
+			}}
+		/>
 	</head>
 	<div
 		class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0"
@@ -127,9 +142,10 @@
 		</div>
 
 		<div class="w-full lg:w-2/5">
-			<img
+			<Img
 				src="./ludo.jpg"
 				class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
+				alt="Photo de ludovic"
 			/>
 		</div>
 	</div>
