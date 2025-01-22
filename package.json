@@ -4,18 +4,11 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/image": "^0.18.0",
-    "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.4.13",
-    "astro-compress": "^1.1.47",
-    "astro-imagetools": "^0.8.1",
-    "astro-seo": "^0.7.4",
-    "tailwindcss": "^3.3.2"
+    "astro": "^5.1.8"
   }
 }
