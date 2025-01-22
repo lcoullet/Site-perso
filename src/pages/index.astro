@@ -7,6 +7,33 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <h1>Salut</h1>
-  <p>C'est Ludovic Coullet.</p>
+  <main>
+    <article>
+    <h1>Salut</h1>
+    <p>C'est Ludovic Coullet.</p>
+    <p>Pas grand chose pour le moment, mais vous pouvez me retrouver sur :</p>
+    <ul>
+      <li>
+        <a href="https://mastodon.social/@lcoullet">Mastodon</a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/lcoullet/">Linkedin</a>
+      </li>
+      <li>
+        <a href="https://soundcloud.com/blud/tracks">Soundcloud</a>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/lcoullet/">Instagram</a>
+      </li>
+    </ul>
+  </article>
+  </main>
 </Layout>
+
+<style>
+article {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 1rem;
+}
+</style>
