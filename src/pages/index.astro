@@ -1,5 +1,4 @@
 ---
-import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -7,10 +6,10 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <main>
-    <article>
+  <main class="container mx-auto p-2">
+    <article class="prose">
     <h1>Salut</h1>
-    <p>C'est Ludovic Coullet.</p>
+    <p>C'est <strong>Ludovic Coullet</strong>.</p>
     <p>Pas grand chose pour le moment, mais vous pouvez me retrouver sur :</p>
     <ul>
       <li>
@@ -29,11 +28,3 @@ import Layout from "../layouts/Layout.astro";
   </article>
   </main>
 </Layout>
-
-<style>
-article {
-  margin: 0 auto;
-  max-width: 600px;
-  padding: 1rem;
-}
-</style>
