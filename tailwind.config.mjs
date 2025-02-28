@@ -4,4 +4,6 @@ export default {
   theme: {},
   extend: {},
   plugins: [require("@tailwindcss/typography"), require('flyonui'), require('flyonui/plugin')],
+  flyonui: {
+    themes: ["light", "dark", "gourmet"]}
 };
