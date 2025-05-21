@@ -1,48 +1,58 @@
-# Astro Starter Kit: Basics
+# Ludovic Coullet's Personal Website
 
-```sh
-npm create astro@latest -- --template basics
-```
+This is my personal website, built with Astro and Tailwind CSS.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Running Locally
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+To run this project locally, follow these steps:
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+1.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-## 🚀 Project Structure
+2.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
 
-Inside of your Astro project, you'll see the following folders and files:
+3.  **Build the project:**
+    ```bash
+    npm run build
+    ```
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+4.  **Preview the build:**
+    ```bash
+    npm run preview
+    ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Project Structure
 
-## 🧞 Commands
+Here's a brief overview of the main directories in this project:
 
-All commands are run from the root of the project, from a terminal:
+-   `src/`: Contains the source code of the website. This includes:
+    -   Astro components (`.astro` files)
+    -   Layouts for pages
+    -   Markdown content for pages
+    -   Static assets like images and fonts that are processed by Astro
+-   `public/`: Contains static assets that are copied to the build output directory as-is. This is suitable for files like:
+    -   `favicon.ico`
+    -   `robots.txt`
+    -   `CNAME` (for custom domains on GitHub Pages)
+-   `dist/`: The directory where the built site is generated after running `npm run build`. This directory is usually not tracked by Git (and should be added to `.gitignore` if it isn't already).
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Deployment
 
-## 👀 Want to learn more?
+This website is configured for deployment on GitHub Pages. The deployment is automated using GitHub Actions.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+For details on the deployment workflow, please refer to the `.github/workflows/deploy.yml` file.
+
+## Contributing
+
+While this is a personal website and contributions are not actively solicited, any suggestions or bug reports are welcome. Please feel free to open an issue on GitHub if you have any feedback.
+
+## License
+
+This project is open source. It is recommended to add a `LICENSE` file to the project (e.g., an MIT License).
+
+Once a `LICENSE` file is added (e.g., using the MIT License), you would find its details in the [MIT License](LICENSE) file.
