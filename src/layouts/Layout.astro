@@ -1,44 +1,33 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="fr" data-theme="gourmet">
+<html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link
-    href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet"
-  />
+			href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<title>Ludovic Coullet</title>
 	</head>
-	<body>
-		<header class="container mx-auto p-2">
-		<nav class="navbar rounded-box shadow">
-			<div class="w-full md:flex md:items-center md:gap-2">
-			  <div class="flex items-center justify-between">
-				<div class="navbar-start items-center justify-between max-md:w-full">
-				  <a class="link text-base-content link-neutral text-xl font-semibold no-underline" href="/">L. Coullet</a>
-				  <div class="md:hidden">
-					<button type="button" class="collapse-toggle btn btn-outline btn-secondary btn-sm btn-square" data-collapse="#default-navbar-collapse" aria-controls="default-navbar-collapse" aria-label="Toggle navigation" >
-					  <span class="icon-[tabler--menu-2] collapse-open:hidden size-4"></span>
-					  <span class="icon-[tabler--x] collapse-open:block hidden size-4"></span>
-					</button>
-				  </div>
-				</div>
-			  </div>
-			  <div id="default-navbar-collapse" class="md:navbar-end collapse hidden grow basis-full overflow-hidden transition-[height] duration-300 max-md:w-full" >
-				<ul class="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
-				  <li><a href="/">Accueil</a></li>
-				</ul>
-			  </div>
+	<body class="bg-zinc-50 text-zinc-900 antialiased min-h-screen flex flex-col">
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white focus:text-zinc-900">Aller au contenu principal</a>
+		
+		<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/70 border-b border-zinc-200/50">
+			<div class="container mx-auto px-6 h-16 flex items-center justify-between">
+				<a class="text-lg font-medium tracking-tight hover:text-zinc-600 transition-colors" href="/" aria-label="Accueil">Ludovic Coullet</a>
+				<nav aria-label="Navigation Principale">
+					<ul class="flex items-center gap-6 text-sm font-medium text-zinc-600">
+						<li><a href="/" class="hover:text-zinc-900 transition-colors" aria-current="page">Accueil</a></li>
+					</ul>
+				</nav>
 			</div>
-		  </nav>
 		</header>
 		<slot />
 	</body>
 </html>
-
