@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Footer from "../components/Footer.astro";
 ---
 
 <!doctype html>
@@ -22,12 +23,18 @@ import "../styles/global.css";
 			<div class="container mx-auto px-6 h-16 flex items-center justify-between">
 				<a class="text-lg font-medium tracking-tight hover:text-zinc-600 transition-colors" href="/" aria-label="Accueil">Ludovic Coullet</a>
 				<nav aria-label="Navigation Principale">
-					<ul class="flex items-center gap-6 text-sm font-medium text-zinc-600">
-						<li><a href="/" class="hover:text-zinc-900 transition-colors" aria-current="page">Accueil</a></li>
+					<ul class="flex items-center gap-2 sm:gap-4 text-sm font-medium text-zinc-600">
+						<li>
+							<a href="/" class="px-3 py-2 rounded-lg hover:bg-zinc-100 hover:text-zinc-900 transition-all duration-200" aria-current="page">Accueil</a>
+						</li>
+						<li>
+							<a href="/cv" class="px-3 py-2 rounded-lg hover:bg-zinc-100 hover:text-zinc-900 transition-all duration-200">CV</a>
+						</li>
 					</ul>
 				</nav>
 			</div>
 		</header>
 		<slot />
+		<Footer />
 	</body>
 </html>
