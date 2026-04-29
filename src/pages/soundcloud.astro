@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<main id="main-content" class="flex-grow container mx-auto px-6 py-12 md:py-20">
+		<div class="max-w-3xl mx-auto">
+			<header class="mb-12">
+				<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4">Musique</h1>
+				<p class="text-lg text-zinc-600 leading-relaxed">
+					Découvrez mes dernières explorations électroacoustiques et expérimentations sonores, directement depuis SoundCloud.
+				</p>
+			</header>
+			
+			<div class="bg-white rounded-2xl shadow-sm border border-zinc-200/50 p-2 overflow-hidden hover:shadow-md transition-shadow duration-300">
+				<iframe 
+					width="100%" 
+					height="600" 
+					scrolling="no" 
+					frameborder="no" 
+					allow="autoplay" 
+					src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/27204&color=%2318181b&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=false"
+					class="rounded-xl w-full"
+					title="Lecteur SoundCloud de blud"
+				></iframe>
+			</div>
+		</div>
+	</main>
+</Layout>
