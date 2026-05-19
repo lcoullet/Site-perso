@@ -130,7 +130,7 @@ const { basics, work, education, skills, languages } = resume || {};
                         <h3 class="text-lg font-bold text-zinc-900">
                           {job.position}
                         </h3>
-                        <span class="text-sm font-medium text-zinc-500 bg-zinc-100 px-3 py-1 rounded-full w-fit mt-2 sm:mt-0">
+                        <span class="text-sm font-medium text-zinc-600 bg-zinc-100 px-3 py-1 rounded-full w-fit mt-2 sm:mt-0">
                           {job.startDate} - {job.endDate || "Présent"}
                         </span>
                       </div>
@@ -181,13 +181,13 @@ const { basics, work, education, skills, languages } = resume || {};
                         <h3 class="text-lg font-bold text-zinc-900">
                           {edu.studyType} - {edu.area}
                         </h3>
-                        <span class="text-sm font-medium text-zinc-500 whitespace-nowrap mt-2 sm:mt-0">
+                        <span class="text-sm font-medium text-zinc-600 whitespace-nowrap mt-2 sm:mt-0">
                           {edu.startDate} - {edu.endDate || "Présent"}
                         </span>
                       </div>
                       <p class="text-zinc-700 font-medium">{edu.institution}</p>
                       {edu.score && (
-                        <p class="text-sm text-zinc-500 mt-1">
+                        <p class="text-sm text-zinc-600 mt-1">
                           Score: {edu.score}
                         </p>
                       )}
@@ -235,7 +235,7 @@ const { basics, work, education, skills, languages } = resume || {};
                         <span class="font-medium text-zinc-800">
                           {lang.language}
                         </span>
-                        <span class="text-sm text-zinc-500 bg-white px-2 py-1 rounded shadow-sm">
+                        <span class="text-sm text-zinc-600 bg-white px-2 py-1 rounded shadow-sm">
                           {lang.fluency}
                         </span>
                       </li>
