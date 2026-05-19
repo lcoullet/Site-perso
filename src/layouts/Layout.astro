@@ -43,38 +43,111 @@ const navItems = [
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title}</title>
-	</head>
-	<body class="bg-zinc-50 text-zinc-900 antialiased min-h-screen flex flex-col">
-		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white focus:text-zinc-900">Aller au contenu principal</a>
 		
-		<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/70 border-b border-zinc-200/50">
+		<!-- Initial theme load to prevent flashing -->
+		<script is:inline>
+			(function() {
+				const getThemePreference = () => {
+					if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+						return localStorage.getItem('theme');
+					}
+					return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+				};
+				const isDark = getThemePreference() === 'dark';
+				document.documentElement.classList.toggle('dark', isDark);
+			})();
+		</script>
+	</head>
+	<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased min-h-screen flex flex-col">
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white dark:focus:bg-zinc-900 focus:text-zinc-900 dark:focus:text-zinc-100">Aller au contenu principal</a>
+		
+		<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/70 dark:bg-zinc-950/70 border-b border-zinc-200/50 dark:border-zinc-800/50">
 			<div class="container mx-auto px-6 h-16 flex items-center justify-between">
-				<a class="text-lg font-semibold tracking-tight hover:text-zinc-600 transition-colors" href="/">Ludovic Coullet</a>
-				<nav aria-label="Navigation Principale">
-					<ul class="flex items-center gap-1 sm:gap-2 text-sm font-medium">
-						{navItems.map((item) => {
-							const active = isActive(item.href);
-							return (
-								<li>
-									<a
-										href={item.href}
-										class={`px-3 py-2 rounded-lg transition-all duration-200 ${
-											active
-												? "bg-zinc-100 text-zinc-900 font-semibold"
-												: "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900"
-										}`}
-										aria-current={active ? "page" : undefined}
-									>
-										{item.label}
-									</a>
-								</li>
-							);
-						})}
-					</ul>
-				</nav>
+				<a class="text-lg font-semibold tracking-tight hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors focus-ring-custom" href="/">Ludovic Coullet</a>
+				
+				<div class="flex items-center gap-2 sm:gap-4">
+					<nav aria-label="Navigation Principale">
+						<ul class="flex items-center gap-1 sm:gap-2 text-sm font-medium">
+							{navItems.map((item) => {
+								const active = isActive(item.href);
+								return (
+									<li>
+										<a
+											href={item.href}
+											class={`px-3 py-2 rounded-lg transition-all duration-200 focus-ring-custom ${
+												active
+													? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 font-semibold"
+													: "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-50"
+											}`}
+											aria-current={active ? "page" : undefined}
+										>
+											{item.label}
+										</a>
+									</li>
+								);
+							})}
+						</ul>
+					</nav>
+
+					<!-- Theme Toggle Button -->
+					<button
+						id="theme-toggle"
+						class="p-2 rounded-lg text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 transition-all cursor-pointer focus-ring-custom"
+						aria-label="Changer de thème"
+						title="Changer de thème"
+					>
+						<!-- Sun icon -->
+						<svg id="theme-toggle-sun" class="w-5 h-5 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M5.25 12H3m18 0h-2.25m-1.72-6.72L15.3 6.78m-8.58 8.58l-1.42 1.42M18.36 18.36l-1.42-1.42M6.78 6.78L5.36 5.36M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z" />
+						</svg>
+						<!-- Moon icon -->
+						<svg id="theme-toggle-moon" class="w-5 h-5 block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+						</svg>
+					</button>
+				</div>
 			</div>
 		</header>
+
+		<!-- Scroll Progress Bar -->
+		<div id="scroll-progress-container" class="fixed top-16 left-0 w-full h-[3px] bg-transparent z-40 pointer-events-none">
+			<div id="scroll-progress" class="h-full bg-zinc-900 dark:bg-zinc-50 w-full origin-left scale-x-0 transition-transform duration-75"></div>
+		</div>
+
 		<slot />
 		<Footer />
+
+		<script>
+			// Add transition class only after page load to prevent initial load flashes
+			window.addEventListener('DOMContentLoaded', () => {
+				document.documentElement.classList.add('theme-transition');
+			});
+
+			// Theme Toggling Logic
+			const themeToggleBtn = document.getElementById('theme-toggle');
+			if (themeToggleBtn) {
+				themeToggleBtn.addEventListener('click', () => {
+					const isDark = document.documentElement.classList.contains('dark');
+					const nextTheme = isDark ? 'light' : 'dark';
+					document.documentElement.classList.toggle('dark', !isDark);
+					localStorage.setItem('theme', nextTheme);
+				});
+			}
+
+			// Scroll Progress Logic
+			const scrollProgress = document.getElementById('scroll-progress');
+			if (scrollProgress) {
+				const updateScrollProgress = () => {
+					const scrollTop = window.scrollY || document.documentElement.scrollTop;
+					const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+					const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
+					scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+				};
+
+				window.addEventListener('scroll', updateScrollProgress);
+				window.addEventListener('resize', updateScrollProgress);
+				updateScrollProgress();
+			}
+		</script>
 	</body>
 </html>

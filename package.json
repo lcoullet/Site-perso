@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.6",
+    "@astrojs/rss": "^4.0.18",
     "astro": "^6.3.5",
     "simple-icons": "^16.11.0"
   },

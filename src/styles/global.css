@@ -1,2 +1,35 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+/* Configure dark mode variant for Tailwind v4 class-based strategy */
+@variant dark (&:where(.dark, .dark *));
+
+/* Smooth theme transition classes */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition-property: background-color, border-color, text-decoration-color, fill, stroke, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Force Shiki dual-theme to respect class-based .dark mode */
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* Base focus custom ring styles (from previous A11y enhancements) */
+.focus-ring-custom:focus-visible {
+  outline: 2px solid var(--color-zinc-950);
+  outline-offset: 4px;
+}
+.dark .focus-ring-custom:focus-visible {
+  outline: 2px solid var(--color-zinc-50);
+  outline-offset: 4px;
+}

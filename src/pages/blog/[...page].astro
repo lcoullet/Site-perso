@@ -37,11 +37,11 @@ const { page } = Astro.props;
     <div class="max-w-3xl mx-auto">
       <header class="mb-12">
         <h1
-          class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4"
+          class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4"
         >
           Blog
         </h1>
-        <p class="text-lg text-zinc-600 leading-relaxed">
+        <p class="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
           Pensées, retours d'expérience et guides pratiques sur le développement web et la création sonore.
         </p>
       </header>
@@ -56,13 +56,13 @@ const { page } = Astro.props;
         (page.url.prev || page.url.next) && (
           <nav
             aria-label="Pagination des articles"
-            class="flex items-center justify-between border-t border-zinc-200 pt-6"
+            class="flex items-center justify-between border-t border-zinc-200 dark:border-zinc-800 pt-6"
           >
             <div class="w-24">
               {page.url.prev ? (
                 <a
                   href={page.url.prev}
-                  class="inline-flex items-center gap-1 text-sm font-semibold text-zinc-900 hover:text-zinc-600 transition-colors px-3 py-2 rounded-lg hover:bg-zinc-100"
+                  class="inline-flex items-center gap-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors px-3 py-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 focus-ring-custom"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,7 @@ const { page } = Astro.props;
               ) : (
                 <button
                   disabled
-                  class="text-zinc-400 text-sm font-medium px-3 py-2 cursor-not-allowed select-none inline-flex items-center gap-1 bg-transparent border-0"
+                  class="text-zinc-400 dark:text-zinc-600 text-sm font-medium px-3 py-2 cursor-not-allowed select-none inline-flex items-center gap-1 bg-transparent border-0"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +91,7 @@ const { page } = Astro.props;
                     viewBox="0 0 24 24"
                     stroke-width="2"
                     stroke="currentColor"
-                    class="w-4 h-4 text-zinc-300"
+                    class="w-4 h-4 text-zinc-300 dark:text-zinc-700"
                   >
                     <path
                       stroke-linecap="round"
@@ -104,7 +104,7 @@ const { page } = Astro.props;
               )}
             </div>
 
-            <span class="text-sm font-medium text-zinc-500">
+            <span class="text-sm font-medium text-zinc-500 dark:text-zinc-400">
               Page {page.currentPage} sur {page.lastPage}
             </span>
 
@@ -112,7 +112,7 @@ const { page } = Astro.props;
               {page.url.next ? (
                 <a
                   href={page.url.next}
-                  class="inline-flex items-center gap-1 text-sm font-semibold text-zinc-900 hover:text-zinc-600 transition-colors px-3 py-2 rounded-lg hover:bg-zinc-100"
+                  class="inline-flex items-center gap-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors px-3 py-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 focus-ring-custom"
                 >
                   Suivant
                   <svg
@@ -133,7 +133,7 @@ const { page } = Astro.props;
               ) : (
                 <button
                   disabled
-                  class="text-zinc-400 text-sm font-medium px-3 py-2 cursor-not-allowed select-none inline-flex items-center gap-1 bg-transparent border-0"
+                  class="text-zinc-400 dark:text-zinc-600 text-sm font-medium px-3 py-2 cursor-not-allowed select-none inline-flex items-center gap-1 bg-transparent border-0"
                 >
                   Suivant
                   <svg
@@ -142,7 +142,7 @@ const { page } = Astro.props;
                     viewBox="0 0 24 24"
                     stroke-width="2"
                     stroke="currentColor"
-                    class="w-4 h-4 text-zinc-300"
+                    class="w-4 h-4 text-zinc-300 dark:text-zinc-700"
                   >
                     <path
                       stroke-linecap="round"
