@@ -28,7 +28,7 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
           {categories.map((category) => (
             <a
               href={`/blog/category/${encodeURIComponent(category)}`}
-              class="px-2 py-0.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 hover:text-zinc-900 transition-colors font-medium"
+              class="px-2 py-0.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 hover:text-zinc-900 transition-colors font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2"
             >
               {category}
             </a>
@@ -39,9 +39,9 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
   </div>
   
   <h2 class="text-xl font-bold tracking-tight text-zinc-900 group-hover:text-zinc-700 transition-colors leading-snug">
-    <a href={`/blog/${post.id}`} class="focus:outline-none">
+    <a href={`/blog/${post.id}`} class="main-link focus:outline-none">
       <!-- absolute overlay to make the whole card clickable EXCEPT the category links -->
-      <span class="absolute inset-0 rounded-2xl" aria-hidden="true"></span>
+      <span class="card-overlay absolute inset-0 rounded-2xl" aria-hidden="true"></span>
       {title}
     </a>
   </h2>
@@ -57,3 +57,10 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
     </svg>
   </div>
 </article>
+
+<style>
+  /* Beautiful custom focus ring around the whole card when the main link is focused via keyboard */
+  .main-link:focus-visible .card-overlay {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #09090b;
+  }
+</style>
