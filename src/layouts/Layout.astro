@@ -36,14 +36,38 @@ const navItems = [
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		
+		<!-- Preconnect to Google Fonts origins -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
 			rel="stylesheet"
 		/>
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
+		
+		<!-- Canonical URL -->
+		<link rel="canonical" href={Astro.url} />
+		
+		<!-- SEO Meta Tags -->
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Mastodon Verification -->
 		<link rel="me" href="https://mastodon.social/@lcoullet" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content="Ludovic Coullet" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={Astro.url} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
 		
 		<!-- Initial theme load to prevent flashing -->
 		<script is:inline>
