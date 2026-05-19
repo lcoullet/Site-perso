@@ -1,0 +1,85 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, categories } = post.data;
+const { Content } = await render(post);
+
+// Format date in French
+const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout title={`${title} | Blog de Ludovic Coullet`} description={description}>
+  <main id="main-content" class="flex-grow container mx-auto px-6 py-12 md:py-20 focus:outline-none" tabindex="-1">
+    <article class="max-w-2xl mx-auto">
+      <!-- Back button -->
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-500 hover:text-zinc-900 transition-colors mb-8 group"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Retour aux articles
+      </a>
+
+      <!-- Article Header -->
+      <header class="mb-8 pb-8 border-b border-zinc-200">
+        <div class="flex flex-wrap items-center gap-3 text-sm text-zinc-500 mb-4">
+          <time datetime={pubDate.toISOString()} class="font-medium">
+            {formattedDate}
+          </time>
+          {categories.length > 0 && (
+            <>
+              <span class="text-zinc-300" aria-hidden="true">•</span>
+              <div class="flex flex-wrap gap-1.5" aria-label="Catégories">
+                {categories.map((category) => (
+                  <a
+                    href={`/blog/category/${encodeURIComponent(category)}`}
+                    class="px-2.5 py-0.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 hover:text-zinc-900 transition-colors text-xs font-semibold"
+                  >
+                    {category}
+                  </a>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
+          {title}
+        </h1>
+        {description && (
+          <p class="mt-4 text-lg text-zinc-600 leading-relaxed font-normal">
+            {description}
+          </p>
+        )}
+      </header>
+
+      <!-- Main rich-text content rendered with Tailwind Typography -->
+      <div class="prose prose-zinc prose-lg max-w-none focus:outline-none 
+                  prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-zinc-950
+                  prose-p:leading-relaxed prose-p:text-zinc-700
+                  prose-a:text-zinc-900 prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-zinc-600 prose-a:transition-colors
+                  prose-blockquote:border-l-4 prose-blockquote:border-zinc-300 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-zinc-600
+                  prose-code:text-zinc-900 prose-code:bg-zinc-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                  prose-pre:bg-zinc-900 prose-pre:text-zinc-100 prose-pre:p-4 prose-pre:rounded-xl prose-pre:overflow-x-auto
+                  prose-ul:list-disc prose-ul:pl-5
+                  prose-ol:list-decimal prose-ol:pl-5">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>
