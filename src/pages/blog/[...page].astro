@@ -1,0 +1,162 @@
+---
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+    const posts = await getCollection("blog", ({ data }) => {
+        return import.meta.env.PROD ? !data.draft : true;
+    });
+
+    // Sort posts by date descending
+    const sortedPosts = posts.sort(
+        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    );
+
+    return paginate(sortedPosts, { pageSize: 3 });
+};
+
+interface Props {
+    page: Page<CollectionEntry<"blog">>;
+}
+
+const { page } = Astro.props;
+---
+
+<Layout
+    title="Blog | Ludovic Coullet"
+    description="Lisez mes articles sur le développement web et mes explorations musicales."
+>
+    <main
+        id="main-content"
+        class="flex-grow container mx-auto px-6 py-12 md:py-20 focus:outline-none"
+        tabindex="-1"
+    >
+        <div class="max-w-3xl mx-auto">
+            <header class="mb-12">
+                <h1
+                    class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4"
+                >
+                    Blog
+                </h1>
+                <p class="text-lg text-zinc-600 leading-relaxed">
+                    Pensées, retours d'expérience et guides pratiques sur le
+                    développement et la création sonore.
+                </p>
+            </header>
+
+            <!-- Blog post list -->
+            <div class="flex flex-col gap-8 mb-12">
+                {page.data.map((post) => <BlogCard post={post} />)}
+            </div>
+
+            <!-- Pagination Component -->
+            {
+                (page.url.prev || page.url.next) && (
+                    <nav
+                        aria-label="Pagination des articles"
+                        class="flex items-center justify-between border-t border-zinc-200 pt-6"
+                    >
+                        <div class="w-24">
+                            {page.url.prev ? (
+                                <a
+                                    href={page.url.prev}
+                                    class="inline-flex items-center gap-1 text-sm font-semibold text-zinc-900 hover:text-zinc-600 transition-colors px-3 py-2 rounded-lg hover:bg-zinc-100"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        class="w-4 h-4"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                                        />
+                                    </svg>
+                                    Précédent
+                                </a>
+                            ) : (
+                                <button
+                                    disabled
+                                    class="text-zinc-400 text-sm font-medium px-3 py-2 cursor-not-allowed select-none inline-flex items-center gap-1 bg-transparent border-0"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        class="w-4 h-4 text-zinc-300"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                                        />
+                                    </svg>
+                                    Précédent
+                                </button>
+                            )}
+                        </div>
+
+                        <span class="text-sm font-medium text-zinc-500">
+                            Page {page.currentPage} sur {page.lastPage}
+                        </span>
+
+                        <div class="w-24 flex justify-end">
+                            {page.url.next ? (
+                                <a
+                                    href={page.url.next}
+                                    class="inline-flex items-center gap-1 text-sm font-semibold text-zinc-900 hover:text-zinc-600 transition-colors px-3 py-2 rounded-lg hover:bg-zinc-100"
+                                >
+                                    Suivant
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        class="w-4 h-4"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                                        />
+                                    </svg>
+                                </a>
+                            ) : (
+                                <button
+                                    disabled
+                                    class="text-zinc-400 text-sm font-medium px-3 py-2 cursor-not-allowed select-none inline-flex items-center gap-1 bg-transparent border-0"
+                                >
+                                    Suivant
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        class="w-4 h-4 text-zinc-300"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                                        />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+                    </nav>
+                )
+            }
+        </div>
+    </main>
+</Layout>

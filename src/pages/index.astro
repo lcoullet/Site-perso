@@ -1,32 +1,76 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import BlogCard from "../components/BlogCard.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Fetch the 3 latest non-draft posts
+const posts = await getCollection("blog", ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+});
+
+const latestPosts = posts
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3);
 ---
 
 <Layout>
-  <main
-    id="main-content"
-    class="container mx-auto px-6 py-20 max-w-3xl focus:outline-none"
-    tabindex="-1"
-  >
-    <article class="flex flex-col gap-6">
-      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900">
-        Salut !
-      </h1>
+    <main
+        id="main-content"
+        class="container mx-auto px-6 py-20 max-w-3xl focus:outline-none"
+        tabindex="-1"
+    >
+        <article class="flex flex-col gap-6">
+            <h1
+                class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900"
+            >
+                Salut !
+            </h1>
 
-      <div class="text-lg text-zinc-600 space-y-4 leading-relaxed">
-        <p>
-          C'est <strong class="font-semibold text-zinc-900"
-            >Ludovic Coullet</strong
-          >.
-        </p>
-      </div>
+            <div class="text-lg text-zinc-600 space-y-4 leading-relaxed">
+                <p>
+                    C'est <strong class="font-semibold text-zinc-900"
+                        >Ludovic Coullet</strong
+                    >.
+                </p>
+            </div>
+        </article>
 
-      <p class="mt-8 text-sm text-zinc-600 font-medium tracking-wide uppercase">
-        Stay tuned (ou pas).
-      </p>
-    </article>
-  </main>
+        {
+            latestPosts.length > 0 && (
+                <section class="mt-20 border-t border-zinc-200/80 pt-16">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="text-2xl font-bold tracking-tight text-zinc-950">
+                            Derniers articles
+                        </h2>
+                        <a
+                            href="/blog"
+                            class="text-sm font-semibold text-zinc-900 hover:text-zinc-600 transition-colors inline-flex items-center gap-1 group"
+                        >
+                            Tous les articles
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                                />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="flex flex-col gap-6">
+                        {latestPosts.map((post) => (
+                            <BlogCard post={post} />
+                        ))}
+                    </div>
+                </section>
+            )
+        }
+    </main>
 </Layout>
