@@ -1,36 +1,505 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import Layout from '../layouts/Layout.astro';
+
+let profileData = {
+  username: "blud",
+  full_name: "Ludovic Coullet",
+  city: "Marseille",
+  country_code: "FR",
+  description: "Ludovic Coullet explore les territoires de la musique électroacoustique, une démarche qu'il poursuit à la Cité de la Musique de Marseille.",
+  avatar_url: "https://i1.sndcdn.com/avatars-000130207310-7xjmdz-large.jpg",
+  followers_count: 136,
+  track_count: 44,
+};
+
+try {
+  const filePath = path.join(process.cwd(), "sc_data.txt");
+  let content = fs.readFileSync(filePath, "utf-8");
+  if (content.startsWith('window.__sc_hydration = ')) {
+    content = content.replace('window.__sc_hydration = ', '');
+  }
+  content = content.trim();
+  if (content.endsWith(';')) {
+    content = content.slice(0, -1);
+  }
+  const hydration = JSON.parse(content);
+  const userBlock = hydration.find((item: any) => item.hydratable === 'user');
+  if (userBlock && userBlock.data) {
+    let avatar = userBlock.data.avatar_url || "";
+    if (avatar.endsWith("-large.jpg")) {
+      avatar = avatar.replace("-large.jpg", "-t500x500.jpg");
+    }
+    profileData = {
+      username: userBlock.data.username || "blud",
+      full_name: userBlock.data.full_name || "Ludovic Coullet",
+      city: userBlock.data.city || "Marseille",
+      country_code: userBlock.data.country_code || "FR",
+      description: userBlock.data.description || "",
+      avatar_url: avatar || "https://i1.sndcdn.com/avatars-000130207310-7xjmdz-large.jpg",
+      followers_count: userBlock.data.followers_count || 136,
+      track_count: userBlock.data.track_count || 44,
+    };
+  }
+} catch (err) {
+  console.error("Failed to parse sc_data.txt, using default fallbacks", err);
+}
 ---
 
 <Layout
-	title="Musique & Créations Sonores | Ludovic Coullet"
-	description="Découvrez les explorations électroacoustiques, compositions acousmatiques et expérimentations de Ludovic Coullet."
+  title="Musique & Créations Sonores | Ludovic Coullet"
+  description="Découvrez les explorations électroacoustiques, compositions acousmatiques et expérimentations de Ludovic Coullet."
 >
-	<main
-		id="main-content"
-		class="flex-grow container mx-auto px-6 py-12 md:py-20 focus:outline-none"
-		tabindex="-1"
-	>
-		<div class="max-w-3xl mx-auto">
-			<header class="mb-12">
-				<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">Musique</h1>
-				<p class="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-					Découvrez mes dernières explorations électroacoustiques et expérimentations sonores, directement depuis SoundCloud.
-				</p>
-			</header>
-			
-			<div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200/50 dark:border-zinc-800 p-2 overflow-hidden hover:shadow-md transition-shadow duration-300">
-				<iframe 
-					width="100%" 
-					height="600" 
-					scrolling="no" 
-					frameborder="no" 
-					allow="autoplay" 
-					src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/27204&color=%2318181b&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=false"
-					class="rounded-xl w-full"
-					title="Lecteur SoundCloud de blud"
-				></iframe>
-			</div>
-		</div>
-	</main>
+  <main
+    id="main-content"
+    class="flex-grow container mx-auto px-6 py-12 md:py-20 focus:outline-none"
+    tabindex="-1"
+  >
+    <div class="max-w-6xl mx-auto">
+      <header class="mb-12">
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-zinc-950 dark:text-zinc-50 mb-4">Musique</h1>
+        <p class="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
+          Découvrez mes explorations électroacoustiques et expérimentations sonores, intégrées directement depuis SoundCloud.
+        </p>
+      </header>
+
+      <!-- Main Columns Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left Column: Statically Compiled Profile Card -->
+        <aside class="lg:col-span-4 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-800/50 shadow-xl rounded-3xl p-8 flex flex-col items-center text-center animate-fade-in" aria-label="Profil SoundCloud">
+          <div class="relative group mb-6">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-[#FF5500] rounded-full blur opacity-35 group-hover:opacity-60 transition duration-500"></div>
+            <img
+              src={profileData.avatar_url}
+              alt={profileData.full_name}
+              class="relative w-36 h-36 rounded-full object-cover border-4 border-white dark:border-zinc-950 shadow-md group-hover:scale-[1.02] transition-transform duration-300"
+            />
+          </div>
+
+          <h2 class="text-2xl font-bold text-zinc-950 dark:text-zinc-50">{profileData.full_name}</h2>
+          <a 
+            href={`https://soundcloud.com/${profileData.username}`} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="text-sm font-semibold text-[#FF5500] hover:underline mb-4"
+          >
+            @{profileData.username}
+          </a>
+
+          <div class="flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400 mb-6">
+            <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span>{profileData.city}, {profileData.country_code}</span>
+          </div>
+
+          <!-- Stats Counters -->
+          <div class="grid grid-cols-2 gap-4 w-full border-y border-zinc-200/50 dark:border-zinc-800/50 py-4 mb-6 text-sm">
+            <div>
+              <span class="block text-2xl font-extrabold text-zinc-950 dark:text-zinc-50">{profileData.track_count}</span>
+              <span class="text-xs text-zinc-500 dark:text-zinc-400">Compositions</span>
+            </div>
+            <div>
+              <span class="block text-2xl font-extrabold text-zinc-950 dark:text-zinc-50">{profileData.followers_count}</span>
+              <span class="text-xs text-zinc-500 dark:text-zinc-400">Abonnés</span>
+            </div>
+          </div>
+
+          <p class="text-sm text-zinc-600 dark:text-zinc-350 leading-relaxed text-left mb-6">
+            {profileData.description}
+          </p>
+
+          <a 
+            href={`https://soundcloud.com/${profileData.username}`} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#FF5500] hover:bg-[#e04b00] text-white font-semibold rounded-2xl shadow-lg shadow-orange-500/20 hover:shadow-orange-500/35 transition-all duration-300 focus-ring-custom"
+          >
+            <span>Voir sur SoundCloud</span>
+            <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M11.6 12.2v6.1c0 .1-.1.2-.1.3s-.2.1-.3.1c-.1 0-.2 0-.3-.1s-.1-.2-.1-.3v-7.9c0-.1.1-.2.1-.3s.2-.1.3-.1c.1 0 .2 0 .3.1s.1.2.1.3v1.9zm-1.8 6.1c0 .1-.1.2-.1.3s-.2.1-.3.1c-.1 0-.2 0-.3-.1s-.1-.2-.1-.3V9.8c0-.1.1-.2.1-.3s.2-.1.3-.1c.1 0 .2 0 .3.1s.1.2.1.3v8.5zm-1.8 0c0 .1-.1.2-.1.3s-.2.1-.3.1c-.1 0-.2 0-.3-.1s-.1-.2-.1-.3v-5.9c0-.1.1-.2.1-.3s.2-.1.3-.1c.1 0 .2 0 .3.1s.1.2.1.3v5.9zm-1.8 0c0 .1-.1.2-.1.3s-.2.1-.3.1c-.1 0-.2 0-.3-.1s-.1-.2-.1-.3v-4.1c0-.1.1-.2.1-.3s.2-.1.3-.1c.1 0 .2 0 .3.1s.1.2.1.3v4.1zm-1.8 0c0 .1-.1.2-.1.3s-.2.1-.3.1c-.1 0-.2 0-.3-.1s-.1-.2-.1-.3v-3.2c0-.1.1-.2.1-.3s.2-.1.3-.1c.1 0 .2 0 .3.1s.1.2.1.3v3.2zm-1.8-1.1c0 .1-.1.2-.1.3s-.2.1-.3.1c-.1 0-.2 0-.3-.1s-.1-.2-.1-.3v-1.4c0-.1.1-.2.1-.3s.2-.1.3-.1c.1 0 .2 0 .3.1s.1.2.1.3v1.4zm15.5-3.1c0-3.3-2.7-6-6-6-1.9 0-3.6.9-4.7 2.3v10.8h11a4.8 4.8 0 0 0 .2-9.7l-.5 0v-.4z"/>
+            </svg>
+          </a>
+        </aside>
+
+        <!-- Right Column: Interactive Custom Player & Dynamic Tracklist -->
+        <section class="lg:col-span-8 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-800/50 shadow-xl rounded-3xl p-6 lg:p-8 animate-fade-in [animation-delay:150ms]" aria-label="Lecteur audio et Liste des pistes">
+          
+          <iframe 
+            id="sc-iframe"
+            width="100%" 
+            height="166" 
+            scrolling="no" 
+            frameborder="no" 
+            allow="autoplay" 
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/27204&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+            class="absolute w-1 h-1 opacity-0 pointer-events-none -z-50"
+            title="Hidden SoundCloud Audio Engine"
+          ></iframe>
+
+          <!-- Premium Player Panel -->
+          <div class="bg-zinc-950 text-white rounded-2xl p-6 mb-8 relative overflow-hidden shadow-2xl">
+            <!-- Glass/Glow reflection background elements -->
+            <div class="absolute -right-20 -top-20 w-60 h-60 bg-[#FF5500]/15 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="flex flex-col sm:flex-row items-center gap-6 relative z-10">
+              <!-- Current Track Artwork -->
+              <div class="w-24 h-24 rounded-xl overflow-hidden bg-zinc-800 border border-zinc-800 shrink-0 relative shadow-md">
+                <img id="player-artwork" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Artwork composition" class="w-full h-full object-cover opacity-0 transition-opacity duration-300" />
+                <div id="player-artwork-fallback" class="absolute inset-0 flex items-center justify-center text-zinc-600 bg-zinc-900">
+                  <svg class="w-10 h-10 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m0 0v1.5m0-1.5L9 12m10.5-6v12.75A2.25 2.25 0 0117.25 21c-1.242 0-2.25-1.008-2.25-2.25s1.008-2.25 2.25-2.25a2.25 2.25 0 012.25 2.25V5.25zM9 12v6.75A2.25 2.25 0 016.75 21c-1.242 0-2.25-1.008-2.25-2.25S5.508 16.5 6.75 16.5A2.25 2.25 0 019 18.75V12z" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Media details and buttons -->
+              <div class="flex-grow text-center sm:text-left min-w-0">
+                <span class="text-[10px] uppercase tracking-widest text-[#FF5500] font-extrabold mb-1 block">Lecture en cours</span>
+                <h3 id="player-title" class="text-xl font-bold tracking-tight truncate">Sélectionnez une piste</h3>
+                <p id="player-author" class="text-xs text-zinc-400 font-semibold mt-0.5">Ludovic Coullet</p>
+
+                <!-- Media Controller Controls -->
+                <div class="flex items-center justify-center sm:justify-start gap-4 mt-4">
+                  <button id="ctrl-prev" class="p-2 text-zinc-400 hover:text-white transition-colors cursor-pointer focus-ring-custom rounded-lg" aria-label="Piste précédente">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                  </button>
+                  <button id="ctrl-play" class="p-4 bg-[#FF5500] hover:bg-[#e04b00] hover:scale-105 transition-all text-white rounded-full cursor-pointer shadow-lg shadow-orange-500/20 focus-ring-custom" aria-label="Play/Pause toggler">
+                    <svg id="play-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <svg id="pause-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                  </button>
+                  <button id="ctrl-next" class="p-2 text-zinc-400 hover:text-white transition-colors cursor-pointer focus-ring-custom rounded-lg" aria-label="Piste suivante">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6z"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Seekbar progress tracker -->
+            <div class="mt-6 z-10 relative">
+              <div class="flex items-center justify-between text-[10px] text-zinc-400 font-mono mb-2">
+                <span id="player-time-current">00:00</span>
+                <span id="player-time-total">00:00</span>
+              </div>
+              <div id="player-seekbar" class="h-1.5 w-full bg-zinc-800 rounded-full cursor-pointer hover:h-2 transition-all relative overflow-hidden">
+                <div id="player-seekbar-progress" class="h-full bg-gradient-to-r from-orange-500 to-[#FF5500] w-0 transition-all duration-75"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Compositions Tracklist -->
+          <div>
+            <h3 class="text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-bold mb-4">Compositions ({profileData.track_count})</h3>
+            
+            <!-- Pulsing Loading Skeletons -->
+            <div id="tracklist-loading" class="space-y-2">
+              {[1, 2, 3, 4, 5].map(() => (
+                <div class="flex items-center gap-4 p-4 rounded-2xl border border-zinc-200/30 dark:border-zinc-800/30 bg-zinc-50/50 dark:bg-zinc-900/10 animate-pulse">
+                  <div class="w-6 h-6 rounded bg-zinc-200 dark:bg-zinc-850 shrink-0"></div>
+                  <div class="w-10 h-10 rounded bg-zinc-200 dark:bg-zinc-850 shrink-0"></div>
+                  <div class="flex-grow space-y-2">
+                    <div class="h-4 bg-zinc-200 dark:bg-zinc-850 rounded w-1/2"></div>
+                    <div class="h-3 bg-zinc-200 dark:bg-zinc-850 rounded w-1/4"></div>
+                  </div>
+                  <div class="w-10 h-4 bg-zinc-200 dark:bg-zinc-850 rounded shrink-0"></div>
+                </div>
+              ))}
+            </div>
+
+            <!-- Dynamically populated list container -->
+            <div id="tracklist-container" class="space-y-2 max-h-[460px] overflow-y-auto pr-1 hidden custom-scrollbar">
+              <!-- JS Injected rows will go here -->
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
 </Layout>
+
+<!-- Load the official SoundCloud Widget API dynamically -->
+<script is:inline src="https://w.soundcloud.com/player/api.js"></script>
+
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    const iframe = document.getElementById('sc-iframe');
+    
+    // Check if the SC global exists (widget API loaded correctly)
+    if (typeof SC === 'undefined') {
+      console.warn("SoundCloud Widget API script failed to load or was blocked.");
+      const loader = document.getElementById('tracklist-loading');
+      if (loader) {
+        loader.innerHTML = `
+          <div class="p-6 bg-orange-500/5 border border-orange-500/20 rounded-2xl text-center text-sm text-zinc-600 dark:text-zinc-400">
+            Le script SoundCloud n'a pas pu être chargé. Veuillez vérifier votre connexion ou désactiver votre bloqueur de publicité pour accéder au lecteur interactif.
+          </div>
+        `;
+      }
+      return;
+    }
+
+    const widget = SC.Widget(iframe);
+    let soundList = [];
+    let isPlayingState = false;
+
+    // DOM References
+    const loader = document.getElementById('tracklist-loading');
+    const container = document.getElementById('tracklist-container');
+    const ctrlPlay = document.getElementById('ctrl-play');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const ctrlPrev = document.getElementById('ctrl-prev');
+    const ctrlNext = document.getElementById('ctrl-next');
+    
+    const playerArtwork = document.getElementById('player-artwork');
+    const playerArtworkFallback = document.getElementById('player-artwork-fallback');
+    const playerTitle = document.getElementById('player-title');
+    const playerAuthor = document.getElementById('player-author');
+    
+    const timeCurrent = document.getElementById('player-time-current');
+    const timeTotal = document.getElementById('player-time-total');
+    const seekbar = document.getElementById('player-seekbar');
+    const seekbarProgress = document.getElementById('player-seekbar-progress');
+
+    // Utility: Format ms into MM:SS
+    function formatTime(ms) {
+      if (isNaN(ms) || ms < 0) return "00:00";
+      const totalSeconds = Math.floor(ms / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = Math.floor(totalSeconds % 60).toString().padStart(2, '0');
+      return `${minutes}:${seconds}`;
+    }
+
+    // Highlight row matching current sound index
+    function highlightActiveTrack(activeIndex, playing) {
+      const rows = document.querySelectorAll('[data-track-index]');
+      rows.forEach(row => {
+        const idx = parseInt(row.getAttribute('data-track-index'));
+        const indicator = row.querySelector(`[data-indicator="${idx}"]`);
+        const soundwave = row.querySelector('.soundwave');
+        const duration = row.querySelector('.duration');
+        const titleText = row.querySelector('.title-text');
+
+        if (idx === activeIndex) {
+          row.classList.add('border-orange-500/50', 'bg-orange-50/5', 'dark:bg-orange-950/10');
+          if (titleText) {
+            titleText.classList.remove('text-zinc-900', 'dark:text-zinc-50');
+            titleText.classList.add('text-[#FF5500]', 'font-semibold');
+          }
+          if (duration) duration.classList.add('text-[#FF5500]');
+          
+          if (playing) {
+            if (indicator) {
+              indicator.innerHTML = `
+                <svg class="w-4 h-4 text-[#FF5500]" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              `;
+            }
+            if (soundwave) {
+              soundwave.classList.remove('hidden');
+              soundwave.classList.add('flex');
+            }
+          } else {
+            if (indicator) {
+              indicator.innerHTML = `
+                <svg class="w-4 h-4 text-[#FF5500]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              `;
+            }
+            if (soundwave) {
+              soundwave.classList.remove('flex');
+              soundwave.classList.add('hidden');
+            }
+          }
+        } else {
+          row.classList.remove('border-orange-500/50', 'bg-orange-50/5', 'dark:bg-orange-950/10');
+          if (titleText) {
+            titleText.classList.remove('text-[#FF5500]', 'font-semibold');
+            titleText.classList.add('text-zinc-900', 'dark:text-zinc-50');
+          }
+          if (duration) duration.classList.remove('text-[#FF5500]');
+          if (soundwave) {
+            soundwave.classList.remove('flex');
+            soundwave.classList.add('hidden');
+          }
+          if (indicator) {
+            indicator.innerHTML = (idx + 1).toString().padStart(2, '0');
+          }
+        }
+      });
+    }
+
+    // Update Player UI details
+    function updatePlayerHeader(sound) {
+      if (!sound) return;
+      playerTitle.textContent = sound.title || "Titre inconnu";
+      playerAuthor.textContent = sound.user?.username || "Ludovic Coullet";
+      timeTotal.textContent = formatTime(sound.duration);
+      
+      const artwork = sound.artwork_url || sound.user?.avatar_url;
+      if (artwork) {
+        // Upgrade size for player header
+        let bigArtwork = artwork;
+        if (bigArtwork.endsWith("-large.jpg")) {
+          bigArtwork = bigArtwork.replace("-large.jpg", "-t500x500.jpg");
+        }
+        playerArtwork.src = bigArtwork;
+        playerArtwork.classList.remove('opacity-0');
+        playerArtworkFallback.classList.add('hidden');
+      } else {
+        playerArtwork.classList.add('opacity-0');
+        playerArtworkFallback.classList.remove('hidden');
+      }
+    }
+
+    // Set UI playing state
+    function setPlayingUI(playing) {
+      isPlayingState = playing;
+      if (playing) {
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+      } else {
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+      }
+      widget.getCurrentSoundIndex((idx) => {
+        highlightActiveTrack(idx, playing);
+      });
+    }
+
+    // Initialize Widget communication once READY
+    widget.bind(SC.Widget.Events.READY, () => {
+      
+      // Fetch sound details list
+      widget.getSounds((sounds) => {
+        soundList = sounds || [];
+        
+        // Hide loader, show container
+        if (loader) loader.classList.add('hidden');
+        if (container) container.classList.remove('hidden');
+        
+        if (soundList.length === 0) {
+          container.innerHTML = `
+            <div class="p-6 bg-zinc-100 dark:bg-zinc-800/40 rounded-2xl text-center text-sm text-zinc-500">
+              Aucune piste trouvée sur ce profil.
+            </div>
+          `;
+          return;
+        }
+
+        // Render rows
+        container.innerHTML = '';
+        soundList.forEach((sound, idx) => {
+          const row = document.createElement('button');
+          row.className = `w-full flex items-center justify-between gap-4 p-4 rounded-2xl border border-zinc-200/40 dark:border-zinc-800/40 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/30 text-left transition-all duration-200 group focus-ring-custom cursor-pointer`;
+          row.setAttribute('data-track-index', idx);
+          row.setAttribute('aria-label', `Écouter ${sound.title}`);
+          
+          row.innerHTML = `
+            <div class="flex items-center gap-4 min-w-0">
+              <div class="w-6 h-6 flex items-center justify-center shrink-0 text-sm font-semibold text-zinc-400 group-hover:text-[#FF5500] font-mono transition-colors" data-indicator="${idx}">
+                ${(idx + 1).toString().padStart(2, '0')}
+              </div>
+              <div class="w-10 h-10 rounded-lg overflow-hidden bg-zinc-800 border border-zinc-200/10 shrink-0">
+                <img src="${sound.artwork_url || 'https://w.soundcloud.com/player/images/default-artwork.png'}" alt="" class="w-full h-full object-cover" />
+              </div>
+              <div class="min-w-0">
+                <p class="title-text font-bold text-zinc-900 dark:text-zinc-50 group-hover:text-[#FF5500] transition-colors truncate">${sound.title}</p>
+                <p class="text-[10px] text-zinc-500 dark:text-zinc-400 font-semibold">${sound.user?.username || 'Ludovic Coullet'}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-mono text-zinc-400 dark:text-zinc-500 shrink-0">
+              <span class="duration">${formatTime(sound.duration)}</span>
+              <div class="soundwave hidden items-end gap-[2px] h-3.5 w-4 shrink-0">
+                <span class="w-[2px] bg-[#FF5500] rounded-full animate-soundwave-1"></span>
+                <span class="w-[2px] bg-[#FF5500] rounded-full animate-soundwave-2"></span>
+                <span class="w-[2px] bg-[#FF5500] rounded-full animate-soundwave-3"></span>
+              </div>
+            </div>
+          `;
+
+          row.addEventListener('click', () => {
+            widget.skip(idx);
+            widget.play();
+          });
+
+          container.appendChild(row);
+        });
+
+        // Set the header details to the first track initially
+        updatePlayerHeader(soundList[0]);
+      });
+    });
+
+    // Control triggers
+    ctrlPlay.addEventListener('click', () => {
+      widget.isPaused((paused) => {
+        if (paused) {
+          widget.play();
+        } else {
+          widget.pause();
+        }
+      });
+    });
+
+    ctrlPrev.addEventListener('click', () => {
+      widget.prev();
+    });
+
+    ctrlNext.addEventListener('click', () => {
+      widget.next();
+    });
+
+    // Seekbar navigation
+    if (seekbar) {
+      seekbar.addEventListener('click', (e) => {
+        const rect = seekbar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percent = clickX / rect.width;
+        widget.getDuration((duration) => {
+          widget.seekTo(duration * percent);
+        });
+      });
+    }
+
+    // Bind playback updates
+    widget.bind(SC.Widget.Events.PLAY, () => {
+      setPlayingUI(true);
+      widget.getCurrentSound((sound) => {
+        updatePlayerHeader(sound);
+      });
+    });
+
+    widget.bind(SC.Widget.Events.PAUSE, () => {
+      setPlayingUI(false);
+    });
+
+    widget.bind(SC.Widget.Events.FINISH, () => {
+      setPlayingUI(false);
+    });
+
+    widget.bind(SC.Widget.Events.PLAY_PROGRESS, (progress) => {
+      timeCurrent.textContent = formatTime(progress.currentPosition);
+      const percent = (progress.relativePosition * 100).toFixed(2);
+      seekbarProgress.style.width = `${percent}%`;
+    });
+  });
+</script>
+
+<style>
+  /* Custom scrollbar adjustments for tracklist */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(161, 161, 170, 0.2);
+    border-radius: 9999px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(161, 161, 170, 0.4);
+  }
+</style>
