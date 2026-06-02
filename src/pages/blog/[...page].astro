@@ -302,7 +302,8 @@ const searchIndex = sortedAllPosts.map((post) => ({
       activeCategory = catParam;
       categoryPills.forEach(pill => {
         const cat = pill.getAttribute('data-category');
-        if (cat === catParam) {
+        if (cat && cat.toLowerCase() === catParam.toLowerCase()) {
+          activeCategory = cat;
           categoryPills.forEach(p => {
             p.classList.remove('active', 'bg-zinc-900', 'dark:bg-zinc-50', 'text-white', 'dark:text-zinc-950', 'border-zinc-900', 'dark:border-zinc-50');
             p.classList.add('bg-white', 'dark:bg-zinc-900', 'text-zinc-600', 'dark:text-zinc-400', 'border-zinc-200', 'dark:border-zinc-800');
@@ -330,7 +331,7 @@ const searchIndex = sortedAllPosts.map((post) => ({
       if (post.categories && post.categories.length > 0) {
         const categoryLinks = post.categories.map(cat => `
           <a
-            href="/blog/category/${encodeURIComponent(cat)}"
+            href="/blog/category/${encodeURIComponent(cat.toLowerCase())}"
             class="px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 dark:focus-visible:ring-zinc-50 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
           >
             ${cat}
@@ -396,7 +397,8 @@ const searchIndex = sortedAllPosts.map((post) => ({
       // Otherwise filter the index
       const normalizedQuery = currentQuery.toLowerCase().trim();
       const filtered = searchIndex.filter(post => {
-        const matchesCategory = activeCategory === 'all' || post.categories.includes(activeCategory);
+        const matchesCategory = activeCategory === 'all' || 
+          post.categories.some(c => c.toLowerCase() === activeCategory.toLowerCase());
         const matchesSearch = normalizedQuery === '' ||
           post.title.toLowerCase().includes(normalizedQuery) ||
           post.description.toLowerCase().includes(normalizedQuery) ||

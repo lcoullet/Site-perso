@@ -13,21 +13,22 @@ export async function getStaticPaths() {
 
   return categories.map((category) => {
     const filteredPosts = posts
-      .filter((post) => post.data.categories.includes(category))
+      .filter((post) => post.data.categories.map(c => c.toLowerCase()).includes(category.toLowerCase()))
       .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
     return {
-      params: { category },
-      props: { posts: filteredPosts },
+      params: { category: category.toLowerCase() },
+      props: { posts: filteredPosts, categoryName: category },
     };
   });
 }
 
 const { category } = Astro.params;
-const { posts } = Astro.props;
+const { posts, categoryName } = Astro.props;
+const displayName = categoryName || category;
 ---
 
-<Layout title={`Articles sur ${category} | Blog de Ludovic Coullet`} description={`Découvrez tous mes articles rédigés dans la catégorie ${category}.`}>
+<Layout title={`Articles sur ${displayName} | Blog de Ludovic Coullet`} description={`Découvrez tous mes articles rédigés dans la catégorie ${displayName}.`}>
   <main id="main-content" class="flex-grow container mx-auto px-6 py-12 md:py-20 focus:outline-none" tabindex="-1">
     <div class="max-w-3xl mx-auto">
       <!-- Back button -->
@@ -44,7 +45,7 @@ const { posts } = Astro.props;
       <header class="mb-12">
         <span class="text-xs font-bold tracking-widest text-zinc-500 uppercase">Catégorie</span>
         <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mt-2 mb-4">
-          {category}
+          {displayName}
         </h1>
         <p class="text-lg text-zinc-600 leading-relaxed">
           {posts.length} {posts.length > 1 ? 'articles trouvés' : 'article trouvé'} pour cette catégorie.

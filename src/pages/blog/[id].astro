@@ -61,7 +61,7 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
                 <div class="flex flex-wrap gap-1.5" aria-label="Catégories">
                   {categories.map((category) => (
                     <a
-                      href={`/blog/category/${encodeURIComponent(category)}`}
+                      href={`/blog/category/${encodeURIComponent(category.toLowerCase())}`}
                       class="px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors text-xs font-semibold focus-ring-custom"
                     >
                       {category}
