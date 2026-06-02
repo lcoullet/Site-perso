@@ -90,8 +90,9 @@ const navItems = [
 			<div class="container mx-auto px-6 h-16 flex items-center justify-between">
 				<a class="text-lg font-semibold tracking-tight hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors focus-ring-custom" href="/">Ludovic Coullet</a>
 				
-				<div class="flex items-center gap-2 sm:gap-4">
-					<nav aria-label="Navigation Principale">
+				<div class="flex items-center gap-1.5 sm:gap-3">
+					<!-- Desktop navigation (hidden on mobile) -->
+					<nav aria-label="Navigation Principale" class="hidden md:block">
 						<ul class="flex items-center gap-1 sm:gap-2 text-sm font-medium">
 							{navItems.map((item) => {
 								const active = isActive(item.href);
@@ -130,7 +131,54 @@ const navItems = [
 							<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
 						</svg>
 					</button>
+
+					<!-- Mobile Menu Toggle Button (hidden on desktop) -->
+					<button
+						id="mobile-menu-toggle"
+						class="md:hidden p-2 rounded-lg text-zinc-650 hover:text-zinc-900 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 transition-all cursor-pointer focus-ring-custom"
+						aria-label="Ouvrir le menu de navigation"
+						aria-expanded="false"
+						aria-controls="mobile-menu"
+					>
+						<!-- Menu (Hamburger) icon -->
+						<svg id="menu-icon-open" class="w-5 h-5 block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+						</svg>
+						<!-- Close (X) icon -->
+						<svg id="menu-icon-close" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
 				</div>
+			</div>
+
+			<!-- Mobile navigation panel (hidden on desktop) -->
+			<div
+				id="mobile-menu"
+				class="hidden md:hidden absolute top-16 left-0 w-full bg-white/95 dark:bg-zinc-955/95 backdrop-blur-md border-b border-zinc-200/50 dark:border-zinc-800/50 shadow-lg transition-all duration-200 ease-in-out origin-top scale-y-95 opacity-0 z-30"
+			>
+				<nav class="container mx-auto px-6 py-4" aria-label="Navigation Mobile">
+					<ul class="flex flex-col gap-1.5 font-medium">
+						{navItems.map((item) => {
+							const active = isActive(item.href);
+							return (
+								<li>
+									<a
+										href={item.href}
+										class={`block px-4 py-2 rounded-xl transition-all duration-200 focus-ring-custom ${
+											active
+												? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 font-semibold"
+												: "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-50"
+										}`}
+										aria-current={active ? "page" : undefined}
+									>
+										{item.label}
+									</a>
+								</li>
+							);
+						})}
+					</ul>
+				</nav>
 			</div>
 		</header>
 
@@ -172,6 +220,46 @@ const navItems = [
 				window.addEventListener('scroll', updateScrollProgress);
 				window.addEventListener('resize', updateScrollProgress);
 				updateScrollProgress();
+			}
+
+			// Mobile Menu Toggle Logic
+			const mobileToggle = document.getElementById('mobile-menu-toggle');
+			const mobileMenu = document.getElementById('mobile-menu');
+			const menuIconOpen = document.getElementById('menu-icon-open');
+			const menuIconClose = document.getElementById('menu-icon-close');
+
+			if (mobileToggle && mobileMenu) {
+				mobileToggle.addEventListener('click', () => {
+					const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+					mobileToggle.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+					
+					if (isExpanded) {
+						// Close menu
+						mobileMenu.classList.add('opacity-0', 'scale-y-95');
+						mobileMenu.classList.remove('opacity-100', 'scale-y-100');
+						if (menuIconOpen) menuIconOpen.classList.remove('hidden');
+						if (menuIconClose) menuIconClose.classList.add('hidden');
+						setTimeout(() => {
+							mobileMenu.classList.add('hidden');
+						}, 200);
+					} else {
+						// Open menu
+						mobileMenu.classList.remove('hidden');
+						// Force layout calculations for transitions
+						mobileMenu.offsetHeight;
+						mobileMenu.classList.remove('opacity-0', 'scale-y-95');
+						mobileMenu.classList.add('opacity-100', 'scale-y-100');
+						if (menuIconOpen) menuIconOpen.classList.add('hidden');
+						if (menuIconClose) menuIconClose.classList.remove('hidden');
+					}
+				});
+
+				// Close on Escape key press
+				window.addEventListener('keydown', (e) => {
+					if (e.key === 'Escape' && mobileToggle.getAttribute('aria-expanded') === 'true') {
+						mobileToggle.click();
+					}
+				});
 			}
 		</script>
 	</body>
