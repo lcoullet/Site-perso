@@ -103,6 +103,7 @@ const searchIndex = sortedAllPosts.map((post) => ({
             <button
               data-category="all"
               class="category-pill active px-3.5 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-950 border border-zinc-900 dark:border-zinc-50 transition-all cursor-pointer focus-ring-custom"
+              aria-pressed="true"
             >
               Tous
             </button>
@@ -110,6 +111,7 @@ const searchIndex = sortedAllPosts.map((post) => ({
               <button
                 data-category={category}
                 class="category-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer focus-ring-custom"
+                aria-pressed="false"
               >
                 {category}
               </button>
@@ -417,10 +419,12 @@ const searchIndex = sortedAllPosts.map((post) => ({
         categoryPills.forEach(p => {
           p.classList.remove('active', 'bg-zinc-900', 'dark:bg-zinc-50', 'text-white', 'dark:text-zinc-950', 'border-zinc-900', 'dark:border-zinc-50');
           p.classList.add('bg-white', 'dark:bg-zinc-900', 'text-zinc-600', 'dark:text-zinc-400', 'border-zinc-200', 'dark:border-zinc-800');
+          p.setAttribute('aria-pressed', 'false');
         });
 
         pill.classList.add('active', 'bg-zinc-900', 'dark:bg-zinc-50', 'text-white', 'dark:text-zinc-950', 'border-zinc-900', 'dark:border-zinc-50');
         pill.classList.remove('bg-white', 'dark:bg-zinc-900', 'text-zinc-600', 'dark:text-zinc-400', 'border-zinc-200', 'dark:border-zinc-800');
+        pill.setAttribute('aria-pressed', 'true');
 
         activeCategory = pill.getAttribute('data-category') || 'all';
         updateList();

@@ -235,6 +235,7 @@ const navItems = [
 					
 					if (isExpanded) {
 						// Close menu
+						mobileToggle.setAttribute('aria-label', "Ouvrir le menu de navigation");
 						mobileMenu.classList.add('opacity-0', 'scale-y-95');
 						mobileMenu.classList.remove('opacity-100', 'scale-y-100');
 						if (menuIconOpen) menuIconOpen.classList.remove('hidden');
@@ -244,6 +245,7 @@ const navItems = [
 						}, 200);
 					} else {
 						// Open menu
+						mobileToggle.setAttribute('aria-label', "Fermer le menu de navigation");
 						mobileMenu.classList.remove('hidden');
 						// Force layout calculations for transitions
 						mobileMenu.offsetHeight;

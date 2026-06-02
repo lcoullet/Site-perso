@@ -157,13 +157,13 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
                 </svg>
                 Charger les commentaires
               </button>
-              <div id="comments-error" class="hidden text-sm text-red-650 dark:text-red-400 mt-2 font-medium"></div>
+              <div id="comments-error" class="hidden text-sm text-red-650 dark:text-red-400 mt-2 font-medium" role="alert"></div>
             </div>
 
             <!-- Comments List -->
-            <div id="comments-list" class="space-y-6 hidden">
+            <ul id="comments-list" class="space-y-6 hidden" role="region" aria-label="Liste des commentaires de la communauté">
               <!-- JS Injected replies thread -->
-            </div>
+            </ul>
           </section>
         )}
       </article>
@@ -281,11 +281,11 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
         }
 
         const repliesHTML = comment.replies && comment.replies.length > 0 
-          ? `<div class="space-y-4">${comment.replies.map(reply => renderCommentTree(reply, depth + 1)).join('')}</div>`
+          ? `<ul class="space-y-4 mt-4" role="group">${comment.replies.map(reply => renderCommentTree(reply, depth + 1)).join('')}</ul>`
           : '';
 
         return `
-          <div class="comment-item ${indentClass} transition-all duration-350 hover:border-zinc-300 dark:hover:border-zinc-700">
+          <li class="comment-item ${indentClass} transition-all duration-350 hover:border-zinc-300 dark:hover:border-zinc-700">
             <article class="flex gap-3 sm:gap-4 items-start group">
               <a href="${comment.account.url}" target="_blank" rel="noopener noreferrer" class="shrink-0 focus-ring-custom rounded-full">
                 <img 
@@ -334,7 +334,7 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
               </div>
             </article>
             ${repliesHTML}
-          </div>
+          </li>
         `;
       }
 
