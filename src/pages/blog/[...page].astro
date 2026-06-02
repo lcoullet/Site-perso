@@ -284,9 +284,36 @@ const searchIndex = sortedAllPosts.map((post) => ({
       console.error('Failed to parse search index data:', e);
     }
 
-    // Active state tracker
-    let currentQuery = '';
+    // Active state tracker initialized with restored search text or query parameters
+    let currentQuery = searchInput ? searchInput.value : '';
     let activeCategory = 'all';
+
+    // Parse URL Search Parameters for initial filter values
+    const urlParams = new URLSearchParams(window.location.search);
+    const qParam = urlParams.get('q');
+    const catParam = urlParams.get('category');
+
+    if (qParam) {
+      currentQuery = qParam;
+      if (searchInput) searchInput.value = qParam;
+    }
+
+    if (catParam) {
+      activeCategory = catParam;
+      categoryPills.forEach(pill => {
+        const cat = pill.getAttribute('data-category');
+        if (cat === catParam) {
+          categoryPills.forEach(p => {
+            p.classList.remove('active', 'bg-zinc-900', 'dark:bg-zinc-50', 'text-white', 'dark:text-zinc-950', 'border-zinc-900', 'dark:border-zinc-50');
+            p.classList.add('bg-white', 'dark:bg-zinc-900', 'text-zinc-600', 'dark:text-zinc-400', 'border-zinc-200', 'dark:border-zinc-800');
+            p.setAttribute('aria-pressed', 'false');
+          });
+          pill.classList.add('active', 'bg-zinc-900', 'dark:bg-zinc-50', 'text-white', 'dark:text-zinc-950', 'border-zinc-900', 'dark:border-zinc-50');
+          pill.classList.remove('bg-white', 'dark:bg-zinc-900', 'text-zinc-600', 'dark:text-zinc-400', 'border-zinc-200', 'dark:border-zinc-800');
+          pill.setAttribute('aria-pressed', 'true');
+        }
+      });
+    }
 
     // Helper: Formats ISO date into long French format
     function formatFrenchDate(dateStr) {
@@ -430,5 +457,8 @@ const searchIndex = sortedAllPosts.map((post) => ({
         updateList();
       });
     });
+
+    // Run initial filter check to sync with restored input state or query parameters
+    updateList();
   });
 </script>
