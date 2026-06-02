@@ -4,6 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import BlogCard from "../../components/BlogCard.astro";
+import { getReadingTime } from "../../utils";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = await getCollection("blog", ({ data }) => {
@@ -23,6 +24,26 @@ interface Props {
 }
 
 const { page } = Astro.props;
+
+// Fetch all posts to construct the complete client-side search index
+const allPosts = await getCollection("blog", ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+const sortedAllPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const allCategories = [...new Set(allPosts.flatMap((post) => post.data.categories))].sort();
+
+const searchIndex = sortedAllPosts.map((post) => ({
+  id: post.id,
+  title: post.data.title,
+  description: post.data.description,
+  pubDate: post.data.pubDate.toISOString(),
+  categories: post.data.categories,
+  readingTime: getReadingTime(post.body),
+}));
 ---
 
 <Layout
@@ -46,116 +67,364 @@ const { page } = Astro.props;
         </p>
       </header>
 
-      <!-- Blog post list -->
-      <div class="flex flex-col gap-8 mb-12">
-        {page.data.map((post) => <BlogCard post={post} />)}
+      <!-- Search & Filters Container -->
+      <div class="mb-10 space-y-6">
+        <!-- Search Input -->
+        <div class="relative max-w-md">
+          <label for="blog-search" class="sr-only">Rechercher des articles</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-zinc-400 dark:text-zinc-500">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </span>
+            <input
+              type="text"
+              id="blog-search"
+              placeholder="Rechercher un article..."
+              class="w-full pl-10 pr-10 py-2.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl text-sm text-zinc-900 dark:text-zinc-105 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-zinc-50 focus:border-transparent transition-all shadow-sm focus-ring-custom"
+            />
+            <button
+              id="clear-search"
+              class="hidden absolute inset-y-0 right-0 flex items-center pr-3.5 text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors cursor-pointer"
+              aria-label="Effacer la recherche"
+            >
+              <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Categories Pill Filters -->
+        {allCategories.length > 0 && (
+          <div class="flex flex-wrap items-center gap-2" aria-label="Filtrer par catégorie">
+            <span class="text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mr-2 select-none">Catégories :</span>
+            <button
+              data-category="all"
+              class="category-pill active px-3.5 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-950 border border-zinc-900 dark:border-zinc-50 transition-all cursor-pointer focus-ring-custom"
+            >
+              Tous
+            </button>
+            {allCategories.map((category) => (
+              <button
+                data-category={category}
+                class="category-pill px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer focus-ring-custom"
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
-      <!-- Pagination Component -->
-      {
-        (page.url.prev || page.url.next) && (
-          <nav
-            aria-label="Pagination des articles"
-            class="flex items-center justify-between border-t border-zinc-200 dark:border-zinc-800 pt-6"
-          >
-            <div class="w-24">
-              {page.url.prev ? (
-                <a
-                  href={page.url.prev}
-                  class="inline-flex items-center gap-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors px-3 py-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 focus-ring-custom"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    class="w-4 h-4"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                    />
-                  </svg>
-                  Précédent
-                </a>
-              ) : (
-                <button
-                  disabled
-                  class="text-zinc-400 dark:text-zinc-600 text-sm font-medium px-3 py-2 cursor-not-allowed select-none inline-flex items-center gap-1 bg-transparent border-0"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    class="w-4 h-4 text-zinc-300 dark:text-zinc-700"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                    />
-                  </svg>
-                  Précédent
-                </button>
-              )}
-            </div>
+      <!-- Static paginated layout (Default view) -->
+      <div id="paginated-section">
+        <!-- Blog post list -->
+        <div class="flex flex-col gap-8 mb-12">
+          {page.data.map((post) => <BlogCard post={post} />)}
+        </div>
 
-            <span class="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-              Page {page.currentPage} sur {page.lastPage}
-            </span>
+        <!-- Pagination Component -->
+        {
+          (page.url.prev || page.url.next) && (
+            <nav
+              id="pagination-nav"
+              aria-label="Pagination des articles"
+              class="flex items-center justify-between border-t border-zinc-200 dark:border-zinc-800 pt-6"
+            >
+              <div class="w-24">
+                {page.url.prev ? (
+                  <a
+                    href={page.url.prev}
+                    class="inline-flex items-center gap-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors px-3 py-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 focus-ring-custom"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2055/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                      />
+                    </svg>
+                    Précédent
+                  </a>
+                ) : (
+                  <button
+                    disabled
+                    class="text-zinc-400 dark:text-zinc-600 text-sm font-medium px-3 py-2 cursor-not-allowed select-none inline-flex items-center gap-1 bg-transparent border-0"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2055/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      class="w-4 h-4 text-zinc-300 dark:text-zinc-700"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                      />
+                    </svg>
+                    Précédent
+                  </button>
+                )}
+              </div>
 
-            <div class="w-24 flex justify-end">
-              {page.url.next ? (
-                <a
-                  href={page.url.next}
-                  class="inline-flex items-center gap-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors px-3 py-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 focus-ring-custom"
-                >
-                  Suivant
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    class="w-4 h-4"
+              <span class="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                Page {page.currentPage} sur {page.lastPage}
+              </span>
+
+              <div class="w-24 flex justify-end">
+                {page.url.next ? (
+                  <a
+                    href={page.url.next}
+                    class="inline-flex items-center gap-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors px-3 py-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 focus-ring-custom"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                    />
-                  </svg>
-                </a>
-              ) : (
-                <button
-                  disabled
-                  class="text-zinc-400 dark:text-zinc-600 text-sm font-medium px-3 py-2 cursor-not-allowed select-none inline-flex items-center gap-1 bg-transparent border-0"
-                >
-                  Suivant
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    class="w-4 h-4 text-zinc-300 dark:text-zinc-700"
+                    Suivant
+                    <svg
+                      xmlns="http://www.w3.org/2055/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                      />
+                    </svg>
+                  </a>
+                ) : (
+                  <button
+                    disabled
+                    class="text-zinc-400 dark:text-zinc-600 text-sm font-medium px-3 py-2 cursor-not-allowed select-none inline-flex items-center gap-1 bg-transparent border-0"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                    />
-                  </svg>
-                </button>
-              )}
-            </div>
-          </nav>
-        )
-      }
+                    Suivant
+                    <svg
+                      xmlns="http://www.w3.org/2055/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      class="w-4 h-4 text-zinc-300 dark:text-zinc-700"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                      />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            </nav>
+          )
+        }
+      </div>
+
+      <!-- Dynamic Search & Filter Results Section -->
+      <div id="search-results-section" class="hidden">
+        <!-- Results container -->
+        <div id="search-results-list" class="flex flex-col gap-8 mb-12">
+          <!-- JS injected cards -->
+        </div>
+
+        <!-- Empty search state -->
+        <div id="search-empty-state" class="hidden py-16 text-center">
+          <svg class="w-12 h-12 text-zinc-300 dark:text-zinc-700 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+          </svg>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100">Aucun résultat trouvé</h2>
+          <p class="text-sm text-zinc-550 dark:text-zinc-500 mt-1">
+            Essayez de modifier votre recherche ou de choisir une autre catégorie.
+          </p>
+        </div>
+      </div>
     </div>
   </main>
 </Layout>
+
+<!-- Embed the search index as JSON data -->
+<script type="application/json" id="search-index-data" is:inline>
+  {JSON.stringify(searchIndex)}
+</script>
+
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    // DOM References
+    const searchInput = document.getElementById('blog-search');
+    const clearButton = document.getElementById('clear-search');
+    const paginatedSection = document.getElementById('paginated-section');
+    const searchResultsSection = document.getElementById('search-results-section');
+    const searchResultsList = document.getElementById('search-results-list');
+    const searchEmptyState = document.getElementById('search-empty-state');
+    const categoryPills = document.querySelectorAll('.category-pill');
+
+    // Parse Embedded JSON Search Index
+    let searchIndex = [];
+    try {
+      const indexElement = document.getElementById('search-index-data');
+      if (indexElement) {
+        searchIndex = JSON.parse(indexElement.textContent || '[]');
+      }
+    } catch (e) {
+      console.error('Failed to parse search index data:', e);
+    }
+
+    // Active state tracker
+    let currentQuery = '';
+    let activeCategory = 'all';
+
+    // Helper: Formats ISO date into long French format
+    function formatFrenchDate(dateStr) {
+      return new Date(dateStr).toLocaleDateString("fr-FR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+
+    // Render a single post card in HTML matching BlogCard exactly
+    function renderCard(post) {
+      let categoriesHTML = '';
+      if (post.categories && post.categories.length > 0) {
+        const categoryLinks = post.categories.map(cat => `
+          <a
+            href="/blog/category/${encodeURIComponent(cat)}"
+            class="px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 dark:focus-visible:ring-zinc-50 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
+          >
+            ${cat}
+          </a>
+        `).join('');
+        
+        categoriesHTML = `
+          <span class="text-zinc-300 dark:text-zinc-700" aria-hidden="true">•</span>
+          <div class="flex flex-wrap gap-1.5 relative z-10" aria-label="Catégories">
+            ${categoryLinks}
+          </div>
+        `;
+      }
+
+      return `
+        <article class="group relative flex flex-col gap-3 bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/60 shadow-sm hover:shadow-md transition-all duration-300 hover:border-zinc-300/80 dark:hover:border-zinc-700/80 animate-fade-in">
+          <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-zinc-500 dark:text-zinc-400">
+            <time datetime="${post.pubDate}" class="font-medium">
+              ${formatFrenchDate(post.pubDate)}
+            </time>
+            <span class="text-zinc-300 dark:text-zinc-700" aria-hidden="true">•</span>
+            <span class="font-medium">${post.readingTime} min de lecture</span>
+            ${categoriesHTML}
+          </div>
+          
+          <h2 class="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors leading-snug">
+            <a href="/blog/${post.id}" class="main-link focus:outline-none">
+              <span class="card-overlay absolute inset-0 rounded-2xl" aria-hidden="true"></span>
+              ${post.title}
+            </a>
+          </h2>
+          
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
+            ${post.description}
+          </p>
+
+          <div class="mt-auto pt-2 flex items-center text-xs font-semibold text-zinc-950 dark:text-zinc-50 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors gap-1">
+            Lire la suite
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </div>
+        </article>
+      `;
+    }
+
+    // Main filtering & display update logic
+    function updateList() {
+      // Show/Hide Clear button
+      if (currentQuery.length > 0) {
+        clearButton.classList.remove('hidden');
+      } else {
+        clearButton.classList.add('hidden');
+      }
+
+      // If no query and category is "all", show the default paginated static posts
+      if (currentQuery === '' && activeCategory === 'all') {
+        paginatedSection.classList.remove('hidden');
+        searchResultsSection.classList.add('hidden');
+        return;
+      }
+
+      // Otherwise filter the index
+      const normalizedQuery = currentQuery.toLowerCase().trim();
+      const filtered = searchIndex.filter(post => {
+        const matchesCategory = activeCategory === 'all' || post.categories.includes(activeCategory);
+        const matchesSearch = normalizedQuery === '' ||
+          post.title.toLowerCase().includes(normalizedQuery) ||
+          post.description.toLowerCase().includes(normalizedQuery) ||
+          post.categories.some(c => c.toLowerCase().includes(normalizedQuery));
+        
+        return matchesCategory && matchesSearch;
+      });
+
+      // Render items
+      paginatedSection.classList.add('hidden');
+      searchResultsSection.classList.remove('hidden');
+
+      if (filtered.length === 0) {
+        searchResultsList.classList.add('hidden');
+        searchEmptyState.classList.remove('hidden');
+      } else {
+        searchEmptyState.classList.add('hidden');
+        searchResultsList.classList.remove('hidden');
+        searchResultsList.innerHTML = filtered.map(renderCard).join('');
+      }
+    }
+
+    // Input event listener
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        currentQuery = e.target.value;
+        updateList();
+      });
+    }
+
+    // Clear Search Action
+    if (clearButton) {
+      clearButton.addEventListener('click', () => {
+        if (searchInput) {
+          searchInput.value = '';
+          currentQuery = '';
+          updateList();
+          searchInput.focus();
+        }
+      });
+    }
+
+    // Pill click listeners
+    categoryPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        // Toggle Active styles
+        categoryPills.forEach(p => {
+          p.classList.remove('active', 'bg-zinc-900', 'dark:bg-zinc-50', 'text-white', 'dark:text-zinc-950', 'border-zinc-900', 'dark:border-zinc-50');
+          p.classList.add('bg-white', 'dark:bg-zinc-900', 'text-zinc-600', 'dark:text-zinc-400', 'border-zinc-200', 'dark:border-zinc-800');
+        });
+
+        pill.classList.add('active', 'bg-zinc-900', 'dark:bg-zinc-50', 'text-white', 'dark:text-zinc-950', 'border-zinc-900', 'dark:border-zinc-50');
+        pill.classList.remove('bg-white', 'dark:bg-zinc-900', 'text-zinc-600', 'dark:text-zinc-400', 'border-zinc-200', 'dark:border-zinc-800');
+
+        activeCategory = pill.getAttribute('data-category') || 'all';
+        updateList();
+      });
+    });
+  });
+</script>

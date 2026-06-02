@@ -11,6 +11,7 @@ const blog = defineCollection({
     heroImage: z.string().optional(),
     categories: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    mastodonPostUrl: z.string().url().optional(),
   }),
 });
 

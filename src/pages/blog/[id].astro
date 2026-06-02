@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { title, description, pubDate, categories } = post.data;
+const { title, description, pubDate, categories, mastodonPostUrl } = post.data;
 const { Content, headings } = await render(post);
 
 // Calculate reading time
@@ -39,7 +39,7 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
         <!-- Back button -->
         <a
           href="/blog"
-          class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 group focus-ring-custom rounded-lg"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-555 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 group focus-ring-custom rounded-lg"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
@@ -97,7 +97,7 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
                     <li style={{ paddingLeft: `${(heading.depth - 2) * 1}rem` }}>
                       <a
                         href={`#${heading.slug}`}
-                        class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-50 hover:underline transition-colors block leading-relaxed focus-ring-custom rounded"
+                        class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-955 dark:hover:text-zinc-50 hover:underline transition-colors block leading-relaxed focus-ring-custom rounded"
                       >
                         {heading.text}
                       </a>
@@ -121,6 +121,51 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
                     prose-ol:list-decimal prose-ol:pl-5">
           <Content />
         </div>
+
+        <!-- Mastodon Comments Section -->
+        {mastodonPostUrl && (
+          <section class="mt-16 border-t border-zinc-200 dark:border-zinc-800 pt-10" aria-label="Commentaires de la communauté">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+              <div>
+                <h2 class="text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">Commentaires</h2>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                  Les commentaires sont hébergés via Mastodon. Répondez au post pour participer.
+                </p>
+              </div>
+              <a
+                href={mastodonPostUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-zinc-950 hover:bg-zinc-800 dark:bg-zinc-50 dark:hover:bg-zinc-200 text-white dark:text-zinc-950 text-xs font-semibold rounded-xl shadow-sm transition-all focus-ring-custom cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-4.96C14.99.03 12.016 0 12.016 0S9.043.03 6.07.353C3.383.702 1.116 2.734.767 5.313.42 7.866.36 11.543.36 11.543s.06 3.677.407 6.23c.35 2.579 2.617 4.61 5.304 4.96 2.973.322 5.946.353 5.946.353s2.973-.03 5.946-.353c2.687-.35 4.954-2.58 5.304-4.96.347-2.553.407-6.23.407-6.23s-.06-3.677-.407-6.23zm-3.834 10.66h-2.208v-4.87c0-1.03-.45-1.57-1.35-1.57-.96 0-1.47.62-1.47 1.85v2.94h-2.22V11.38c0-1.23-.51-1.85-1.47-1.85-.9 0-1.35.54-1.35 1.57v4.87H7.162V9.82c0-1.02.29-1.82.88-2.4.6-.58 1.37-.88 2.32-.88 1.11 0 1.95.42 2.5 1.25l.58.97.58-.97c.55-.83 1.39-1.25 2.5-1.25.95 0 1.72.3 2.32.88.59.58.88 1.38.88 2.4v6.18h.012z"/>
+                </svg>
+                Répondre sur Mastodon
+              </a>
+            </div>
+
+            <!-- Loader / Actions -->
+            <div id="comments-loader" class="py-10 text-center">
+              <button
+                id="load-comments-btn"
+                class="inline-flex items-center gap-2 px-5 py-2.5 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-sm font-semibold text-zinc-800 dark:text-zinc-200 rounded-xl shadow-sm transition-all focus-ring-custom cursor-pointer"
+              >
+                <svg id="loader-spinner" class="w-4 h-4 animate-spin hidden text-[#FF5500]" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Charger les commentaires
+              </button>
+              <div id="comments-error" class="hidden text-sm text-red-650 dark:text-red-400 mt-2 font-medium"></div>
+            </div>
+
+            <!-- Comments List -->
+            <div id="comments-list" class="space-y-6 hidden">
+              <!-- JS Injected replies thread -->
+            </div>
+          </section>
+        )}
       </article>
       
       <!-- Right Column: Sticky Sidebar TOC (displayed only on lg screens) -->
@@ -153,8 +198,8 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
   </main>
 </Layout>
 
+<!-- Active TOC link highlighting using IntersectionObserver -->
 <script>
-  // Dynamic active TOC link highlighting using IntersectionObserver
   window.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
       root: null,
@@ -194,3 +239,196 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
     });
   });
 </script>
+
+<!-- Load and Render Mastodon comments on-scroll or on-click -->
+{mastodonPostUrl && (
+  <script is:inline define:vars={{ mastodonPostUrl }}>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!mastodonPostUrl) return;
+
+      const loadBtn = document.getElementById('load-comments-btn');
+      const loaderSpinner = document.getElementById('loader-spinner');
+      const commentsList = document.getElementById('comments-list');
+      const commentsLoader = document.getElementById('comments-loader');
+      const errorEl = document.getElementById('comments-error');
+
+      let loaded = false;
+
+      // Formats ISO date to a human readable French format
+      function formatFrenchDateTime(dateStr) {
+        const date = new Date(dateStr);
+        const formattedDate = date.toLocaleDateString("fr-FR", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        const formattedTime = date.toLocaleTimeString("fr-FR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        return `le ${formattedDate} à ${formattedTime}`;
+      }
+
+      // Recursively render a comment and its nested replies with indentation matching premium style
+      function renderCommentTree(comment, depth = 0) {
+        const indentClass = depth > 0 ? 'ml-4 sm:ml-8 pl-4 border-l-2 border-zinc-200 dark:border-zinc-800/80 mt-4' : 'border border-zinc-250/50 dark:border-zinc-800 p-4 sm:p-5 rounded-2xl bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm';
+        const displayName = comment.account.display_name || comment.account.username;
+        
+        // Clean acct handle display
+        let accountHandle = comment.account.acct;
+        if (!accountHandle.includes('@')) {
+          accountHandle = `${accountHandle}@mastodon.social`;
+        }
+
+        const repliesHTML = comment.replies && comment.replies.length > 0 
+          ? `<div class="space-y-4">${comment.replies.map(reply => renderCommentTree(reply, depth + 1)).join('')}</div>`
+          : '';
+
+        return `
+          <div class="comment-item ${indentClass} transition-all duration-350 hover:border-zinc-300 dark:hover:border-zinc-700">
+            <article class="flex gap-3 sm:gap-4 items-start group">
+              <a href="${comment.account.url}" target="_blank" rel="noopener noreferrer" class="shrink-0 focus-ring-custom rounded-full">
+                <img 
+                  src="${comment.account.avatar_static}" 
+                  alt="Avatar de ${displayName}" 
+                  class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-zinc-200/50 dark:border-zinc-850/50 bg-zinc-150 dark:bg-zinc-950"
+                />
+              </a>
+              <div class="flex-grow min-w-0">
+                <div class="flex flex-wrap items-baseline gap-x-1.5 text-xs">
+                  <a href="${comment.account.url}" target="_blank" rel="noopener noreferrer" class="font-bold text-zinc-950 dark:text-zinc-50 hover:underline hover:text-[#FF5500] dark:hover:text-orange-500 transition-colors">
+                    ${displayName}
+                  </a>
+                  <a href="${comment.account.url}" target="_blank" rel="noopener noreferrer" class="text-zinc-400 dark:text-zinc-500 truncate hover:underline max-w-[140px] sm:max-w-none">
+                    @${accountHandle}
+                  </a>
+                  <span class="text-zinc-300 dark:text-zinc-700 select-none" aria-hidden="true">•</span>
+                  <a href="${comment.url}" target="_blank" rel="noopener noreferrer" class="text-zinc-400 dark:text-zinc-500 hover:underline">
+                    <time datetime="${comment.created_at}">${formatFrenchDateTime(comment.created_at)}</time>
+                  </a>
+                </div>
+                
+                <div class="comment-body prose prose-zinc prose-sm dark:prose-invert max-w-none mt-2 text-zinc-800 dark:text-zinc-200 leading-relaxed break-words">
+                  ${comment.content}
+                </div>
+
+                <!-- Comment Actions & Likes -->
+                <div class="flex items-center gap-4 mt-3 text-[11px] font-semibold text-zinc-450 dark:text-zinc-500">
+                  <a href="${comment.url}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Favoris">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                    </svg>
+                    <span>${comment.favourites_count}</span>
+                  </a>
+                  <a href="${comment.url}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-green-500 dark:hover:text-green-400 transition-colors" title="Partages">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.656 48.656 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7C4.68 9.58 4.634 10.782 4.634 12c0 1.218.046 2.42.138 3.627a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.092-1.206.138-2.408.138-3.627z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15l3-3 3 3M12 12V9" />
+                    </svg>
+                    <span>${comment.reblogs_count}</span>
+                  </a>
+                  <a href="${comment.url}" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors">
+                    Répondre
+                  </a>
+                </div>
+              </div>
+            </article>
+            ${repliesHTML}
+          </div>
+        `;
+      }
+
+      async function loadComments() {
+        if (loaded) return;
+        loaded = true;
+
+        // Update button visual state
+        if (loadBtn) loadBtn.disabled = true;
+        if (loaderSpinner) loaderSpinner.classList.remove('hidden');
+        if (errorEl) errorEl.classList.add('hidden');
+
+        try {
+          const url = new URL(mastodonPostUrl);
+          const instance = `${url.protocol}//${url.host}`;
+          const parts = url.pathname.split('/');
+          const statusId = parts[parts.length - 1];
+
+          const response = await fetch(`${instance}/api/v1/statuses/${statusId}/context`);
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          
+          const data = await response.json();
+          const descendants = data.descendants || [];
+
+          if (descendants.length === 0) {
+            if (commentsLoader) {
+              commentsLoader.innerHTML = `
+                <div class="py-8 text-center text-sm text-zinc-500 dark:text-zinc-400 border border-zinc-200/50 dark:border-zinc-800 rounded-2xl bg-zinc-50/20 dark:bg-zinc-900/10">
+                  Aucun commentaire pour le moment. Soyez le premier à participer sur Mastodon !
+                </div>
+              `;
+            }
+            return;
+          }
+
+          // Map comments
+          const commentsMap = {};
+          descendants.forEach(comment => {
+            comment.replies = [];
+            commentsMap[comment.id] = comment;
+          });
+
+          // Resolve parent-child relation
+          const rootComments = [];
+          descendants.forEach(comment => {
+            const parentId = comment.in_reply_to_id;
+            if (parentId && commentsMap[parentId]) {
+              commentsMap[parentId].replies.push(comment);
+            } else {
+              rootComments.push(comment);
+            }
+          });
+
+          // Insert into list
+          if (commentsList) {
+            commentsList.innerHTML = rootComments.map(c => renderCommentTree(c)).join('');
+            commentsList.classList.remove('hidden');
+          }
+
+          if (commentsLoader) {
+            commentsLoader.classList.add('hidden');
+          }
+
+        } catch (err) {
+          console.error('Failed to load Mastodon context:', err);
+          loaded = false; // Allow user to try again
+          if (loadBtn) loadBtn.disabled = false;
+          if (loaderSpinner) loaderSpinner.classList.add('hidden');
+          if (errorEl) {
+            errorEl.textContent = "Impossible de récupérer les commentaires. Vérifiez votre connexion ou les bloqueurs d'URL.";
+            errorEl.classList.remove('hidden');
+          }
+        }
+      }
+
+      if (loadBtn) {
+        loadBtn.addEventListener('click', loadComments);
+      }
+
+      // Auto load when scrolled close to view
+      const observerTarget = document.getElementById('comments-loader');
+      if (observerTarget) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              loadComments();
+              observer.disconnect();
+            }
+          });
+        }, { rootMargin: '250px 0px' });
+        observer.observe(observerTarget);
+      }
+    });
+  </script>
+)}
