@@ -4,6 +4,7 @@ description: "Concert acousmatique 'Traversées II' le vendredi 12 juin 2026 au 
 pubDate: "2026-06-03"
 categories: ["Musique", "Concert", "Électroacoustique"]
 draft: false
+mastodonPostUrl: https://mastodon.social/@lcoullet/116686756170255693
 ---
 
 Le **vendredi 12 juin 2026 à 21h00**, j'aurai le plaisir de présenter une de mes pièces électroacoustiques lors de la soirée **Traversées II** au **Videodrome 2** à Marseille. 
