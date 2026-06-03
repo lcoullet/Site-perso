@@ -28,6 +28,38 @@ const navItems = [
 	{ href: "/cv", label: "CV" },
 	{ href: "/soundcloud", label: "Musique" },
 ];
+
+const ogImageUrl = new URL("/og-image.png", Astro.site || Astro.url.origin).toString();
+
+const isHome = pathname === "/" || pathname === "";
+
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	"name": "Ludovic Coullet",
+	"url": "https://ludovic.coullet.net",
+	"sameAs": [
+		"https://mastodon.social/@lcoullet",
+		"https://www.linkedin.com/in/lcoullet/",
+		"https://soundcloud.com/blud/tracks",
+		"https://www.instagram.com/lcoullet/"
+	],
+	"jobTitle": "Spécialiste web open source et consultant",
+	"knowsAbout": [
+		"Développement web",
+		"Design d'interface",
+		"Accessibilité numérique",
+		"Musique électroacoustique"
+	]
+};
+
+const websiteSchema = isHome ? {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": "Ludovic Coullet",
+	"url": "https://ludovic.coullet.net",
+	"description": "Site personnel et blog de Ludovic Coullet"
+} : null;
 ---
 
 <!doctype html>
@@ -62,12 +94,21 @@ const navItems = [
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:site_name" content="Ludovic Coullet" />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Ludovic Coullet - Site personnel et blog" />
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:url" content={Astro.url} />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
+
+		<!-- Structured Schema JSON-LD -->
+		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
+		{websiteSchema && <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} is:inline />}
 		
 		<!-- Initial theme load to prevent flashing -->
 		<script is:inline>

@@ -72,6 +72,7 @@ const searchIndex = sortedAllPosts.map((post) => ({
         <!-- Search Input -->
         <div class="relative max-w-md">
           <label for="blog-search" class="sr-only">Rechercher des articles</label>
+          <div id="search-status" class="sr-only" aria-live="polite"></div>
           <div class="relative">
             <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-zinc-400 dark:text-zinc-500">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -269,6 +270,7 @@ const searchIndex = sortedAllPosts.map((post) => ({
     const searchResultsSection = document.getElementById('search-results-section');
     const searchResultsList = document.getElementById('search-results-list');
     const searchEmptyState = document.getElementById('search-empty-state');
+    const searchStatus = document.getElementById('search-status');
     const categoryPills = document.querySelectorAll('.category-pill');
 
     // Parse Embedded JSON Search Index
@@ -389,6 +391,9 @@ const searchIndex = sortedAllPosts.map((post) => ({
       if (currentQuery === '' && activeCategory === 'all') {
         paginatedSection.classList.remove('hidden');
         searchResultsSection.classList.add('hidden');
+        if (searchStatus) {
+          searchStatus.textContent = '';
+        }
         return;
       }
 
@@ -412,10 +417,17 @@ const searchIndex = sortedAllPosts.map((post) => ({
       if (filtered.length === 0) {
         searchResultsList.classList.add('hidden');
         searchEmptyState.classList.remove('hidden');
+        if (searchStatus) {
+          searchStatus.textContent = 'Aucun résultat trouvé';
+        }
       } else {
         searchEmptyState.classList.add('hidden');
         searchResultsList.classList.remove('hidden');
         searchResultsList.innerHTML = filtered.map(renderCard).join('');
+        if (searchStatus) {
+          const count = filtered.length;
+          searchStatus.textContent = `${count} ${count === 1 ? 'article trouvé' : 'articles trouvés'}`;
+        }
       }
     }
 

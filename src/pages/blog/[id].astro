@@ -27,9 +27,35 @@ const formattedDate = new Date(pubDate).toLocaleDateString("fr-FR", {
   month: "long",
   day: "numeric",
 });
+
+const postUrl = new URL(`/blog/${post.id}`, Astro.site || Astro.url.origin).toString();
+
+const blogPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description || "",
+  "datePublished": pubDate.toISOString(),
+  "url": postUrl,
+  "author": {
+    "@type": "Person",
+    "name": "Ludovic Coullet",
+    "url": "https://ludovic.coullet.net"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Ludovic Coullet",
+    "url": "https://ludovic.coullet.net"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": postUrl
+  }
+};
 ---
 
 <Layout title={`${title} | Blog de Ludovic Coullet`} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} is:inline />
   <main id="main-content" class="flex-grow container mx-auto px-6 py-12 md:py-20 focus:outline-none" tabindex="-1">
     <!-- Main layout: grid on desktop, single column on mobile -->
     <div class="max-w-6xl mx-auto lg:grid lg:grid-cols-[1fr_260px] lg:gap-12 items-start">

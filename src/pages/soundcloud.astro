@@ -135,6 +135,7 @@ try {
             scrolling="no" 
             frameborder="no" 
             allow="autoplay" 
+            loading="lazy"
             src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/27204&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
             class="absolute w-1 h-1 opacity-0 pointer-events-none -z-50"
             title="Hidden SoundCloud Audio Engine"
@@ -167,7 +168,7 @@ try {
                   <button id="ctrl-prev" class="p-2 text-zinc-400 hover:text-white transition-colors cursor-pointer focus-ring-custom rounded-lg" aria-label="Piste précédente">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
                   </button>
-                  <button id="ctrl-play" class="p-4 bg-[#FF5500] hover:bg-[#e04b00] hover:scale-105 transition-all text-white rounded-full cursor-pointer shadow-lg shadow-orange-500/20 focus-ring-custom" aria-label="Play/Pause toggler">
+                  <button id="ctrl-play" class="p-4 bg-[#FF5500] hover:bg-[#e04b00] hover:scale-105 transition-all text-white rounded-full cursor-pointer shadow-lg shadow-orange-500/20 focus-ring-custom" aria-label="Lire la composition">
                     <svg id="play-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     <svg id="pause-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                   </button>
@@ -184,7 +185,16 @@ try {
                 <span id="player-time-current">00:00</span>
                 <span id="player-time-total">00:00</span>
               </div>
-              <div id="player-seekbar" class="h-1.5 w-full bg-zinc-800 rounded-full cursor-pointer hover:h-2 transition-all relative overflow-hidden">
+              <div 
+                id="player-seekbar" 
+                class="h-1.5 w-full bg-zinc-800 rounded-full cursor-pointer hover:h-2 transition-all relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+                role="slider"
+                aria-label="Progression de la piste"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+                tabindex="0"
+              >
                 <div id="player-seekbar-progress" class="h-full bg-gradient-to-r from-orange-500 to-[#FF5500] w-0 transition-all duration-75"></div>
               </div>
             </div>
@@ -359,9 +369,15 @@ try {
       if (playing) {
         playIcon.classList.add('hidden');
         pauseIcon.classList.remove('hidden');
+        if (ctrlPlay) {
+          ctrlPlay.setAttribute('aria-label', 'Mettre en pause la composition');
+        }
       } else {
         playIcon.classList.remove('hidden');
         pauseIcon.classList.add('hidden');
+        if (ctrlPlay) {
+          ctrlPlay.setAttribute('aria-label', 'Lire la composition');
+        }
       }
       widget.getCurrentSoundIndex((idx) => {
         highlightActiveTrack(idx, playing);
@@ -461,6 +477,22 @@ try {
           widget.seekTo(duration * percent);
         });
       });
+
+      // Keyboard navigation for seekbar (Arrow Left/Right keys)
+      seekbar.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          widget.getDuration((duration) => {
+            widget.getPosition((position) => {
+              const step = 5000; // 5 seconds step
+              let newPos = position + (e.key === 'ArrowRight' ? step : -step);
+              if (newPos < 0) newPos = 0;
+              if (newPos > duration) newPos = duration;
+              widget.seekTo(newPos);
+            });
+          });
+        }
+      });
     }
 
     // Bind playback updates
@@ -483,6 +515,7 @@ try {
       timeCurrent.textContent = formatTime(progress.currentPosition);
       const percent = (progress.relativePosition * 100).toFixed(2);
       seekbarProgress.style.width = `${percent}%`;
+      seekbar.setAttribute('aria-valuenow', Math.round(progress.relativePosition * 100).toString());
     });
   });
 </script>
