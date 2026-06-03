@@ -258,9 +258,7 @@ const searchIndex = sortedAllPosts.map((post) => ({
 </Layout>
 
 <!-- Embed the search index as JSON data -->
-<script type="application/json" id="search-index-data" is:inline>
-  {JSON.stringify(searchIndex)}
-</script>
+<div id="search-index-data" data-index={JSON.stringify(searchIndex)} class="hidden"></div>
 
 <script is:inline>
   window.addEventListener('DOMContentLoaded', () => {
@@ -278,7 +276,7 @@ const searchIndex = sortedAllPosts.map((post) => ({
     try {
       const indexElement = document.getElementById('search-index-data');
       if (indexElement) {
-        searchIndex = JSON.parse(indexElement.textContent || '[]');
+        searchIndex = JSON.parse(indexElement.dataset.index || '[]');
       }
     } catch (e) {
       console.error('Failed to parse search index data:', e);
