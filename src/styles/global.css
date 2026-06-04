@@ -5,6 +5,7 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --font-sans: "Rubik Variable", sans-serif;
   --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   --animate-soundwave-1: soundwave-1 0.8s ease-in-out infinite;
   --animate-soundwave-2: soundwave-2 0.8s ease-in-out infinite 0.15s;
