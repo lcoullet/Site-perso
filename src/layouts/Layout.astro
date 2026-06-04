@@ -9,9 +9,9 @@ interface Props {
 	description?: string;
 }
 
-const { 
-	title = "Ludovic Coullet", 
-	description = "Site personnel et blog de Ludovic Coullet" 
+const {
+	title = "Ludovic Coullet",
+	description = "Site personnel et blog de Ludovic Coullet",
 } = Astro.props;
 
 const { pathname } = Astro.url;
@@ -31,37 +31,42 @@ const navItems = [
 	{ href: "/soundcloud", label: "Musique" },
 ];
 
-const ogImageUrl = new URL("/og-image.png", Astro.site || Astro.url.origin).toString();
+const ogImageUrl = new URL(
+	"/og-image.png",
+	Astro.site || Astro.url.origin,
+).toString();
 
 const isHome = pathname === "/" || pathname === "";
 
 const personSchema = {
 	"@context": "https://schema.org",
 	"@type": "Person",
-	"name": "Ludovic Coullet",
-	"url": "https://ludovic.coullet.net",
-	"sameAs": [
+	name: "Ludovic Coullet",
+	url: "https://ludovic.coullet.net",
+	sameAs: [
 		"https://mastodon.social/@lcoullet",
 		"https://www.linkedin.com/in/lcoullet/",
 		"https://soundcloud.com/blud/tracks",
-		"https://www.instagram.com/lcoullet/"
+		"https://www.instagram.com/lcoullet/",
 	],
-	"jobTitle": "Spécialiste web open source et consultant",
-	"knowsAbout": [
+	jobTitle: "Responsable technique et ingénieur avant vente",
+	knowsAbout: [
 		"Développement web",
 		"Design d'interface",
 		"Accessibilité numérique",
-		"Musique électroacoustique"
-	]
+		"Musique électroacoustique",
+	],
 };
 
-const websiteSchema = isHome ? {
-	"@context": "https://schema.org",
-	"@type": "WebSite",
-	"name": "Ludovic Coullet",
-	"url": "https://ludovic.coullet.net",
-	"description": "Site personnel et blog de Ludovic Coullet"
-} : null;
+const websiteSchema = isHome
+	? {
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			name: "Ludovic Coullet",
+			url: "https://ludovic.coullet.net",
+			description: "Site personnel et blog de Ludovic Coullet",
+		}
+	: null;
 ---
 
 <!doctype html>
@@ -70,20 +75,18 @@ const websiteSchema = isHome ? {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		
 
-		
 		<!-- Canonical URL -->
 		<link rel="canonical" href={Astro.url} />
-		
+
 		<!-- SEO Meta Tags -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
-		
+
 		<!-- Mastodon Verification -->
 		<link rel="me" href="https://mastodon.social/@lcoullet" />
-		
+
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={Astro.url} />
@@ -93,7 +96,10 @@ const websiteSchema = isHome ? {
 		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Ludovic Coullet - Site personnel et blog" />
+		<meta
+			property="og:image:alt"
+			content="Ludovic Coullet - Site personnel et blog"
+		/>
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
@@ -103,52 +109,92 @@ const websiteSchema = isHome ? {
 		<meta name="twitter:image" content={ogImageUrl} />
 
 		<!-- Structured Schema JSON-LD -->
-		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
-		{websiteSchema && <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} is:inline />}
-		
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify(personSchema)}
+			is:inline
+		/>
+		{
+			websiteSchema && (
+				<script
+					type="application/ld+json"
+					set:html={JSON.stringify(websiteSchema)}
+					is:inline
+				/>
+			)
+		}
+
 		<!-- Initial theme load to prevent flashing -->
 		<script is:inline>
-			(function() {
+			(function () {
 				const getThemePreference = () => {
-					if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-						return localStorage.getItem('theme');
+					if (
+						typeof localStorage !== "undefined" &&
+						localStorage.getItem("theme")
+					) {
+						return localStorage.getItem("theme");
 					}
-					return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+					return window.matchMedia("(prefers-color-scheme: dark)")
+						.matches
+						? "dark"
+						: "light";
 				};
-				const isDark = getThemePreference() === 'dark';
-				document.documentElement.classList.toggle('dark', isDark);
+				const isDark = getThemePreference() === "dark";
+				document.documentElement.classList.toggle("dark", isDark);
 			})();
 		</script>
 	</head>
-	<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased min-h-screen flex flex-col">
-		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white dark:focus:bg-zinc-900 focus:text-zinc-900 dark:focus:text-zinc-100">Aller au contenu principal</a>
-		
-		<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/70 dark:bg-zinc-950/70 border-b border-zinc-200/50 dark:border-zinc-800/50">
-			<div class="container mx-auto px-6 h-16 flex items-center justify-between">
-				<a class="text-lg font-semibold tracking-tight hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors focus-ring-custom" href="/">Ludovic Coullet</a>
-				
+	<body
+		class="bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 antialiased min-h-screen flex flex-col"
+	>
+		<a
+			href="#main-content"
+			class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white dark:focus:bg-zinc-900 focus:text-zinc-900 dark:focus:text-zinc-100"
+			>Aller au contenu principal</a
+		>
+
+		<header
+			class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/70 dark:bg-zinc-950/70 border-b border-zinc-200/50 dark:border-zinc-800/50"
+		>
+			<div
+				class="container mx-auto px-6 h-16 flex items-center justify-between"
+			>
+				<a
+					class="text-lg font-semibold tracking-tight hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors focus-ring-custom"
+					href="/">Ludovic Coullet</a
+				>
+
 				<div class="flex items-center gap-1.5 sm:gap-3">
 					<!-- Desktop navigation (hidden on mobile) -->
-					<nav aria-label="Navigation Principale" class="hidden md:block">
-						<ul class="flex items-center gap-1 sm:gap-2 text-sm font-medium">
-							{navItems.map((item) => {
-								const active = isActive(item.href);
-								return (
-									<li>
-										<a
-											href={item.href}
-											class={`px-3 py-2 rounded-lg transition-all duration-200 focus-ring-custom ${
-												active
-													? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 font-semibold"
-													: "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-50"
-											}`}
-											aria-current={active ? "page" : undefined}
-										>
-											{item.label}
-										</a>
-									</li>
-								);
-							})}
+					<nav
+						aria-label="Navigation Principale"
+						class="hidden md:block"
+					>
+						<ul
+							class="flex items-center gap-1 sm:gap-2 text-sm font-medium"
+						>
+							{
+								navItems.map((item) => {
+									const active = isActive(item.href);
+									return (
+										<li>
+											<a
+												href={item.href}
+												class={`px-3 py-2 rounded-lg transition-all duration-200 focus-ring-custom ${
+													active
+														? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 font-semibold"
+														: "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-50"
+												}`}
+												aria-current={
+													active ? "page" : undefined
+												}
+											>
+												{item.label}
+											</a>
+										</li>
+									);
+								})
+							}
 						</ul>
 					</nav>
 
@@ -160,12 +206,36 @@ const websiteSchema = isHome ? {
 						title="Changer de thème"
 					>
 						<!-- Sun icon -->
-						<svg id="theme-toggle-sun" class="w-5 h-5 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M5.25 12H3m18 0h-2.25m-1.72-6.72L15.3 6.78m-8.58 8.58l-1.42 1.42M18.36 18.36l-1.42-1.42M6.78 6.78L5.36 5.36M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z" />
+						<svg
+							id="theme-toggle-sun"
+							class="w-5 h-5 hidden dark:block"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 3v2.25m0 13.5V21M5.25 12H3m18 0h-2.25m-1.72-6.72L15.3 6.78m-8.58 8.58l-1.42 1.42M18.36 18.36l-1.42-1.42M6.78 6.78L5.36 5.36M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9z"
+							></path>
 						</svg>
 						<!-- Moon icon -->
-						<svg id="theme-toggle-moon" class="w-5 h-5 block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+						<svg
+							id="theme-toggle-moon"
+							class="w-5 h-5 block dark:hidden"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
+							></path>
 						</svg>
 					</button>
 
@@ -178,12 +248,35 @@ const websiteSchema = isHome ? {
 						aria-controls="mobile-menu"
 					>
 						<!-- Menu (Hamburger) icon -->
-						<svg id="menu-icon-open" class="w-5 h-5 block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+						<svg
+							id="menu-icon-open"
+							class="w-5 h-5 block"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+							></path>
 						</svg>
 						<!-- Close (X) icon -->
-						<svg id="menu-icon-close" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+						<svg
+							id="menu-icon-close"
+							class="w-5 h-5 hidden"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M6 18L18 6M6 6l12 12"></path>
 						</svg>
 					</button>
 				</div>
@@ -194,34 +287,48 @@ const websiteSchema = isHome ? {
 				id="mobile-menu"
 				class="hidden md:hidden absolute top-16 left-0 w-full bg-white/95 dark:bg-zinc-955/95 backdrop-blur-md border-b border-zinc-200/50 dark:border-zinc-800/50 shadow-lg transition-all duration-200 ease-in-out origin-top scale-y-95 opacity-0 z-30"
 			>
-				<nav class="container mx-auto px-6 py-4" aria-label="Navigation Mobile">
+				<nav
+					class="container mx-auto px-6 py-4"
+					aria-label="Navigation Mobile"
+				>
 					<ul class="flex flex-col gap-1.5 font-medium">
-						{navItems.map((item) => {
-							const active = isActive(item.href);
-							return (
-								<li>
-									<a
-										href={item.href}
-										class={`block px-4 py-2 rounded-xl transition-all duration-200 focus-ring-custom ${
-											active
-												? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 font-semibold"
-												: "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-50"
-										}`}
-										aria-current={active ? "page" : undefined}
-									>
-										{item.label}
-									</a>
-								</li>
-							);
-						})}
+						{
+							navItems.map((item) => {
+								const active = isActive(item.href);
+								return (
+									<li>
+										<a
+											href={item.href}
+											class={`block px-4 py-2 rounded-xl transition-all duration-200 focus-ring-custom ${
+												active
+													? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 font-semibold"
+													: "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-50"
+											}`}
+											aria-current={
+												active ? "page" : undefined
+											}
+										>
+											{item.label}
+										</a>
+									</li>
+								);
+							})
+						}
 					</ul>
 				</nav>
 			</div>
 		</header>
 
 		<!-- Scroll Progress Bar -->
-		<div id="scroll-progress-container" class="fixed top-16 left-0 w-full h-[3px] bg-transparent z-40 pointer-events-none">
-			<div id="scroll-progress" class="h-full bg-zinc-900 dark:bg-zinc-50 w-full origin-left scale-x-0 transition-transform duration-75"></div>
+		<div
+			id="scroll-progress-container"
+			class="fixed top-16 left-0 w-full h-[3px] bg-transparent z-40 pointer-events-none"
+		>
+			<div
+				id="scroll-progress"
+				class="h-full bg-zinc-900 dark:bg-zinc-50 w-full origin-left scale-x-0 transition-transform duration-75"
+			>
+			</div>
 		</div>
 
 		<slot />
@@ -229,73 +336,97 @@ const websiteSchema = isHome ? {
 
 		<script>
 			// Add transition class only after page load to prevent initial load flashes
-			window.addEventListener('DOMContentLoaded', () => {
-				document.documentElement.classList.add('theme-transition');
+			window.addEventListener("DOMContentLoaded", () => {
+				document.documentElement.classList.add("theme-transition");
 			});
 
 			// Theme Toggling Logic
-			const themeToggleBtn = document.getElementById('theme-toggle');
+			const themeToggleBtn = document.getElementById("theme-toggle");
 			if (themeToggleBtn) {
-				themeToggleBtn.addEventListener('click', () => {
-					const isDark = document.documentElement.classList.contains('dark');
-					const nextTheme = isDark ? 'light' : 'dark';
-					document.documentElement.classList.toggle('dark', !isDark);
-					localStorage.setItem('theme', nextTheme);
+				themeToggleBtn.addEventListener("click", () => {
+					const isDark =
+						document.documentElement.classList.contains("dark");
+					const nextTheme = isDark ? "light" : "dark";
+					document.documentElement.classList.toggle("dark", !isDark);
+					localStorage.setItem("theme", nextTheme);
 				});
 			}
 
 			// Scroll Progress Logic
-			const scrollProgress = document.getElementById('scroll-progress');
+			const scrollProgress = document.getElementById("scroll-progress");
 			if (scrollProgress) {
 				const updateScrollProgress = () => {
-					const scrollTop = window.scrollY || document.documentElement.scrollTop;
-					const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-					const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
+					const scrollTop =
+						window.scrollY || document.documentElement.scrollTop;
+					const docHeight =
+						document.documentElement.scrollHeight -
+						document.documentElement.clientHeight;
+					const scrollPercent =
+						docHeight > 0 ? scrollTop / docHeight : 0;
 					scrollProgress.style.transform = `scaleX(${scrollPercent})`;
 				};
 
-				window.addEventListener('scroll', updateScrollProgress);
-				window.addEventListener('resize', updateScrollProgress);
+				window.addEventListener("scroll", updateScrollProgress);
+				window.addEventListener("resize", updateScrollProgress);
 				updateScrollProgress();
 			}
 
 			// Mobile Menu Toggle Logic
-			const mobileToggle = document.getElementById('mobile-menu-toggle');
-			const mobileMenu = document.getElementById('mobile-menu');
-			const menuIconOpen = document.getElementById('menu-icon-open');
-			const menuIconClose = document.getElementById('menu-icon-close');
+			const mobileToggle = document.getElementById("mobile-menu-toggle");
+			const mobileMenu = document.getElementById("mobile-menu");
+			const menuIconOpen = document.getElementById("menu-icon-open");
+			const menuIconClose = document.getElementById("menu-icon-close");
 
 			if (mobileToggle && mobileMenu) {
-				mobileToggle.addEventListener('click', () => {
-					const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-					mobileToggle.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
-					
+				mobileToggle.addEventListener("click", () => {
+					const isExpanded =
+						mobileToggle.getAttribute("aria-expanded") === "true";
+					mobileToggle.setAttribute(
+						"aria-expanded",
+						!isExpanded ? "true" : "false",
+					);
+
 					if (isExpanded) {
 						// Close menu
-						mobileToggle.setAttribute('aria-label', "Ouvrir le menu de navigation");
-						mobileMenu.classList.add('opacity-0', 'scale-y-95');
-						mobileMenu.classList.remove('opacity-100', 'scale-y-100');
-						if (menuIconOpen) menuIconOpen.classList.remove('hidden');
-						if (menuIconClose) menuIconClose.classList.add('hidden');
+						mobileToggle.setAttribute(
+							"aria-label",
+							"Ouvrir le menu de navigation",
+						);
+						mobileMenu.classList.add("opacity-0", "scale-y-95");
+						mobileMenu.classList.remove(
+							"opacity-100",
+							"scale-y-100",
+						);
+						if (menuIconOpen)
+							menuIconOpen.classList.remove("hidden");
+						if (menuIconClose)
+							menuIconClose.classList.add("hidden");
 						setTimeout(() => {
-							mobileMenu.classList.add('hidden');
+							mobileMenu.classList.add("hidden");
 						}, 200);
 					} else {
 						// Open menu
-						mobileToggle.setAttribute('aria-label', "Fermer le menu de navigation");
-						mobileMenu.classList.remove('hidden');
+						mobileToggle.setAttribute(
+							"aria-label",
+							"Fermer le menu de navigation",
+						);
+						mobileMenu.classList.remove("hidden");
 						// Force layout calculations for transitions
 						mobileMenu.offsetHeight;
-						mobileMenu.classList.remove('opacity-0', 'scale-y-95');
-						mobileMenu.classList.add('opacity-100', 'scale-y-100');
-						if (menuIconOpen) menuIconOpen.classList.add('hidden');
-						if (menuIconClose) menuIconClose.classList.remove('hidden');
+						mobileMenu.classList.remove("opacity-0", "scale-y-95");
+						mobileMenu.classList.add("opacity-100", "scale-y-100");
+						if (menuIconOpen) menuIconOpen.classList.add("hidden");
+						if (menuIconClose)
+							menuIconClose.classList.remove("hidden");
 					}
 				});
 
 				// Close on Escape key press
-				window.addEventListener('keydown', (e) => {
-					if (e.key === 'Escape' && mobileToggle.getAttribute('aria-expanded') === 'true') {
+				window.addEventListener("keydown", (e) => {
+					if (
+						e.key === "Escape" &&
+						mobileToggle.getAttribute("aria-expanded") === "true"
+					) {
 						mobileToggle.click();
 					}
 				});
