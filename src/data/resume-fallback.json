@@ -1,0 +1,279 @@
+{
+    "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+    "basics": {
+        "name": "Ludovic Coullet",
+        "label": "Directeur pôle technique France",
+        "image": "",
+        "email": "",
+        "phone": "",
+        "url": "http://ludovic.coullet.net",
+        "summary": "",
+        "location": {
+            "countryCode": "FR",
+            "address": "Marseille"
+        },
+        "profiles": [
+            {
+                "network": "LinkedIn",
+                "username": "lcoullet",
+                "url": "https://www.linkedin.com/in/lcoullet/"
+            }
+        ]
+    },
+    "work": [
+        {
+            "name": "bluedrop.fr",
+            "position": "Chef de projet, responsable technique, expert Drupal.",
+            "startDate": "2012",
+            "endDate": "2026",
+            "highlights": [],
+            "url": "https://www.bluedrop.fr",
+            "location": "Marseille"
+        },
+        {
+            "name": "Icare Internet International",
+            "position": "Responsable Recherche & Développement",
+            "startDate": "2008",
+            "endDate": "2011",
+            "highlights": [],
+            "summary": "Conception et réalisation de projets web, de la phase d'étude à l’intégration au sein de la société.\nCoordination d’une équipe de 4 personnes.\nRédaction de cahiers des charges.\nVeille Technologique.\nPartenariats techniques.\nMaintenance et développement du système informatique interne.\nSécurité et disponibilité des données."
+        },
+        {
+            "name": "Icare Internet International",
+            "position": "Responsable Hotline / Intégration",
+            "startDate": "2006-09-30",
+            "endDate": "2008-06-30",
+            "highlights": [],
+            "summary": "Gestion et coordination d’une équipe de 7 intégrateurs web.\nRessources humaines (formation et recrutement).\nConception et application des procédures qualités du service clientèle..\nRéponse aux réclamations de la clientèle / Contentieux.\nConception et réalisation des outils de mesure de performance du service.\nAnalyse des résultats et renseignement des supports d’activité.\nPropositions d’évolutions du service et du système d’information correspondant.\nDéploiement du service à l’étranger (Espagne)."
+        },
+        {
+            "name": "Icare Internet International",
+            "position": "Intégrateur Web",
+            "startDate": "2005-12-31",
+            "endDate": "2006-09-30",
+            "highlights": [],
+            "summary": "Analyse des besoins du client :\nConception et déclinaison de la charte graphique (illustrations, photos)\nMise en page de sites internet :\nConception de l'arborescence\nConception de la navigation (ergonomie, liens, ...)\nDéfinition de l'identité visuelle\nDéfinition des contenus/rubriques\nHotline / Accueil téléphonique."
+        }
+    ],
+    "volunteer": [],
+    "education": [
+        {
+            "institution": "",
+            "area": "Sciences Politiques",
+            "studyType": "Master",
+            "startDate": "1996-12-31",
+            "endDate": "2000-12-31",
+            "score": "",
+            "courses": []
+        },
+        {
+            "institution": "",
+            "area": "Management Interculturel et Médiation Religieuse",
+            "studyType": "DESS",
+            "startDate": "2001-12-31",
+            "endDate": "2002-12-31",
+            "score": "",
+            "courses": []
+        },
+        {
+            "institution": "Institut Européen des Hautes Etudes Internationales",
+            "area": "European Studies",
+            "studyType": "Master",
+            "startDate": "2000-12-31",
+            "endDate": "2001-12-31",
+            "score": "",
+            "courses": []
+        },
+        {
+            "institution": "",
+            "area": "Sciences Politiques",
+            "studyType": "Erasmus",
+            "startDate": "1998-12-31",
+            "endDate": "1999-12-31",
+            "score": "",
+            "courses": []
+        }
+    ],
+    "awards": [],
+    "certificates": [],
+    "publications": [],
+    "skills": [
+        {
+            "name": "Web Project Management",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Drupal",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "CMS",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Semantic Web",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Open Source",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Applications web",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "PHP",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Ruby",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "HTML",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "CSS",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "JavaScript",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "User Experience",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Web Applications",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "MVC",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Expérience utilisateur",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Silverstripe",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "HTML5",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Gestion de projet web",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "WordPress",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "E-commerce",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "ebizproduction - Agence digitale - Solutions Open Source",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "bluedrop.fr - Usinons Drupal ",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Web design",
+            "level": "",
+            "keywords": []
+        },
+        {
+            "name": "Programmation web",
+            "level": "",
+            "keywords": []
+        }
+    ],
+    "languages": [
+        {
+            "fluency": "Elementary",
+            "language": "Allemand"
+        },
+        {
+            "fluency": "Full Professional",
+            "language": "Anglais"
+        },
+        {
+            "fluency": "Professional Working",
+            "language": "Espagnol"
+        },
+        {
+            "fluency": "Native Speaker",
+            "language": "Français"
+        },
+        {
+            "fluency": "Elementary",
+            "language": "Néerlandais"
+        }
+    ],
+    "interests": [],
+    "references": [
+        {
+            "name": "Sao Pralith",
+            "reference": "Réactif et efficace"
+        },
+        {
+            "name": "Marc DUPUY",
+            "reference": "Ce qui fait la force de Ludovic, du moins chez Icare, est  sa force de recherche, et d'analyse exhaustive, qui permet de choisir les outils qui correspondent à la compagnie, et aux besoins des différents services.\r\n\r\nCapacité de synthèse qui a permis au Service Référencement d'être entendu sur la problématique du référencement des sites internet dans les moteurs de recherche."
+        },
+        {
+            "name": "Paul Lê",
+            "reference": "Ludovic is well organized, creativ, and devoted person. I do recommend him for any ambitious technic project on the Internet."
+        }
+    ],
+    "projects": [
+        {
+            "name": "STORM",
+            "startDate": "2012-09-30",
+            "summary": null,
+            "url": "http://projet-storm.fr/",
+            "endDate": "2012-09-30"
+        },
+        {
+            "name": "Bluedrop",
+            "startDate": "2012-01-31",
+            "summary": null,
+            "url": "http://www.bluedrop.fr",
+            "endDate": "2012-01-31"
+        }
+    ],
+    "meta": {
+        "version": "v1.0.0",
+        "canonical": "https://github.com/jsonresume/resume-schema/blob/v1.0.0/schema.json"
+    }
+}
