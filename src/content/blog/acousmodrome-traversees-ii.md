@@ -7,7 +7,7 @@ draft: false
 mastodonPostUrl: https://mastodon.social/@lcoullet/116686756170255693
 ---
 
-Le **vendredi 12 juin 2026 à 21h00**, j'aurai le plaisir de présenter une de mes pièces électroacoustiques lors de la soirée **Traversées II** au **Videodrome 2** à Marseille. 
+Le **vendredi 12 juin 2026 à 21h00**, j'aurai le plaisir de présenter une de mes pièces électroacoustiques lors de la soirée **[Traversées II](https://www.videodrome2.fr/traversee-acousmodrome-exutoire-individuel-exaltations-collectives-synthe-modulaire-clarinette-basse/)** au **Videodrome 2** à Marseille. 
 
 Cet événement s'inscrit dans le cadre du cycle de programmation **Acousmodrome – Cinéma pour l’Oreille**, un rendez-vous dédié aux expériences et immersions auditives spatialisées. 
 
