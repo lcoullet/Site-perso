@@ -1,31 +1,39 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
+import { config } from "../config";
 import fallbackResume from "../data/resume-fallback.json";
+
+const shouldPublish = config.publishCV || import.meta.env.DEV;
 
 // TODO: Remplacer cette URL par l'URL raw de ton fichier resume.json sur GitHub ou Gist
 const RESUME_URL =
   "https://gist.github.com/lcoullet/6a444611f124bea3f5fe4f1cacb80b66/raw";
 
 let resume;
-try {
-  const response = await fetch(RESUME_URL);
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+if (shouldPublish) {
+  try {
+    const response = await fetch(RESUME_URL);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    resume = await response.json();
+  } catch (e) {
+    console.error("Erreur lors de la récupération du JSON Resume, utilisation du fallback local", e);
+    resume = fallbackResume;
   }
-  resume = await response.json();
-} catch (e) {
-  console.error("Erreur lors de la récupération du JSON Resume, utilisation du fallback local", e);
-  resume = fallbackResume;
 }
 
 const { basics, work, education, skills, languages } = resume || {};
+
+const pageTitle = shouldPublish ? "CV | Ludovic Coullet" : "Page non trouvée";
+const pageDescription = shouldPublish ? "Parcours professionnel, compétences techniques et expérience de Ludovic Coullet, responsable technique et ingénieur avant-vente spécialisé dans l'open source et plus particulièrement Drupal." : "Page non trouvée";
 ---
 
 <Layout
-  title="CV | Ludovic Coullet"
-  description="Parcours professionnel, compétences techniques et expérience de Ludovic Coullet, responsable technique et ingénieur avant-vente spécialisé dans l'open source et plus particulièrement Drupal."
+  title={pageTitle}
+  description={pageDescription}
 >
+  {shouldPublish ? (
   <main
     id="main-content"
     class="container mx-auto px-6 py-12 max-w-4xl focus:outline-none"
@@ -304,4 +312,14 @@ const { basics, work, education, skills, languages } = resume || {};
       )
     }
   </main>
+  ) : (
+    <div class="container mx-auto px-6 py-24 text-center">
+      <h1 class="text-4xl font-bold mb-4">404</h1>
+      <p class="text-zinc-600 dark:text-zinc-400 mb-8">La page que vous recherchez n'existe pas.</p>
+      <a href="/" class="px-6 py-3 bg-zinc-900 text-white rounded-lg hover:bg-zinc-800 transition-colors">Retour à l'accueil</a>
+      <script is:inline>
+        window.location.replace("/");
+      </script>
+    </div>
+  )}
 </Layout>

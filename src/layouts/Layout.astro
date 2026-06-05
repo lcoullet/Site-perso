@@ -3,6 +3,7 @@ import "../styles/global.css";
 import "@fontsource-variable/rubik";
 import "@fontsource-variable/rubik/wght-italic.css";
 import Footer from "../components/Footer.astro";
+import { config } from "../config";
 
 interface Props {
 	title?: string;
@@ -27,7 +28,7 @@ const isActive = (path: string) => {
 const navItems = [
 	{ href: "/", label: "Accueil" },
 	{ href: "/blog", label: "Blog" },
-	{ href: "/cv", label: "CV" },
+	...(config.publishCV || import.meta.env.DEV ? [{ href: "/cv", label: "CV" }] : []),
 	{ href: "/soundcloud", label: "Musique" },
 ];
 
