@@ -9,11 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^6.0.1",
-    "@astrojs/rss": "^4.0.18",
+    "@astrojs/mdx": "^7.0.7",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@fontsource-variable/rubik": "^5.2.8",
-    "astro": "^6.4.3",
+    "astro": "^7.2.4",
     "simple-icons": "^16.11.0"
   },
   "devDependencies": {
