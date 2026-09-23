@@ -323,26 +323,3 @@ const pageDescription = shouldPublish ? "Parcours professionnel, compétences te
     </div>
   )}
 </Layout>
-
-<style>
-  @media print {
-    :global(header),
-    :global(footer),
-    :global(#scroll-progress-container) {
-      display: none !important;
-    }
-
-    main {
-      padding: 0 !important;
-      max-width: 100% !important;
-    }
-
-    .shadow-xl {
-      box-shadow: none !important;
-    }
-
-    .animate-fade-in {
-      animation: none !important;
-    }
-  }
-</style>

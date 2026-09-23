@@ -79,3 +79,74 @@ h1, h2, h3, h4, h5, h6 {
 p, blockquote, li {
   text-wrap: pretty;
 }
+
+/* Site-wide print stylesheet */
+@media print {
+  /* Reset animations, transitions, and shadows */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Force light theme on print */
+  html,
+  body {
+    color-scheme: light !important;
+    background: #ffffff !important;
+    color: #18181b !important;
+  }
+
+  /* Hide navigation, footers, progress bar, interactive controls and search */
+  body > header,
+  body > footer,
+  #scroll-progress-container,
+  a[href="#main-content"],
+  #pagination-nav,
+  #blog-search,
+  #clear-search,
+  .category-pill,
+  aside[aria-label*="Table des matières"],
+  details:has(nav[aria-label*="Table des matières"]),
+  section[aria-label*="Commentaires"],
+  #sc-iframe,
+  #ctrl-prev,
+  #ctrl-play,
+  #ctrl-next,
+  #player-seekbar,
+  #tracklist-loading {
+    display: none !important;
+  }
+
+  /* Full-width container and reset paddings */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Prevent awkward page breaks */
+  article,
+  section,
+  pre,
+  blockquote,
+  ol > li,
+  ul > li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  a {
+    text-decoration: underline !important;
+    color: inherit !important;
+  }
+}
