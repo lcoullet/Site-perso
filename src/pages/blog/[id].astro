@@ -317,6 +317,10 @@ const blogPostingSchema = {
                 <img 
                   src="${comment.account.avatar_static}" 
                   alt="Avatar de ${displayName}" 
+                  width="40"
+                  height="40"
+                  loading="lazy"
+                  decoding="async"
                   class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-zinc-200/50 dark:border-zinc-800/50 bg-zinc-100 dark:bg-zinc-950"
                 />
               </a>
@@ -458,3 +462,11 @@ const blogPostingSchema = {
     });
   </script>
 )}
+
+<style>
+  :global(.comment-item) {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 80px;
+  }
+</style>
+

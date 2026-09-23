@@ -129,6 +129,9 @@ const websiteSchema = isHome
 			)
 		}
 
+		<!-- Additional head tags or resource hints from pages -->
+		<slot name="head" />
+
 		<!-- Initial theme load to prevent flashing -->
 		<script is:inline>
 			(function () {
