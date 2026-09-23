@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
-import sitemap from "@astrojs/sitemap";
+import sitemap, { ChangeFreqEnum } from "@astrojs/sitemap";
 import { config } from "./src/config";
 
 // https://astro.build/config
@@ -16,6 +16,28 @@ export default defineConfig({
           return false;
         }
         return true;
+      },
+      serialize(item) {
+        if (item.url === "https://ludovic.coullet.net/") {
+          item.priority = 1.0;
+          item.changefreq = ChangeFreqEnum.WEEKLY;
+        } else if (item.url === "https://ludovic.coullet.net/blog/") {
+          item.priority = 0.9;
+          item.changefreq = ChangeFreqEnum.WEEKLY;
+        } else if (item.url.includes("/blog/category/")) {
+          item.priority = 0.5;
+          item.changefreq = ChangeFreqEnum.MONTHLY;
+        } else if (item.url.includes("/blog/")) {
+          item.priority = 0.8;
+          item.changefreq = ChangeFreqEnum.MONTHLY;
+        } else if (item.url.includes("/soundcloud/")) {
+          item.priority = 0.8;
+          item.changefreq = ChangeFreqEnum.MONTHLY;
+        } else if (item.url.includes("/cv/")) {
+          item.priority = 0.7;
+          item.changefreq = ChangeFreqEnum.MONTHLY;
+        }
+        return item;
       },
     }),
   ],
