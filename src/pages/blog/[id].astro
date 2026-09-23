@@ -65,9 +65,9 @@ const blogPostingSchema = {
         <!-- Back button -->
         <a
           href="/blog"
-          class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-555 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 group focus-ring-custom rounded-lg"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 group focus-ring-custom rounded-lg"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
           </svg>
           Retour aux articles
@@ -113,7 +113,7 @@ const blogPostingSchema = {
             <details class="group">
               <summary class="flex items-center justify-between p-4 font-bold text-sm text-zinc-950 dark:text-zinc-50 cursor-pointer list-none select-none focus:outline-none focus:bg-zinc-50 dark:focus:bg-zinc-800/50">
                 <span>Table des matières</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-zinc-500 group-open:rotate-180 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-zinc-500 group-open:rotate-180 transition-transform" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
               </summary>
@@ -123,7 +123,7 @@ const blogPostingSchema = {
                     <li style={{ paddingLeft: `${(heading.depth - 2) * 1}rem` }}>
                       <a
                         href={`#${heading.slug}`}
-                        class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-955 dark:hover:text-zinc-50 hover:underline transition-colors block leading-relaxed focus-ring-custom rounded"
+                        class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-50 hover:underline transition-colors block leading-relaxed focus-ring-custom rounded"
                       >
                         {heading.text}
                       </a>
@@ -164,7 +164,7 @@ const blogPostingSchema = {
                 rel="noopener noreferrer"
                 class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-zinc-950 hover:bg-zinc-800 dark:bg-zinc-50 dark:hover:bg-zinc-200 text-white dark:text-zinc-950 text-xs font-semibold rounded-xl shadow-sm transition-all focus-ring-custom cursor-pointer"
               >
-                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-4.96C14.99.03 12.016 0 12.016 0S9.043.03 6.07.353C3.383.702 1.116 2.734.767 5.313.42 7.866.36 11.543.36 11.543s.06 3.677.407 6.23c.35 2.579 2.617 4.61 5.304 4.96 2.973.322 5.946.353 5.946.353s2.973-.03 5.946-.353c2.687-.35 4.954-2.58 5.304-4.96.347-2.553.407-6.23.407-6.23s-.06-3.677-.407-6.23zm-3.834 10.66h-2.208v-4.87c0-1.03-.45-1.57-1.35-1.57-.96 0-1.47.62-1.47 1.85v2.94h-2.22V11.38c0-1.23-.51-1.85-1.47-1.85-.9 0-1.35.54-1.35 1.57v4.87H7.162V9.82c0-1.02.29-1.82.88-2.4.6-.58 1.37-.88 2.32-.88 1.11 0 1.95.42 2.5 1.25l.58.97.58-.97c.55-.83 1.39-1.25 2.5-1.25.95 0 1.72.3 2.32.88.59.58.88 1.38.88 2.4v6.18h.012z"/>
                 </svg>
                 Répondre sur Mastodon
@@ -177,7 +177,7 @@ const blogPostingSchema = {
                 id="load-comments-btn"
                 class="inline-flex items-center gap-2 px-5 py-2.5 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-sm font-semibold text-zinc-800 dark:text-zinc-200 rounded-xl shadow-sm transition-all focus-ring-custom cursor-pointer"
               >
-                <svg id="loader-spinner" class="w-4 h-4 animate-spin hidden text-[#FF5500]" fill="none" viewBox="0 0 24 24">
+                <svg id="loader-spinner" class="w-4 h-4 animate-spin hidden text-[#FF5500]" fill="none" viewBox="0 0 24 24" aria-hidden="true">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
@@ -297,7 +297,7 @@ const blogPostingSchema = {
 
       // Recursively render a comment and its nested replies with indentation matching premium style
       function renderCommentTree(comment, depth = 0) {
-        const indentClass = depth > 0 ? 'ml-4 sm:ml-8 pl-4 border-l-2 border-zinc-200 dark:border-zinc-800/80 mt-4' : 'border border-zinc-250/50 dark:border-zinc-800 p-4 sm:p-5 rounded-2xl bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm';
+        const indentClass = depth > 0 ? 'ml-4 sm:ml-8 pl-4 border-l-2 border-zinc-200 dark:border-zinc-800/80 mt-4' : 'border border-zinc-200/50 dark:border-zinc-800 p-4 sm:p-5 rounded-2xl bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm';
         const displayName = comment.account.display_name || comment.account.username;
         
         // Clean acct handle display
@@ -317,7 +317,7 @@ const blogPostingSchema = {
                 <img 
                   src="${comment.account.avatar_static}" 
                   alt="Avatar de ${displayName}" 
-                  class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-zinc-200/50 dark:border-zinc-850/50 bg-zinc-150 dark:bg-zinc-950"
+                  class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-zinc-200/50 dark:border-zinc-800/50 bg-zinc-100 dark:bg-zinc-950"
                 />
               </a>
               <div class="flex-grow min-w-0">
@@ -339,7 +339,7 @@ const blogPostingSchema = {
                 </div>
 
                 <!-- Comment Actions & Likes -->
-                <div class="flex items-center gap-4 mt-3 text-[11px] font-semibold text-zinc-450 dark:text-zinc-500">
+                <div class="flex items-center gap-4 mt-3 text-[11px] font-semibold text-zinc-400 dark:text-zinc-500">
                   <a href="${comment.url}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Favoris">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />

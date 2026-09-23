@@ -36,14 +36,19 @@
   }
 }
 
-/* Smooth theme transition classes */
-.theme-transition,
-.theme-transition *,
-.theme-transition *::before,
-.theme-transition *::after {
-  transition-property: background-color, border-color, text-decoration-color, fill, stroke, color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
+/* Native color-scheme adaptation for system UI, form controls and scrollbars */
+:root {
+  color-scheme: light dark;
+}
+.dark {
+  color-scheme: dark;
+}
+
+/* Smooth cross-fade when switching themes using the View Transitions API */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 250ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Force Shiki dual-theme to respect class-based .dark mode */
@@ -64,4 +69,13 @@
 .dark .focus-ring-custom:focus-visible {
   outline: 2px solid var(--color-zinc-50);
   outline-offset: 4px;
+}
+
+/* Modern typography: balanced headings and orphan-preventing body copy */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p, blockquote, li {
+  text-wrap: pretty;
 }

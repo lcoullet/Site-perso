@@ -75,6 +75,7 @@ const websiteSchema = isHome
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="color-scheme" content="light dark" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 		<!-- Canonical URL -->
@@ -215,6 +216,7 @@ const websiteSchema = isHome
 							viewBox="0 0 24 24"
 							stroke-width="2"
 							stroke="currentColor"
+							aria-hidden="true"
 						>
 							<path
 								stroke-linecap="round"
@@ -231,6 +233,7 @@ const websiteSchema = isHome
 							viewBox="0 0 24 24"
 							stroke-width="2"
 							stroke="currentColor"
+							aria-hidden="true"
 						>
 							<path
 								stroke-linecap="round"
@@ -257,6 +260,7 @@ const websiteSchema = isHome
 							viewBox="0 0 24 24"
 							stroke-width="2"
 							stroke="currentColor"
+							aria-hidden="true"
 						>
 							<path
 								stroke-linecap="round"
@@ -273,6 +277,7 @@ const websiteSchema = isHome
 							viewBox="0 0 24 24"
 							stroke-width="2"
 							stroke="currentColor"
+							aria-hidden="true"
 						>
 							<path
 								stroke-linecap="round"
@@ -324,10 +329,11 @@ const websiteSchema = isHome
 		<div
 			id="scroll-progress-container"
 			class="fixed top-16 left-0 w-full h-[3px] bg-transparent z-40 pointer-events-none"
+			aria-hidden="true"
 		>
 			<div
 				id="scroll-progress"
-				class="h-full bg-zinc-900 dark:bg-zinc-50 w-full origin-left scale-x-0 transition-transform duration-75"
+				class="h-full bg-zinc-900 dark:bg-zinc-50 w-full origin-left scale-x-0"
 			>
 			</div>
 		</div>
@@ -335,41 +341,83 @@ const websiteSchema = isHome
 		<slot />
 		<Footer />
 
-		<script>
-			// Add transition class only after page load to prevent initial load flashes
-			window.addEventListener("DOMContentLoaded", () => {
-				document.documentElement.classList.add("theme-transition");
-			});
+		<style>
+			@media (prefers-reduced-motion: no-preference) {
+				@supports (animation-timeline: scroll()) {
+					@keyframes grow-progress {
+						from {
+							transform: scaleX(0);
+						}
+						to {
+							transform: scaleX(1);
+						}
+					}
 
-			// Theme Toggling Logic
+					#scroll-progress {
+						animation: grow-progress auto linear;
+						animation-timeline: scroll();
+					}
+				}
+			}
+		</style>
+
+		<script>
+			// Theme Toggling Logic with View Transitions API
 			const themeToggleBtn = document.getElementById("theme-toggle");
 			if (themeToggleBtn) {
 				themeToggleBtn.addEventListener("click", () => {
 					const isDark =
 						document.documentElement.classList.contains("dark");
 					const nextTheme = isDark ? "light" : "dark";
-					document.documentElement.classList.toggle("dark", !isDark);
-					localStorage.setItem("theme", nextTheme);
+
+					const toggleTheme = () => {
+						document.documentElement.classList.toggle("dark", !isDark);
+						localStorage.setItem("theme", nextTheme);
+					};
+
+					if (
+						document.startViewTransition &&
+						!window.matchMedia("(prefers-reduced-motion: reduce)").matches
+					) {
+						document.startViewTransition(() => {
+							toggleTheme();
+						});
+					} else {
+						toggleTheme();
+					}
 				});
 			}
 
-			// Scroll Progress Logic
-			const scrollProgress = document.getElementById("scroll-progress");
-			if (scrollProgress) {
-				const updateScrollProgress = () => {
-					const scrollTop =
-						window.scrollY || document.documentElement.scrollTop;
-					const docHeight =
-						document.documentElement.scrollHeight -
-						document.documentElement.clientHeight;
-					const scrollPercent =
-						docHeight > 0 ? scrollTop / docHeight : 0;
-					scrollProgress.style.transform = `scaleX(${scrollPercent})`;
-				};
+			// Listen for system theme changes if user hasn't explicitly set a preference
+			window
+				.matchMedia("(prefers-color-scheme: dark)")
+				.addEventListener("change", (e) => {
+					if (!localStorage.getItem("theme")) {
+						document.documentElement.classList.toggle("dark", e.matches);
+					}
+				});
 
-				window.addEventListener("scroll", updateScrollProgress);
-				window.addEventListener("resize", updateScrollProgress);
-				updateScrollProgress();
+			// Scroll Progress Logic - Fallback for browsers without Scroll-Driven Animations
+			if (!CSS.supports("animation-timeline", "scroll()")) {
+				const scrollProgress = document.getElementById("scroll-progress");
+				if (scrollProgress) {
+					const updateScrollProgress = () => {
+						const scrollTop =
+							window.scrollY || document.documentElement.scrollTop;
+						const docHeight =
+							document.documentElement.scrollHeight -
+							document.documentElement.clientHeight;
+						const scrollPercent =
+							docHeight > 0 ? scrollTop / docHeight : 0;
+						scrollProgress.style.transform = `scaleX(${scrollPercent})`;
+					};
+
+					window.addEventListener("scroll", updateScrollProgress, {
+						passive: true,
+					});
+					window.addEventListener("resize", updateScrollProgress);
+					updateScrollProgress();
+				}
 			}
 
 			// Mobile Menu Toggle Logic
