@@ -313,13 +313,17 @@ const pageDescription = shouldPublish ? "Parcours professionnel, compétences te
     }
   </main>
   ) : (
-    <div class="container mx-auto px-6 py-24 text-center">
-      <h1 class="text-4xl font-bold mb-4">404</h1>
+    <main
+      id="main-content"
+      class="flex-grow container mx-auto px-6 py-24 text-center focus:outline-none"
+      tabindex="-1"
+    >
+      <h1 class="text-4xl font-bold text-zinc-950 dark:text-zinc-50 mb-4">404</h1>
       <p class="text-zinc-600 dark:text-zinc-400 mb-8">La page que vous recherchez n'existe pas.</p>
-      <a href="/" class="px-6 py-3 bg-zinc-900 text-white rounded-lg hover:bg-zinc-800 transition-colors">Retour à l'accueil</a>
+      <a href="/" class="inline-flex items-center px-6 py-3 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-50 dark:hover:bg-zinc-200 text-white dark:text-zinc-950 font-semibold rounded-xl transition-colors focus-ring-custom">Retour à l'accueil</a>
       <script is:inline>
         window.location.replace("/");
       </script>
-    </div>
+    </main>
   )}
 </Layout>

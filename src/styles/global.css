@@ -44,11 +44,29 @@
   color-scheme: dark;
 }
 
-/* Smooth cross-fade when switching themes using the View Transitions API */
+/* Smooth cross-fade when switching themes or navigating pages using the View Transitions API */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 250ms;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom focus ring around blog cards (static and dynamic search results) when main link is focused via keyboard */
+article:has(.main-link:focus-visible) .card-overlay {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #09090b;
+}
+.dark article:has(.main-link:focus-visible) .card-overlay {
+  box-shadow: 0 0 0 2px #09090b, 0 0 0 4px #f4f4f5;
 }
 
 /* Force Shiki dual-theme to respect class-based .dark mode */
@@ -105,6 +123,7 @@ p, blockquote, li {
   body > footer,
   #scroll-progress-container,
   a[href="#main-content"],
+  #home-cta,
   #pagination-nav,
   #blog-search,
   #clear-search,

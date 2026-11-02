@@ -63,13 +63,3 @@ const readingTime = getReadingTime(post.body);
     </svg>
   </div>
 </article>
-
-<style>
-  /* Beautiful custom focus ring around the whole card when the main link is focused via keyboard */
-  article:has(.main-link:focus-visible) .card-overlay {
-    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #09090b;
-  }
-  :global(.dark) article:has(.main-link:focus-visible) .card-overlay {
-    box-shadow: 0 0 0 2px #09090b, 0 0 0 4px #f4f4f5;
-  }
-</style>

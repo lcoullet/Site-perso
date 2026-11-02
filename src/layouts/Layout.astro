@@ -483,6 +483,19 @@ const websiteSchema = isHome
 						mobileToggle.getAttribute("aria-expanded") === "true"
 					) {
 						mobileToggle.click();
+						mobileToggle.focus();
+					}
+				});
+
+				// Close when clicking outside the mobile menu and toggle button
+				document.addEventListener("click", (e) => {
+					if (
+						mobileToggle.getAttribute("aria-expanded") === "true" &&
+						e.target instanceof Node &&
+						!mobileMenu.contains(e.target) &&
+						!mobileToggle.contains(e.target)
+					) {
+						mobileToggle.click();
 					}
 				});
 			}

@@ -317,7 +317,7 @@ try {
           if (playing) {
             if (indicator) {
               indicator.innerHTML = `
-                <svg class="w-4 h-4 text-[#FF5500]" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                <svg class="w-4 h-4 text-[#FF5500]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
               `;
             }
             if (soundwave) {
@@ -327,7 +327,7 @@ try {
           } else {
             if (indicator) {
               indicator.innerHTML = `
-                <svg class="w-4 h-4 text-[#FF5500]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg class="w-4 h-4 text-[#FF5500]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
               `;
             }
             if (soundwave) {
@@ -440,7 +440,7 @@ try {
             </div>
             <div class="flex items-center gap-4 text-xs font-mono text-zinc-400 dark:text-zinc-500 shrink-0">
               <span class="duration">${formatTime(sound.duration)}</span>
-              <div class="soundwave hidden items-end gap-[2px] h-3.5 w-4 shrink-0">
+              <div class="soundwave hidden items-end gap-[2px] h-3.5 w-4 shrink-0" aria-hidden="true">
                 <span class="w-[2px] bg-[#FF5500] rounded-full animate-soundwave-1"></span>
                 <span class="w-[2px] bg-[#FF5500] rounded-full animate-soundwave-2"></span>
                 <span class="w-[2px] bg-[#FF5500] rounded-full animate-soundwave-3"></span>
