@@ -53,12 +53,21 @@
   html {
     scroll-behavior: smooth;
   }
-}
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 250ms;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  body > header {
+    view-transition-name: site-header;
+  }
+
+  ::view-transition-old(site-header),
+  ::view-transition-new(site-header) {
+    animation: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 250ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
 /* Custom focus ring around blog cards (static and dynamic search results) when main link is focused via keyboard */

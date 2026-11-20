@@ -8,11 +8,21 @@ import { config } from "../config";
 interface Props {
 	title?: string;
 	description?: string;
+	noindex?: boolean;
+	ogType?: "website" | "article";
+	publishedTime?: Date;
+	modifiedTime?: Date;
+	tags?: string[];
 }
 
 const {
 	title = "Ludovic Coullet",
 	description = "Site personnel et blog de Ludovic Coullet",
+	noindex = false,
+	ogType = "website",
+	publishedTime,
+	modifiedTime,
+	tags = [],
 } = Astro.props;
 
 const { pathname } = Astro.url;
@@ -78,11 +88,20 @@ const websiteSchema = isHome
 		<meta name="color-scheme" content="light dark" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-		<!-- Canonical URL -->
-		<link rel="canonical" href={Astro.url} />
+		{noindex ? (
+			<meta name="robots" content="noindex, nofollow" />
+		) : (
+			<link rel="canonical" href={Astro.url} />
+		)}
 
-		<!-- Sitemap -->
+		<!-- Sitemap & RSS Auto-Discovery -->
 		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="Blog de Ludovic Coullet"
+			href="/rss.xml"
+		/>
 
 		<!-- SEO Meta Tags -->
 		<title>{title}</title>
@@ -93,7 +112,8 @@ const websiteSchema = isHome
 		<link rel="me" href="https://mastodon.social/@lcoullet" />
 
 		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="fr_FR" />
+		<meta property="og:type" content={ogType} />
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
@@ -101,10 +121,32 @@ const websiteSchema = isHome
 		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta
-			property="og:image:alt"
-			content="Ludovic Coullet - Site personnel et blog"
-		/>
+		<meta property="og:image:alt" content={title} />
+		{
+			ogType === "article" && (
+				<>
+					{publishedTime && (
+						<meta
+							property="article:published_time"
+							content={publishedTime.toISOString()}
+						/>
+					)}
+					{modifiedTime && (
+						<meta
+							property="article:modified_time"
+							content={modifiedTime.toISOString()}
+						/>
+					)}
+					<meta
+						property="article:author"
+						content="https://ludovic.coullet.net"
+					/>
+					{tags.map((tag) => (
+						<meta property="article:tag" content={tag} />
+					))}
+				</>
+			)
+		}
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />

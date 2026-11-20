@@ -32,6 +32,7 @@ const pageDescription = shouldPublish ? "Parcours professionnel, compétences te
 <Layout
   title={pageTitle}
   description={pageDescription}
+  noindex={!shouldPublish}
 >
   {shouldPublish ? (
   <main
