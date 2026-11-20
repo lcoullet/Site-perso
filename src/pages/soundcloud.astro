@@ -417,13 +417,32 @@ try {
           return;
         }
 
+        const escapeHtml = (str) => String(str ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+
+        const safeUrl = (raw, fallback) => {
+          try {
+            const parsed = new URL(String(raw ?? ''));
+            return parsed.protocol === 'https:' || parsed.protocol === 'http:' ? parsed.href : fallback;
+          } catch {
+            return fallback;
+          }
+        };
+
         // Render rows
         container.innerHTML = '';
         soundList.forEach((sound, idx) => {
           const row = document.createElement('button');
           row.className = `w-full flex items-center justify-between gap-4 p-4 rounded-2xl border border-zinc-200/40 dark:border-zinc-800/40 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/30 text-left transition-all duration-200 group focus-ring-custom cursor-pointer`;
           row.setAttribute('data-track-index', idx);
-          row.setAttribute('aria-label', `Écouter ${sound.title}`);
+          row.setAttribute('aria-label', `Écouter ${sound.title || ''}`);
+          const safeTitle = escapeHtml(sound.title);
+          const safeUsername = escapeHtml(sound.user?.username || 'Ludovic Coullet');
+          const safeArtwork = escapeHtml(safeUrl(sound.artwork_url, 'https://w.soundcloud.com/player/images/default-artwork.png'));
           
           row.innerHTML = `
             <div class="flex items-center gap-4 min-w-0">
@@ -431,11 +450,11 @@ try {
                 ${(idx + 1).toString().padStart(2, '0')}
               </div>
               <div class="w-10 h-10 rounded-lg overflow-hidden bg-zinc-800 border border-zinc-200/10 shrink-0">
-                <img src="${sound.artwork_url || 'https://w.soundcloud.com/player/images/default-artwork.png'}" alt="" class="w-full h-full object-cover" />
+                <img src="${safeArtwork}" alt="" width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" />
               </div>
               <div class="min-w-0">
-                <p class="title-text font-bold text-zinc-900 dark:text-zinc-50 group-hover:text-[#FF5500] transition-colors truncate">${sound.title}</p>
-                <p class="text-[10px] text-zinc-500 dark:text-zinc-400 font-semibold">${sound.user?.username || 'Ludovic Coullet'}</p>
+                <p class="title-text font-bold text-zinc-900 dark:text-zinc-50 group-hover:text-[#FF5500] transition-colors truncate">${safeTitle}</p>
+                <p class="text-[10px] text-zinc-500 dark:text-zinc-400 font-semibold">${safeUsername}</p>
               </div>
             </div>
             <div class="flex items-center gap-4 text-xs font-mono text-zinc-400 dark:text-zinc-500 shrink-0">

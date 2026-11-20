@@ -336,16 +336,93 @@ const breadcrumbSchema = {
         return `le ${formattedDate} à ${formattedTime}`;
       }
 
+      // Escape plain text for safe HTML/attribute interpolation
+      function escapeHtml(str) {
+        return String(str ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      // Allow only http(s) URLs to prevent javascript: or data: URI injection
+      function safeUrl(raw) {
+        try {
+          const parsed = new URL(String(raw ?? ''));
+          return parsed.protocol === 'https:' || parsed.protocol === 'http:' ? parsed.href : '#';
+        } catch {
+          return '#';
+        }
+      }
+
+      // Sanitize Mastodon HTML content against an explicit tag/attribute allowlist
+      function sanitizeMastodonHtml(html) {
+        const doc = new DOMParser().parseFromString(String(html ?? ''), 'text/html');
+        const allowedTags = new Set([
+          'P', 'BR', 'A', 'SPAN', 'STRONG', 'B', 'EM', 'I', 'U', 'DEL',
+          'CODE', 'PRE', 'BLOCKQUOTE', 'UL', 'OL', 'LI'
+        ]);
+
+        function cleanNode(node) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            return document.createTextNode(node.textContent || '');
+          }
+          if (node.nodeType !== Node.ELEMENT_NODE) {
+            return null;
+          }
+          if (!allowedTags.has(node.tagName)) {
+            const frag = document.createDocumentFragment();
+            Array.from(node.childNodes).forEach((child) => {
+              const cleaned = cleanNode(child);
+              if (cleaned) frag.appendChild(cleaned);
+            });
+            return frag;
+          }
+
+          const el = document.createElement(node.tagName.toLowerCase());
+          if (node.tagName === 'A') {
+            el.setAttribute('href', safeUrl(node.getAttribute('href')));
+            el.setAttribute('target', '_blank');
+            el.setAttribute('rel', 'nofollow noopener noreferrer');
+          }
+          const cls = node.getAttribute('class');
+          if (cls && (node.tagName === 'A' || node.tagName === 'SPAN' || node.tagName === 'P')) {
+            el.setAttribute('class', cls);
+          }
+
+          Array.from(node.childNodes).forEach((child) => {
+            const cleaned = cleanNode(child);
+            if (cleaned) el.appendChild(cleaned);
+          });
+          return el;
+        }
+
+        const out = document.createElement('div');
+        Array.from(doc.body.childNodes).forEach((child) => {
+          const cleaned = cleanNode(child);
+          if (cleaned) out.appendChild(cleaned);
+        });
+        return out.innerHTML;
+      }
+
       // Recursively render a comment and its nested replies with indentation matching premium style
       function renderCommentTree(comment, depth = 0) {
         const indentClass = depth > 0 ? 'ml-4 sm:ml-8 pl-4 border-l-2 border-zinc-200 dark:border-zinc-800/80 mt-4' : 'border border-zinc-200/50 dark:border-zinc-800 p-4 sm:p-5 rounded-2xl bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm';
-        const displayName = comment.account.display_name || comment.account.username;
-        
+        const displayName = escapeHtml(comment.account.display_name || comment.account.username);
+        const accountUrl = escapeHtml(safeUrl(comment.account.url));
+        const avatarUrl = escapeHtml(safeUrl(comment.account.avatar_static));
+        const commentUrl = escapeHtml(safeUrl(comment.url));
+        const createdAt = escapeHtml(comment.created_at);
+        const favouritesCount = Number(comment.favourites_count) || 0;
+        const reblogsCount = Number(comment.reblogs_count) || 0;
+
         // Clean acct handle display
-        let accountHandle = comment.account.acct;
-        if (!accountHandle.includes('@')) {
-          accountHandle = `${accountHandle}@mastodon.social`;
+        let rawHandle = String(comment.account.acct || '');
+        if (!rawHandle.includes('@')) {
+          rawHandle = `${rawHandle}@mastodon.social`;
         }
+        const accountHandle = escapeHtml(rawHandle);
 
         const repliesHTML = comment.replies && comment.replies.length > 0 
           ? `<ul class="space-y-4 mt-4" role="group">${comment.replies.map(reply => renderCommentTree(reply, depth + 1)).join('')}</ul>`
@@ -354,9 +431,9 @@ const breadcrumbSchema = {
         return `
           <li class="comment-item ${indentClass} transition-all duration-350 hover:border-zinc-300 dark:hover:border-zinc-700">
             <article class="flex gap-3 sm:gap-4 items-start group">
-              <a href="${comment.account.url}" target="_blank" rel="noopener noreferrer" class="shrink-0 focus-ring-custom rounded-full">
+              <a href="${accountUrl}" target="_blank" rel="noopener noreferrer" class="shrink-0 focus-ring-custom rounded-full">
                 <img 
-                  src="${comment.account.avatar_static}" 
+                  src="${avatarUrl}" 
                   alt="Avatar de ${displayName}" 
                   width="40"
                   height="40"
@@ -367,38 +444,38 @@ const breadcrumbSchema = {
               </a>
               <div class="flex-grow min-w-0">
                 <div class="flex flex-wrap items-baseline gap-x-1.5 text-xs">
-                  <a href="${comment.account.url}" target="_blank" rel="noopener noreferrer" class="font-bold text-zinc-950 dark:text-zinc-50 hover:underline hover:text-[#FF5500] dark:hover:text-orange-500 transition-colors">
+                  <a href="${accountUrl}" target="_blank" rel="noopener noreferrer" class="font-bold text-zinc-950 dark:text-zinc-50 hover:underline hover:text-[#FF5500] dark:hover:text-orange-500 transition-colors">
                     ${displayName}
                   </a>
-                  <a href="${comment.account.url}" target="_blank" rel="noopener noreferrer" class="text-zinc-400 dark:text-zinc-500 truncate hover:underline max-w-[140px] sm:max-w-none">
+                  <a href="${accountUrl}" target="_blank" rel="noopener noreferrer" class="text-zinc-400 dark:text-zinc-500 truncate hover:underline max-w-[140px] sm:max-w-none">
                     @${accountHandle}
                   </a>
                   <span class="text-zinc-300 dark:text-zinc-700 select-none" aria-hidden="true">•</span>
-                  <a href="${comment.url}" target="_blank" rel="noopener noreferrer" class="text-zinc-400 dark:text-zinc-500 hover:underline">
-                    <time datetime="${comment.created_at}">${formatFrenchDateTime(comment.created_at)}</time>
+                  <a href="${commentUrl}" target="_blank" rel="noopener noreferrer" class="text-zinc-400 dark:text-zinc-500 hover:underline">
+                    <time datetime="${createdAt}">${formatFrenchDateTime(comment.created_at)}</time>
                   </a>
                 </div>
                 
                 <div class="comment-body prose prose-zinc prose-sm dark:prose-invert max-w-none mt-2 text-zinc-800 dark:text-zinc-200 leading-relaxed break-words">
-                  ${comment.content}
+                  ${sanitizeMastodonHtml(comment.content)}
                 </div>
 
                 <!-- Comment Actions & Likes -->
                 <div class="flex items-center gap-4 mt-3 text-[11px] font-semibold text-zinc-400 dark:text-zinc-500">
-                  <a href="${comment.url}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-red-500 dark:hover:text-red-400 transition-colors focus-ring-custom rounded" title="Favoris" aria-label="${comment.favourites_count} favoris">
+                  <a href="${commentUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-red-500 dark:hover:text-red-400 transition-colors focus-ring-custom rounded" title="Favoris" aria-label="${favouritesCount} favoris">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                     </svg>
-                    <span>${comment.favourites_count}</span>
+                    <span>${favouritesCount}</span>
                   </a>
-                  <a href="${comment.url}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-green-500 dark:hover:text-green-400 transition-colors focus-ring-custom rounded" title="Partages" aria-label="${comment.reblogs_count} partages">
+                  <a href="${commentUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-green-500 dark:hover:text-green-400 transition-colors focus-ring-custom rounded" title="Partages" aria-label="${reblogsCount} partages">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.656 48.656 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7C4.68 9.58 4.634 10.782 4.634 12c0 1.218.046 2.42.138 3.627a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.092-1.206.138-2.408.138-3.627z" />
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 15l3-3 3 3M12 12V9" />
                     </svg>
-                    <span>${comment.reblogs_count}</span>
+                    <span>${reblogsCount}</span>
                   </a>
-                  <a href="${comment.url}" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors focus-ring-custom rounded">
+                  <a href="${commentUrl}" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors focus-ring-custom rounded">
                     Répondre
                   </a>
                 </div>
